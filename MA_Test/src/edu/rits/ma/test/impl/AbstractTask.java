@@ -1,6 +1,6 @@
 package edu.rits.ma.test.impl;
 
-import edu.rits.ma.common.ITask;
+import edu.rits.ma.common.abstr.ITask;
 
 public abstract class AbstractTask implements ITask {
 

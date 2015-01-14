@@ -2,7 +2,7 @@ package edu.rits.ma.test.impl;
 
 import java.util.List;
 
-import edu.rits.ma.common.ITask;
+import edu.rits.ma.common.abstr.ITask;
 
 public class TaskSampleImpl extends AbstractTask {
 

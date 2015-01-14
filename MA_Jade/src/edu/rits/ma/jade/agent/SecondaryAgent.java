@@ -1,28 +1,30 @@
 package edu.rits.ma.jade.agent;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import jade.core.AID;
 import jade.core.Agent;
-import edu.rits.ma.jade.behaviour.SingleTaskProcessorBehaviour;
-import edu.rits.ma.jade.concurrency.CondVarManager;
-import edu.rits.ma.jade.concurrency.ICondVarReleaser;
-import edu.rits.ma.jade.dataobject.CondVar;
+import jade.core.behaviours.Behaviour;
+import jade.lang.acl.ACLMessage;
+import jade.wrapper.AgentController;
+import edu.rits.ma.jade.behaviour.AgentCommunicatingBehaviour;
+import edu.rits.ma.jade.behaviour.ICommunicationDataStoreProcessor;
+import edu.rits.ma.jade.behaviour.SecondaryTaskProcessorImpl;
 import edu.rits.ma.jade.util.LogUtil;
 
 public class SecondaryAgent extends Agent implements IAgentProtocol {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1509623737210577104L;
-
-	private CondVar mCondVarToRelease = null;
+	private String mPrimaryAgentName = null;
 	
 	@Override
 	protected void setup() {
 		super.setup();
 		AgentOrganizer setupOrganizer = new AgentOrganizer();
-		setupOrganizer.setupAgentAndNotify(this, new CondVarManager());
+		setupOrganizer.setupAgent(this);
 	}
-	
+
 	@Override
 	public void onSetupStart() {
 		LogUtil.logInfo(this, "Setup called on secondary agent" + getAID().getLocalName()
@@ -33,8 +35,8 @@ public class SecondaryAgent extends Agent implements IAgentProtocol {
 	@Override
 	public void onSetupArgumentsParsed() throws Exception {
 		Object[] args = getArguments();
-		if(args != null && args.length > 0) {
-			mCondVarToRelease = (CondVar) args[0];
+		if(args != null) {
+			mPrimaryAgentName = (String) args[0];
 		}
 	}
 
@@ -45,13 +47,24 @@ public class SecondaryAgent extends Agent implements IAgentProtocol {
 
 	@Override
 	public void onSetupEnd() {
-		addBehaviour(new SingleTaskProcessorBehaviour(this));
+		ICommunicationDataStoreProcessor processor = new SecondaryTaskProcessorImpl(mPrimaryAgentName);
+		List<AgentController> agentControllers = new ArrayList<AgentController>();
+		Behaviour behaviour = new AgentCommunicatingBehaviour(this, processor, agentControllers);
+		addBehaviour(behaviour);
+		ACLMessage readyMessage = createReadyMessage();
+		LogUtil.logInfo(this, "Going to send ready message to " + mPrimaryAgentName);
+		send(readyMessage);
 	}
 	
-	@Override
-	public void notifySetupFinish(ICondVarReleaser condVarReleaser) {
-		if(mCondVarToRelease != null) {
-			condVarReleaser.release(mCondVarToRelease);
-		}
+	private ACLMessage createReadyMessage() {
+		//TODO Change string content to ontology
+		ACLMessage message = new ACLMessage(ACLMessage.INFORM);
+		
+		AID receiver = new AID(mPrimaryAgentName, AID.ISGUID);
+		message.addReceiver(receiver);
+		
+		message.setContent("Ready");
+		return message;
 	}
+
 }

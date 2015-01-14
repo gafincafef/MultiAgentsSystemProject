@@ -3,10 +3,9 @@ package edu.rits.ma.test.main;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.rits.ma.common.IAgentGateway;
-import edu.rits.ma.common.ITask;
-import edu.rits.ma.jade.agent.PrimaryAgent;
-import edu.rits.ma.jade.agent.SecondaryAgent;
+import edu.rits.ma.common.abstr.IAgentGateway;
+import edu.rits.ma.common.abstr.ITask;
+import edu.rits.ma.jade.agent.TaskProcessorPrimaryAgentImpl;
 import edu.rits.ma.jade.impl.JadeAgentGatewayImpl;
 import edu.rits.ma.test.impl.TaskSampleImpl;
 
@@ -14,10 +13,9 @@ public class Main {
 	public static void main(String[] args) {
 		String host = "localhost";
 		String port = "1099";
-		String primaryAgentClassName = PrimaryAgent.class.getName();
-		String secondaryAgentClassName = SecondaryAgent.class.getName();
+		String primaryAgentClassName = TaskProcessorPrimaryAgentImpl.class.getName();
 		
-		IAgentGateway agentGateway = new JadeAgentGatewayImpl(host, port, primaryAgentClassName, secondaryAgentClassName);
+		IAgentGateway agentGateway = new JadeAgentGatewayImpl(host, port, primaryAgentClassName);
 		int nbAgents = 4;
 		agentGateway.prepareAgents(nbAgents);
 		

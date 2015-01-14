@@ -7,24 +7,19 @@ import jade.wrapper.gateway.JadeGateway;
 
 import java.util.List;
 
-import edu.rits.ma.common.IAgentGateway;
-import edu.rits.ma.common.ITask;
-import edu.rits.ma.jade.concurrency.CondVarManager;
-import edu.rits.ma.jade.concurrency.ICondVarAcquirer;
-import edu.rits.ma.jade.dataobject.CondVar;
+import edu.rits.ma.common.abstr.IAgentGateway;
+import edu.rits.ma.common.abstr.ITask;
 
 public class JadeAgentGatewayImpl implements IAgentGateway {
 
 	private String mHost;
 	private String mPort;
 	private String mPrimaryAgentClassName;
-	private String mSecondaryAgentClassName;
 
-	public JadeAgentGatewayImpl(String host, String port, String primaryAgentClassName, String secondaryAgentClassName) {
+	public JadeAgentGatewayImpl(String host, String port, String primaryAgentClassName) {
 		mHost = host;
 		mPort = port;
 		mPrimaryAgentClassName = primaryAgentClassName;
-		mSecondaryAgentClassName = secondaryAgentClassName;
 	}
 
 	@Override
@@ -52,10 +47,6 @@ public class JadeAgentGatewayImpl implements IAgentGateway {
 	}
 	
 	private void initAndWaitForGatewayAgent(int numberOfSecondaryAgents, Properties pp) {
-		CondVar condVar = new CondVar();
-		condVar.setReleaseThreshold(1);
-		JadeGateway.init(mPrimaryAgentClassName, new Object[] {condVar, numberOfSecondaryAgents, mSecondaryAgentClassName}, pp);
-		ICondVarAcquirer condVarAcquirer = new CondVarManager();
-		condVarAcquirer.acquire(condVar);
+		JadeGateway.init(mPrimaryAgentClassName, new Object[] {numberOfSecondaryAgents}, pp);
 	}
 }

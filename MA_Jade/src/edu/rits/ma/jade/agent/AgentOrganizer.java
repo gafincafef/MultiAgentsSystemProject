@@ -1,10 +1,9 @@
 package edu.rits.ma.jade.agent;
 
-import edu.rits.ma.jade.concurrency.ICondVarReleaser;
 
 public class AgentOrganizer {
 	
-	public void setupAgentAndNotify(IAgentProtocol agentCallback, ICondVarReleaser condVarReleaser) {
+	public void setupAgent(IAgentProtocol agentCallback) {
 		agentCallback.onSetupStart();
 		
 		try {
@@ -16,9 +15,5 @@ public class AgentOrganizer {
 		}
 		
 		agentCallback.onSetupEnd();
-		
-		if(condVarReleaser != null) {
-			agentCallback.notifySetupFinish(condVarReleaser);
-		}
 	}
 }
