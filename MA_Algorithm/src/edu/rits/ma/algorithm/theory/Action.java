@@ -1,4 +1,4 @@
-package edu.rits.ma.common.theory;
+package edu.rits.ma.algorithm.theory;
 
 public class Action {
 	private int mId;
