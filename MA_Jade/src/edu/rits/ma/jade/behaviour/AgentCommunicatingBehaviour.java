@@ -19,10 +19,10 @@ public class AgentCommunicatingBehaviour extends Behaviour {
 	private IncomingBuffer mReceiveBuffer = new IncomingBuffer();
 	private OutCommingBuffer mSendBuffer = new OutCommingBuffer();
 
-	private ICommunicationDataStoreProcessor mProcessor;
+	private ICommunicationBufferProcessor mProcessor;
 	private List<AgentController> mAgentControllers;
 
-	public AgentCommunicatingBehaviour(Agent agent, ICommunicationDataStoreProcessor processor, List<AgentController> agentControllers) {
+	public AgentCommunicatingBehaviour(Agent agent, ICommunicationBufferProcessor processor, List<AgentController> agentControllers) {
 		setAgent(agent);
 		mProcessor = processor;
 		mAgentControllers = agentControllers;

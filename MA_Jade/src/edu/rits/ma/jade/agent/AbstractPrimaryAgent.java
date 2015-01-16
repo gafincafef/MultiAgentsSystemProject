@@ -30,7 +30,8 @@ public abstract class AbstractPrimaryAgent extends GatewayAgent implements IAgen
 	protected void processCommand(java.lang.Object command) {
 		try {
 			createAndStartSecondaryAgents(mNumberOfSecondaryAgents);
-		} catch (StaleProxyException e) {
+		} 
+		catch (StaleProxyException e) {
 			e.printStackTrace();
 			releaseCommand(command);
 		}
@@ -78,7 +79,7 @@ public abstract class AbstractPrimaryAgent extends GatewayAgent implements IAgen
 		cleanSecondaryAgents();
 		
 		for(int i = 0; i < numberOfSecondaryAgents; i++) {
-			String secondaryAgentInstanceName = SECONDARY_AGENT_NAME_PREFIX + i;
+			String secondaryAgentInstanceName = getName() + "_" +SECONDARY_AGENT_NAME_PREFIX + i;
 			AgentController ac = getContainerController().createNewAgent(secondaryAgentInstanceName, getSecondaryAgentClassName(i), createSecondarySetupParams(getName()));
 			ac.start();
 			mSecondaryAgentControllers.add(ac);

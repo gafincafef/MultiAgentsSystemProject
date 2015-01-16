@@ -9,7 +9,7 @@ import jade.core.behaviours.Behaviour;
 import jade.lang.acl.ACLMessage;
 import jade.wrapper.AgentController;
 import edu.rits.ma.jade.behaviour.AgentCommunicatingBehaviour;
-import edu.rits.ma.jade.behaviour.ICommunicationDataStoreProcessor;
+import edu.rits.ma.jade.behaviour.ICommunicationBufferProcessor;
 import edu.rits.ma.jade.behaviour.SecondaryTaskProcessorImpl;
 import edu.rits.ma.jade.util.LogUtil;
 
@@ -47,7 +47,7 @@ public class SecondaryAgent extends Agent implements IAgentProtocol {
 
 	@Override
 	public void onSetupEnd() {
-		ICommunicationDataStoreProcessor processor = new SecondaryTaskProcessorImpl(mPrimaryAgentName);
+		ICommunicationBufferProcessor processor = new SecondaryTaskProcessorImpl(mPrimaryAgentName);
 		List<AgentController> agentControllers = new ArrayList<AgentController>();
 		Behaviour behaviour = new AgentCommunicatingBehaviour(this, processor, agentControllers);
 		addBehaviour(behaviour);

@@ -9,8 +9,8 @@ import java.util.List;
 
 import edu.rits.ma.common.abstr.ITask;
 import edu.rits.ma.jade.behaviour.GatewayAgentCommunicatingBehaviour;
-import edu.rits.ma.jade.behaviour.ICommunicationDataStoreProcessor;
-import edu.rits.ma.jade.behaviour.PrimaryTaskProcessorImpl;
+import edu.rits.ma.jade.behaviour.ICommunicationBufferProcessor;
+import edu.rits.ma.jade.behaviour.PrimaryTaskByTaskProcessorImpl;
 
 public class TaskProcessorPrimaryAgentImpl extends AbstractPrimaryAgent {
 
@@ -35,7 +35,7 @@ public class TaskProcessorPrimaryAgentImpl extends AbstractPrimaryAgent {
 			secondaryAgentNames.add(ac.getName());
 		}
 		
-		ICommunicationDataStoreProcessor processor = new PrimaryTaskProcessorImpl(tasks, secondaryAgentNames);
+		ICommunicationBufferProcessor processor = new PrimaryTaskByTaskProcessorImpl(tasks, secondaryAgentNames);
 		
 		Behaviour behaviour = new GatewayAgentCommunicatingBehaviour(this, processor, mSecondaryAgentControllers, this, command);
 		

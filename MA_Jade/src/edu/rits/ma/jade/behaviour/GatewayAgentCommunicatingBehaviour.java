@@ -14,7 +14,7 @@ public class GatewayAgentCommunicatingBehaviour extends AgentCommunicatingBehavi
 	private Object mCommand;
 	
 	public GatewayAgentCommunicatingBehaviour(Agent agent,
-			ICommunicationDataStoreProcessor processor,
+			ICommunicationBufferProcessor processor,
 			List<AgentController> agentControllers,
 			GatewayAgent cbGatewayAgent,
 			Object command) {
