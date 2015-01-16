@@ -2,11 +2,12 @@ package edu.rits.ma.algorithm.nashequil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
-import edu.rits.ma.algorithm.theory.IPreference;
-import edu.rits.ma.algorithm.theory.IPreferenceSet;
-import edu.rits.ma.algorithm.theory.IUtilitiesMap;
 import edu.rits.ma.common.abstr.ITask;
+import edu.rits.ma.theory.IPreference;
+import edu.rits.ma.theory.IPreferenceSet;
+import edu.rits.ma.theory.IUtilitiesMap;
 
 public class BestPreferenceCheckerTaskImpl implements ITask {
 
@@ -22,21 +23,20 @@ public class BestPreferenceCheckerTaskImpl implements ITask {
 		mUtilitiesMap = utilitiesMap;
 		mCandidatePreferences = candidatePreferences;
 	}
-	
-	@Override
-	public long getTimeOutMs() {
-		return -1;
-	}
 
 	@Override
 	public void execute() {
 		for(IPreference preference : mCandidatePreferences) {
+			Set<Integer> complementAgentIdSet = mPreferenceSet.getAllAgentIds();
+			complementAgentIdSet.remove(mAgentId);
+			
+			IPreference subPreference = preference.getSubPreference(complementAgentIdSet);
 			int candidateUtilValueForAgent = mUtilitiesMap.getUtilityOfAgent(preference, mAgentId);
-			IPreference subPreference = preference.removeAgent(mAgentId);
+			
 			if(subPreference != null) {
-				//TODO Consider the name of "preferences for other agents"
 				List<IPreference> preferences = new ArrayList<IPreference>();
 				mPreferenceSet.getContainerPreferences(subPreference, preferences);
+				
 				for(IPreference oPreference : preferences) {
 					if(mUtilitiesMap.getUtilityOfAgent(oPreference, mAgentId) > candidateUtilValueForAgent) {
 						//TODO Do some things to eliminate the candidate

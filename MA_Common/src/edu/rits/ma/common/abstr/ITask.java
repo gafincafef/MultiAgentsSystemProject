@@ -9,8 +9,6 @@ public interface ITask {
 	public static final int TASK_STATUS_SUCCEEDED = 2;
 	public static final int TASK_STATUS_FAILED = 3;
 	
-	long getTimeOutMs();
-	
 	void execute();
 	
 	int getStatus();

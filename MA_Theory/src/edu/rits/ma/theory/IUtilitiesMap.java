@@ -1,6 +1,6 @@
-package edu.rits.ma.algorithm.theory;
+package edu.rits.ma.theory;
 
 public interface IUtilitiesMap {
 	public void addPreferenceUtilityForAgent(IPreference preference, int agentId, int utilityValue);
-	public int getUtilityOfAgent(IPreference preference, int agentId);
+	public Integer getUtilityOfAgent(IPreference preference, int agentId);
 }

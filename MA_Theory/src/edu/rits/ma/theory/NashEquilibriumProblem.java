@@ -1,4 +1,4 @@
-package edu.rits.ma.algorithm.theory;
+package edu.rits.ma.theory;
 
 public class NashEquilibriumProblem {
 	private IPreferenceSet mPreferenceSet;

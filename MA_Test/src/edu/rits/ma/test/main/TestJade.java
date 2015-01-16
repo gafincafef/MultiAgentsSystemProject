@@ -9,7 +9,7 @@ import edu.rits.ma.jade.agent.TaskProcessorPrimaryAgentImpl;
 import edu.rits.ma.jade.impl.JadeAgentGatewayImpl;
 import edu.rits.ma.test.impl.TaskSampleImpl;
 
-public class Main {
+public class TestJade {
 	public static void main(String[] args) {
 		String host = "localhost";
 		String port = "1099";

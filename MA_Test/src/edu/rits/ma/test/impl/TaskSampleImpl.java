@@ -38,9 +38,4 @@ public class TaskSampleImpl extends AbstractTask {
 		return results;
 	}
 
-	@Override
-	public long getTimeOutMs() {
-		return 10;
-	}
-
 }

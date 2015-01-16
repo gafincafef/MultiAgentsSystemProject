@@ -1,11 +1,12 @@
 package edu.rits.ma.algorithm.impl;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import edu.rits.ma.algorithm.theory.IPreference;
-import edu.rits.ma.algorithm.theory.IPreferenceSet;
+import edu.rits.ma.theory.IPreference;
+import edu.rits.ma.theory.IPreferenceSet;
 
 public class PreferenceSetImpl implements IPreferenceSet {
 	
@@ -18,8 +19,16 @@ public class PreferenceSetImpl implements IPreferenceSet {
 
 	@Override
 	public void removePreference(IPreference preference) {
-		//TODO Revise this method
 		mPreferences.remove(preference);
+	}
+	
+	@Override
+	public Set<Integer> getAllAgentIds() {
+		Set<Integer> agentIdSet = new HashSet<Integer>();
+		for(IPreference preference : mPreferences) {
+			agentIdSet.addAll(preference.getAllAgentIds());
+		}
+		return agentIdSet;
 	}
 
 	@Override
@@ -28,14 +37,25 @@ public class PreferenceSetImpl implements IPreferenceSet {
 	}
 
 	@Override
+	public void getSubPreferencesForAgents(Set<Integer> agentIds, List<IPreference> subPreferences) {
+		HashSet<IPreference> subPreferenceSet = new HashSet<IPreference>();
+		for(IPreference preference : mPreferences) {
+			if(preference.contains(agentIds)) {
+				subPreferenceSet.add(preference);
+			}
+		}
+		subPreferences.clear();
+		subPreferences.addAll(subPreferenceSet);
+	}
+	
+	@Override
 	public void getContainerPreferences(IPreference subPreference, List<IPreference> containerPreferences) {
 		containerPreferences.clear();
-		Set<Integer> subSetOfAgentsIds = subPreference.getAllAgentsIds();
+		Set<Integer> subSetOfAgentsIds = subPreference.getAllAgentIds();
 		for(IPreference preference : mPreferences) {
 			if(preference.contains(subSetOfAgentsIds)) {
 				containerPreferences.add(preference);
 			}
 		}
 	}
-
 }

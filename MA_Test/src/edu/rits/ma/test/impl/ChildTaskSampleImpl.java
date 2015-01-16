@@ -38,9 +38,4 @@ public class ChildTaskSampleImpl extends AbstractTask {
 		return null;
 	}
 
-	@Override
-	public long getTimeOutMs() {
-		return 1000;
-	}
-
 }

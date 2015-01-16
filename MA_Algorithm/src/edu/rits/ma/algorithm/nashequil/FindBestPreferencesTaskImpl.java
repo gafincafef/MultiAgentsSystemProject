@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import edu.rits.ma.algorithm.theory.IPreference;
-import edu.rits.ma.algorithm.theory.IPreferenceSet;
-import edu.rits.ma.algorithm.theory.IUtilitiesMap;
 import edu.rits.ma.common.abstr.ITask;
+import edu.rits.ma.theory.IPreference;
+import edu.rits.ma.theory.IPreferenceSet;
+import edu.rits.ma.theory.IUtilitiesMap;
 
 public class FindBestPreferencesTaskImpl implements ITask {
 
@@ -23,11 +23,6 @@ public class FindBestPreferencesTaskImpl implements ITask {
 		mSubPreference = subPreference;
 		mPreferenceSet = preferenceSet;
 		mUtilitiesMap = utilitiesMap;
-	}
-	
-	@Override
-	public long getTimeOutMs() {
-		return 1000;
 	}
 
 	@Override
@@ -52,14 +47,13 @@ public class FindBestPreferencesTaskImpl implements ITask {
 	@Override
 	public void createSubTasks(List<ITask> subTasks) {
 		subTasks.clear();
-		Set<Integer> otherAgentIds = mSubPreference.getAllAgentsIds();
+		Set<Integer> otherAgentIds = mSubPreference.getAllAgentIds();
 		for(int agentId : otherAgentIds) {
 			ITask task = new BestPreferenceCheckerTaskImpl(agentId, mCandidatePreferences, mPreferenceSet, mUtilitiesMap);
 			subTasks.add(task);
 		}
 	}
 	
-	//TODO Consider moving this work to utilities map
 	private void findBestPrefenrencesForPrimaryAgent(List<IPreference> preferences, List<IPreference> outputs) {
 		int bestUtilities = Integer.MIN_VALUE;
 		IUtilitiesMap utilityMap = mUtilitiesMap;
@@ -77,7 +71,5 @@ public class FindBestPreferencesTaskImpl implements ITask {
 				outputs.add(preference);
 			}
 		}
-		
 	}
-
 }
