@@ -1,9 +1,12 @@
 package edu.rits.ma.test.impl;
 
+import java.io.Serializable;
+
 import edu.rits.ma.common.abstr.ITask;
 
-public abstract class AbstractTask implements ITask {
+public abstract class AbstractTask implements ITask, Serializable {
 
+	private static final long serialVersionUID = 98446188229760633L;
 	private int mStatus;
 	
 	public AbstractTask() {

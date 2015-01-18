@@ -1,4 +1,4 @@
-package edu.rits.ma.jade.impl;
+package edu.rits.ma.jade.gateway;
 
 import jade.core.Profile;
 import jade.util.leap.Properties;

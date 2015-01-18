@@ -1,5 +1,8 @@
 package edu.rits.ma.jade.agent;
 
+import jade.content.lang.Codec;
+import jade.content.lang.sl.SLCodec;
+import jade.content.onto.Ontology;
 import jade.core.behaviours.Behaviour;
 import jade.wrapper.AgentController;
 import jade.wrapper.StaleProxyException;
@@ -9,13 +12,23 @@ import java.util.List;
 
 import edu.rits.ma.common.abstr.ITask;
 import edu.rits.ma.jade.behaviour.GatewayAgentCommunicatingBehaviour;
-import edu.rits.ma.jade.behaviour.ICommunicationBufferProcessor;
-import edu.rits.ma.jade.behaviour.PrimaryTaskByTaskProcessorImpl;
+import edu.rits.ma.jade.communication.AgentTrackingOntology;
+import edu.rits.ma.jade.taskprocessor.IContentBufferProcessor;
+import edu.rits.ma.jade.taskprocessor.PrimaryContentBufferProcessorImpl;
 
 public class TaskProcessorPrimaryAgentImpl extends AbstractPrimaryAgent {
 
 	private static final long serialVersionUID = 8019767118623600485L;
-
+	private Codec mCodec = new SLCodec();
+	private Ontology mOntology = AgentTrackingOntology.getInstance();
+	
+	@Override
+	public void setup() {
+		super.setup();
+		getContentManager().registerLanguage(mCodec);
+		getContentManager().registerOntology(mOntology);
+	}
+	
 	@Override
 	protected String getSecondaryAgentClassName(int secondaryAgentId) {
 		return SecondaryAgent.class.getName();
@@ -35,9 +48,9 @@ public class TaskProcessorPrimaryAgentImpl extends AbstractPrimaryAgent {
 			secondaryAgentNames.add(ac.getName());
 		}
 		
-		ICommunicationBufferProcessor processor = new PrimaryTaskByTaskProcessorImpl(tasks, secondaryAgentNames);
+		IContentBufferProcessor processor = new PrimaryContentBufferProcessorImpl(tasks, secondaryAgentNames);
 		
-		Behaviour behaviour = new GatewayAgentCommunicatingBehaviour(this, processor, mSecondaryAgentControllers, this, command);
+		Behaviour behaviour = new GatewayAgentCommunicatingBehaviour(this, processor, this, command);
 		
 		return behaviour;
 	}

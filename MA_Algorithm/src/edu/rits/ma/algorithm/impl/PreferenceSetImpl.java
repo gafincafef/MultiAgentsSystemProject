@@ -30,6 +30,11 @@ public class PreferenceSetImpl implements IPreferenceSet {
 		}
 		return agentIdSet;
 	}
+	
+	@Override
+	public void getAllPreference(List<IPreference> preferences) {
+		preferences.addAll(mPreferences);
+	}
 
 	@Override
 	public void clear() {
@@ -58,4 +63,5 @@ public class PreferenceSetImpl implements IPreferenceSet {
 			}
 		}
 	}
+
 }

@@ -6,6 +6,8 @@ import java.util.Set;
 public interface IPreferenceSet {
 	public void addPreference(IPreference preference);
 	public void removePreference(IPreference preference);
+	
+	public void getAllPreference(List<IPreference> preferences);
 	public Set<Integer> getAllAgentIds();
 	
 	public void clear();

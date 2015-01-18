@@ -1,16 +1,16 @@
 package edu.rits.ma.jade.agent;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import jade.core.AID;
+import jade.content.lang.Codec;
+import jade.content.lang.sl.SLCodec;
+import jade.content.onto.Ontology;
 import jade.core.Agent;
-import jade.core.behaviours.Behaviour;
 import jade.lang.acl.ACLMessage;
-import jade.wrapper.AgentController;
-import edu.rits.ma.jade.behaviour.AgentCommunicatingBehaviour;
-import edu.rits.ma.jade.behaviour.ICommunicationBufferProcessor;
-import edu.rits.ma.jade.behaviour.SecondaryTaskProcessorImpl;
+import edu.rits.ma.jade.behaviour.AgentOntologyCommunicatingBehaviour;
+import edu.rits.ma.jade.communication.AgentTrackingOntology;
+import edu.rits.ma.jade.communication.ContentElementWrapper;
+import edu.rits.ma.jade.communication.SecondaryAgentState;
+import edu.rits.ma.jade.taskprocessor.IContentBufferProcessor;
+import edu.rits.ma.jade.taskprocessor.SecondaryContentBufferProcessorImpl;
 import edu.rits.ma.jade.util.LogUtil;
 
 public class SecondaryAgent extends Agent implements IAgentProtocol {
@@ -18,9 +18,14 @@ public class SecondaryAgent extends Agent implements IAgentProtocol {
 	private static final long serialVersionUID = 1509623737210577104L;
 	private String mPrimaryAgentName = null;
 	
+	private Codec mCodec = new SLCodec();
+	private Ontology mOntology = AgentTrackingOntology.getInstance();
+
 	@Override
 	protected void setup() {
 		super.setup();
+		getContentManager().registerLanguage(mCodec);
+		getContentManager().registerOntology(mOntology);
 		AgentOrganizer setupOrganizer = new AgentOrganizer();
 		setupOrganizer.setupAgent(this);
 	}
@@ -47,24 +52,25 @@ public class SecondaryAgent extends Agent implements IAgentProtocol {
 
 	@Override
 	public void onSetupEnd() {
-		ICommunicationBufferProcessor processor = new SecondaryTaskProcessorImpl(mPrimaryAgentName);
-		List<AgentController> agentControllers = new ArrayList<AgentController>();
-		Behaviour behaviour = new AgentCommunicatingBehaviour(this, processor, agentControllers);
+		IContentBufferProcessor processor = new SecondaryContentBufferProcessorImpl(mPrimaryAgentName, getName());
+		AgentOntologyCommunicatingBehaviour behaviour = new AgentOntologyCommunicatingBehaviour(this, processor);
 		addBehaviour(behaviour);
-		ACLMessage readyMessage = createReadyMessage();
+		
+		SecondaryAgentState readyState = createReadyMessage();
+		ContentElementWrapper cew = new ContentElementWrapper(readyState, AgentTrackingOntology.ONTOLOGY_NAME);
+		cew.addReceiverAgentName(mPrimaryAgentName);
+		
+		ACLMessage readyMessage = behaviour.createMessageFromContentElement(cew);
+		
 		LogUtil.logInfo(this, "Going to send ready message to " + mPrimaryAgentName);
 		send(readyMessage);
 	}
 	
-	private ACLMessage createReadyMessage() {
-		//TODO Change string content to ontology
-		ACLMessage message = new ACLMessage(ACLMessage.INFORM);
-		
-		AID receiver = new AID(mPrimaryAgentName, AID.ISGUID);
-		message.addReceiver(receiver);
-		
-		message.setContent("Ready");
-		return message;
+	private SecondaryAgentState createReadyMessage() {
+		SecondaryAgentState agentState = new SecondaryAgentState();
+		agentState.setAgentName(getName());
+		agentState.setState(SecondaryAgentState.STATE_READY);
+		return agentState;
 	}
 
 }

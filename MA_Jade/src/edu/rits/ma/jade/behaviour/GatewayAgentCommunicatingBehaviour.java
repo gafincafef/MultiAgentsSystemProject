@@ -1,12 +1,10 @@
 package edu.rits.ma.jade.behaviour;
 
 import jade.core.Agent;
-import jade.wrapper.AgentController;
 import jade.wrapper.gateway.GatewayAgent;
+import edu.rits.ma.jade.taskprocessor.IContentBufferProcessor;
 
-import java.util.List;
-
-public class GatewayAgentCommunicatingBehaviour extends AgentCommunicatingBehaviour {
+public class GatewayAgentCommunicatingBehaviour extends AgentOntologyCommunicatingBehaviour {
 
 	private static final long serialVersionUID = -6373415624378748676L;
 
@@ -14,11 +12,10 @@ public class GatewayAgentCommunicatingBehaviour extends AgentCommunicatingBehavi
 	private Object mCommand;
 	
 	public GatewayAgentCommunicatingBehaviour(Agent agent,
-			ICommunicationBufferProcessor processor,
-			List<AgentController> agentControllers,
+			IContentBufferProcessor processor,
 			GatewayAgent cbGatewayAgent,
 			Object command) {
-		super(agent, processor, agentControllers);
+		super(agent, processor);
 		mCbGatewayAgent = cbGatewayAgent;
 		mCommand = command;
 	}
