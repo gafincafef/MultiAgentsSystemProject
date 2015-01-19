@@ -1,7 +1,0 @@
-package edu.rits.ma.jade.behaviour;
-
-
-public interface ICommunicationDataStoreProcessor {
-	public void processCommunicationDataStore(CommunicationBuffer communicationBuffer);
-	public boolean done();
-}

@@ -1,7 +1,0 @@
-package edu.rits.ma.jade.agent;
-
-import jade.wrapper.gateway.GatewayAgent;
-
-public class PrimaryAgent extends GatewayAgent {
-
-}

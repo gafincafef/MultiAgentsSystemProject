@@ -1,6 +1,0 @@
-package edu.rits.ma.jade.concurrency;
-
-
-public interface ICondVarAcquirer {
-	void acquire(CondVar condVar);
-}

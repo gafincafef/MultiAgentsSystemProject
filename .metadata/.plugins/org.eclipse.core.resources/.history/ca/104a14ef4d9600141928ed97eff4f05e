@@ -1,7 +1,0 @@
-package edu.rits.ma.theory;
-
-public class Preference {
-	private Action[] mActions;
-	
-	
-}

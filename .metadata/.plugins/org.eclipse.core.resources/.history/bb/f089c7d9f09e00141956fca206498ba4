@@ -1,7 +1,0 @@
-package communication;
-
-import jade.content.onto.Ontology;
-
-public class TestOntology extends Ontology {
-
-}

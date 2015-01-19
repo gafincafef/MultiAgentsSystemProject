@@ -1,9 +1,0 @@
-1420621660177	Delete element
-1420622080818	Encapsulate field 'mId'
-1420622096032	Encapsulate field 'mName'
-1420622110170	Encapsulate field 'mId'
-1420700796023	Rename package 'edu.rits.ma.theory'
-1420700846829	Rename type 'IGateway'
-1420700927516	Rename method 'startTasksOnAgents'
-1420732851661	Rename field 'TASK_STATUS_CREATE'
-1420733685999	Rename field 'TASK_STATUS_INITIAED'

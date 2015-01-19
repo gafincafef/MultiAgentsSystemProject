@@ -1,7 +1,0 @@
-package edu.rits.ma.jade.communication;
-
-import jade.content.AgentAction;
-
-public class SecondaryAgentStopAction implements AgentAction {
-
-}

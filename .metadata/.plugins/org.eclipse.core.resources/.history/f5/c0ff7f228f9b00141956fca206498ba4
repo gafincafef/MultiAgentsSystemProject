@@ -1,6 +1,0 @@
-package edu.rits.ma.jade.communication;
-
-public class ObjectMessage {
-	private String mTargetAgentName;
-	
-}

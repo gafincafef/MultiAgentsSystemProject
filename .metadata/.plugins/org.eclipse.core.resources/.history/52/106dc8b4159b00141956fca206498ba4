@@ -1,7 +1,0 @@
-package edu.rits.ma.jade.behaviour;
-
-import edu.rits.ma.jade.communication.TaskProcessorIntermediator;
-
-public class ITaskProcessor {
-	public int process(TaskProcessorIntermediator intermediator)
-}

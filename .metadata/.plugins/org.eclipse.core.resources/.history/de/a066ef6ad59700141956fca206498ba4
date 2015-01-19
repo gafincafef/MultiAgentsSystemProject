@@ -1,8 +1,0 @@
-package edu.rits.ma.jade.agent;
-
-public interface IAgent {
-	void onSetupStart();
-	void onSetupArgumentsParsed();
-	void onSetupArgumentsParseFailed();
-	void onSetupEnd();
-}

@@ -1,6 +1,0 @@
-package edu.rits.ma.common.theory;
-
-public interface IPreferenceSet {
-	public void addPreference(IPreference preference);
-	public void getPreferences();
-}

@@ -1,8 +1,0 @@
-package edu.rits.ma.jade.agent;
-
-public interface IAgentCallback {
-	void onSetupStart();
-	void onSetupArgumentsParsed() throws Exception;
-	void onSetupArgumentsParseFailed();
-	void onSetupEnd();
-}

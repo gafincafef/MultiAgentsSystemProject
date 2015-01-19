@@ -1,7 +1,0 @@
-package edu.rits.ma.jade.agent;
-
-import edu.rits.ma.jade.dataobject.CondVar;
-
-public interface ICondVarWaiter {
-	void waitOn(CondVar condVar);
-}

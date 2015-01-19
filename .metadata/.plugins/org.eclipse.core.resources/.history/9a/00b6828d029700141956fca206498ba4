@@ -1,6 +1,0 @@
-package edu.rits.ma.common;
-
-public interface ITask {
-	void execute();
-	int getStatus();
-}

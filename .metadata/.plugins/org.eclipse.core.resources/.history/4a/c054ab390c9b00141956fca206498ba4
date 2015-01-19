@@ -1,7 +1,0 @@
-package edu.rits.ma.jade.dataobject;
-
-public class TaskProcessorState {
-	public static final int 
-	private int mState;
-	
-}

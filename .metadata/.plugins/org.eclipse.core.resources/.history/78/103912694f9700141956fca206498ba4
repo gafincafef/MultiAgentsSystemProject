@@ -1,7 +1,0 @@
-package edu.rits.ma.test.impl;
-
-import edu.rits.ma.common.ITask;
-
-public class TaskSampleImpl implements ITask {
-
-}

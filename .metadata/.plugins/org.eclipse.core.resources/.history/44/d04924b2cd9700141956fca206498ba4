@@ -1,6 +1,0 @@
-package edu.rits.ma.jade.model;
-
-public interface IResponse {
-	public int getResponseValue();
-	public void setResponseValue(int responseValue);
-}

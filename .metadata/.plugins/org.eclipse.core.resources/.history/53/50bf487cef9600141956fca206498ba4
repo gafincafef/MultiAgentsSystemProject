@@ -1,7 +1,0 @@
-package behaviours;
-
-import jade.core.behaviours.OneShotBehaviour;
-
-public class MainContainerAgentsFinderBehaviour extends OneShotBehaviour {
-
-}

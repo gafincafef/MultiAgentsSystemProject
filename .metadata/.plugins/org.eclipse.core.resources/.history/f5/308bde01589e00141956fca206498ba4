@@ -1,9 +1,0 @@
-package edu.rits.ma.webapp.servlet;
-
-import javax.servlet.http.HttpServlet;
-
-public class NashEquilibriumSolverServlet extends HttpServlet {
-
-	private static final long serialVersionUID = 5003473793288915706L;
-
-}

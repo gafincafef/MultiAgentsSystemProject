@@ -1,7 +1,0 @@
-package edu.rits.ma.algorithm.impl;
-
-import edu.rits.ma.algorithm.theory.IUtilitiesMap;
-
-public class UtilitiesMapImpl implements IUtilitiesMap {
-
-}

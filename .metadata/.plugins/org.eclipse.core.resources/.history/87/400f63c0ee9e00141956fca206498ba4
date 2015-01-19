@@ -1,7 +1,0 @@
-package agent;
-
-import jade.core.Agent;
-
-public class OntologyMessageReceiverAgent extends Agent{
-
-}

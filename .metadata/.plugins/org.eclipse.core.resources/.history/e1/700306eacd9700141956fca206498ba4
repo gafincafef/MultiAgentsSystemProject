@@ -1,6 +1,0 @@
-package edu.rits.ma.jade.dataobject;
-
-public class SimpleCondVar {
-	private int mThreshold;
-	
-}

@@ -1,5 +1,0 @@
-package edu.rits.ma.common.theory;
-
-public interface IUtilitiesMap {
-	public void addPreference();
-}

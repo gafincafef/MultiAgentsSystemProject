@@ -1,7 +1,0 @@
-package edu.rits.ma.jade.communication;
-
-import jade.content.Predicate;
-
-public class SecondaryAgentState implements Predicate {
-
-}

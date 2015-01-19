@@ -1,9 +1,0 @@
-package edu.rits.ma.common.theory;
-
-public interface IPreference {
-	public void addAgentAction(int agentId, Action action);
-	public Action getActionOfAgent(int agentId);
-	public IPreference removeAgent(int agentId);
-	public Set<Integer> getAllAgents
-	public boolean contains();
-}

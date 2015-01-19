@@ -1,7 +1,0 @@
-package edu.rits.ma.behaviour;
-
-import jade.core.behaviours.Behaviour;
-
-public class PrimaryBehaviour extends Behaviour {
-
-}

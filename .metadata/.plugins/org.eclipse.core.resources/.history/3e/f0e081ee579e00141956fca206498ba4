@@ -1,7 +1,0 @@
-package edu.rits.ma.webapp.servlet;
-
-import javax.servlet.http.HttpServlet;
-
-public class NashEquilibriumSolverServlet extends HttpServlet {
-
-}

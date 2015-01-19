@@ -1,7 +1,0 @@
-package edu.rits.ma.jade.communication;
-
-import java.io.Serializable;
-
-public class SerializeObjectWrapper implements Serializable {
-
-}

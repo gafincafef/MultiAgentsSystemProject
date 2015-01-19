@@ -1,8 +1,0 @@
-package model;
-
-public class AgentSpecifier {
-	private String host;
-	private String port;
-	private String name;
-	
-}

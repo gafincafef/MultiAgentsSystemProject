@@ -1,5 +1,0 @@
-package edu.rits.ma.jade.concurrency;
-
-public class CondVarManager {
-
-}

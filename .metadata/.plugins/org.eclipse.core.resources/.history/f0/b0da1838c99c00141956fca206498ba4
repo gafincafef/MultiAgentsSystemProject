@@ -1,8 +1,0 @@
-package edu.rits.ma.common.theory;
-
-import java.util.List;
-
-public interface IPreferenceSet {
-	public void addPreference(IPreference preference);
-	public void getPreferencesContains(IPreference subPreference, List<> g);
-}

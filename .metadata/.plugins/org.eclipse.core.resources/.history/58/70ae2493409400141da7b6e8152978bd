@@ -1,5 +1,0 @@
-package behaviours;
-
-public class MessageSenderBehaviour extends Behaviour {
-
-}

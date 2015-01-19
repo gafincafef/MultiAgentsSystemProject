@@ -1,8 +1,0 @@
-package edu.rits.ma.test.impl;
-
-import edu.rits.ma.theory.IPreferenceSet;
-
-public class NashEquilibirumProblemParser {
-	private IPreferenceSet mPreferenceSet;
-	
-}

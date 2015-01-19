@@ -1,7 +1,0 @@
-package edu.rits.ma.jade.agent;
-
-public class AgentOrganizer {
-	public void setupAgent() {
-		
-	}
-}

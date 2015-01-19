@@ -1,7 +1,0 @@
-package edu.rits.ma.jade.agent;
-
-import jade.core.Agent;
-
-public class PrimaryAgent extends Agent {
-	
-}
