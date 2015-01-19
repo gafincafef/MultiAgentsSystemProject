@@ -1,6 +1,7 @@
 package edu.rits.ma.algorithm.nashequil;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -26,7 +27,9 @@ public class BestPreferenceCheckerTaskImpl implements ITask {
 
 	@Override
 	public void execute() {
-		for(IPreference preference : mCandidatePreferences) {
+		for(Iterator<IPreference> pIter = mCandidatePreferences.iterator(); pIter.hasNext();) {
+			IPreference preference = pIter.next();
+			
 			Set<Integer> complementAgentIdSet = mPreferenceSet.getAllAgentIds();
 			complementAgentIdSet.remove(mAgentId);
 			
@@ -39,7 +42,7 @@ public class BestPreferenceCheckerTaskImpl implements ITask {
 				
 				for(IPreference oPreference : preferences) {
 					if(mUtilitiesMap.getUtilityOfAgent(oPreference, mAgentId) > candidateUtilValueForAgent) {
-						//TODO Do some things to eliminate the candidate
+						pIter.remove();
 					}
 				}
 			}
@@ -52,8 +55,15 @@ public class BestPreferenceCheckerTaskImpl implements ITask {
 	}
 
 	@Override
-	public Object[] getResults() {
-		return null;
+	public List<Object> getResults() {
+		List<Object> results = new ArrayList<Object>();
+		results.addAll(mCandidatePreferences);
+		return results;
+	}
+	
+	@Override
+	public void processSubTaskResults(List<Object>[] subTasksResults) {
+		//Do nothing
 	}
 
 	@Override

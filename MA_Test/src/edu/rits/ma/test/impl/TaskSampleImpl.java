@@ -1,6 +1,7 @@
 package edu.rits.ma.test.impl;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.rits.ma.common.abstr.ITask;
@@ -36,12 +37,13 @@ public class TaskSampleImpl extends AbstractTask implements Serializable{
 	}
 
 	@Override
-	public Object[] getResults() {
-		Object[] results = new Object[mSubTaskResults.length];
+	public List<Object> getResults() {
+		List<Object> resultList = new ArrayList<Object>();
 		for(int i = 0; i < mSubTaskResults.length; i++) {
-			results[i] = mSubTaskResults[i];
+			resultList.add(mSubTaskResults[i]);
 		}
-		return results;
+		return resultList;
+		
 	}
 
 }

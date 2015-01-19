@@ -1,6 +1,7 @@
 package edu.rits.ma.test.impl;
 
 import java.io.Serializable;
+import java.util.List;
 
 import edu.rits.ma.common.abstr.ITask;
 
@@ -16,6 +17,11 @@ public abstract class AbstractTask implements ITask, Serializable {
 	@Override
 	public int getStatus() {
 		return mStatus;
+	}
+	
+	@Override
+	public void processSubTaskResults(List<Object>[] subTasksResults) {
+		//Do no thing
 	}
 	
 	protected void onInitiated() {

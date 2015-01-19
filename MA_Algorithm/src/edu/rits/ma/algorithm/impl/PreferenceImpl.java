@@ -23,6 +23,16 @@ public class PreferenceImpl implements IPreference 	{
 	}
 
 	@Override
+	public int getIndex() {
+		return -1;
+	}
+
+	@Override
+	public boolean isIndexed() {
+		return false;
+	}
+	
+	@Override
 	public IPreference getSubPreference(Set<Integer> agentIds) {
 		IPreference preference = new PreferenceImpl();
 		for(int agentId : agentIds) {

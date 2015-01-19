@@ -14,7 +14,8 @@ import edu.rits.ma.theory.NashEquilibriumProblem;
 
 public class NashEquilibriumAgentBasedSolverImpl implements INashEquilibriumSolver {
 
-	private  IAgentGateway mAgentGateway = null;
+	private IAgentGateway mAgentGateway = null;
+	private List<ITask> mTasks = null;
 	
 	public NashEquilibriumAgentBasedSolverImpl(IAgentGateway agentGateway) {
 		mAgentGateway = agentGateway;
@@ -22,14 +23,14 @@ public class NashEquilibriumAgentBasedSolverImpl implements INashEquilibriumSolv
 	
 	@Override
 	public void solve(NashEquilibriumProblem problem) {
-		List<ITask> tasks = new ArrayList<ITask>();
+		mTasks = new ArrayList<ITask>();
 		
 		Set<Integer> agentIdSet = problem.getPreferenceSet().getAllAgentIds();
 		int numberOfAgents = agentIdSet.size();
 		mAgentGateway.prepareAgents(numberOfAgents);
 		
-		convertProblemToTasks(problem, agentIdSet, tasks);
-		mAgentGateway.runTasksOnAgents(tasks);
+		convertProblemToTasks(problem, agentIdSet, mTasks);
+		mAgentGateway.runTasksOnAgents(mTasks);
 	}
 	
 	private void convertProblemToTasks(NashEquilibriumProblem problem, Set<Integer> agentIdSet, List<ITask> tasks) {
@@ -42,9 +43,8 @@ public class NashEquilibriumAgentBasedSolverImpl implements INashEquilibriumSolv
 		int primaryAgentId = agentIds[0];
 		
 		Set<Integer> secondaryAgentIdSet = new HashSet<Integer>();
-		for(int i = 1; i < agentIds.length; i++) {
-			secondaryAgentIdSet.add(agentIds[i]);
-		}
+		secondaryAgentIdSet.addAll(agentIdSet);
+		secondaryAgentIdSet.remove(primaryAgentId);
 		
 		List<IPreference> allSubPreferences = new ArrayList<IPreference>();
 		IPreferenceSet preferenceSet = problem.getPreferenceSet();
@@ -53,6 +53,16 @@ public class NashEquilibriumAgentBasedSolverImpl implements INashEquilibriumSolv
 		for(IPreference subPreference : allSubPreferences) {
 			ITask task = new FindBestPreferencesTaskImpl(primaryAgentId, subPreference, preferenceSet, problem.getUtilitiesMap());
 			tasks.add(task);
+		}
+	}
+
+	@Override
+	public void getResults(List<IPreference> resultPreferences) {
+		for(ITask task : mTasks) {
+			List<Object> taskResults = task.getResults();
+			for(Object oResult : taskResults) {
+				resultPreferences.add((IPreference) oResult);
+			}
 		}
 	}
 }

@@ -45,7 +45,7 @@ public class ChildTaskSampleImpl extends AbstractTask implements Serializable {
 	}
 
 	@Override
-	public Object[] getResults() {
+	public List<Object> getResults() {
 		return null;
 	}
 

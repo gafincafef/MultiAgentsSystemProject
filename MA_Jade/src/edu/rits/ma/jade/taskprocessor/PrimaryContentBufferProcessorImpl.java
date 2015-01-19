@@ -42,10 +42,10 @@ public class PrimaryContentBufferProcessorImpl implements IContentBufferProcesso
 			int nextActionPhase = mInternalState;
 			switch (mInternalState) {
 			case ACTION_PHASE_TO_PROCESS_READY_MESSAGE:
-				nextActionPhase = onReadyMessage(sendBuffer);
+				nextActionPhase = onOneSecondaryAgentReady(sendBuffer);
 				break;
 			case ACTION_PHASE_TO_PROCESS_TASK_DONE_MESSAGE:
-				nextActionPhase = onTaskDoneMessage(receiveBuffer, sendBuffer);
+				nextActionPhase = onOneSecondaryAgentDoneTask(receiveBuffer, sendBuffer);
 				break;
 			default:
 				break;
@@ -69,7 +69,7 @@ public class PrimaryContentBufferProcessorImpl implements IContentBufferProcesso
 		}
 	}
 
-	private int onReadyMessage(ContentOutcomingBuffer sendBuffer) {
+	private int onOneSecondaryAgentReady(ContentOutcomingBuffer sendBuffer) {
 		mExecutingStatus.decrementNumberOfSecondaryAgentsNotReady();
 		if(mExecutingStatus.allSecondaryAgentReady()) {
 			LogUtil.logInfo(this, "All secondary agent ready");
@@ -79,7 +79,7 @@ public class PrimaryContentBufferProcessorImpl implements IContentBufferProcesso
 		return ACTION_PHASE_TO_WAIT_SECONDARY_AGENTS_READY;
 	}
 
-	private int onTaskDoneMessage(ContentIncomingBuffer receiveBuffer, ContentOutcomingBuffer sendBuffer) {
+	private int onOneSecondaryAgentDoneTask(ContentIncomingBuffer receiveBuffer, ContentOutcomingBuffer sendBuffer) {
 		//receiveBuffer.extractReceivedMessage();
 		mExecutingStatus.decrementNumberOfSubTasksToWait();
 		
@@ -142,6 +142,8 @@ public class PrimaryContentBufferProcessorImpl implements IContentBufferProcesso
 		cow.addReceiverAgentName(secondaryAgentName);
 		sendBuffer.addContentObjectToSend(cow);
 	}
+	
+	//AgentAction stop doesn't work due to unknown reason
 	
 	/*private void stopSecondaryAgents(ContentOutcomingBuffer sendBuffer) {
 		ContentElement secondaryAgentStopAction = new SecondaryAgentStopAction();

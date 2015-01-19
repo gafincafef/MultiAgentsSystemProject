@@ -1,4 +1,4 @@
-package edu.rits.ma.test.impl;
+package edu.rits.ma.webapp.util;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,6 +15,7 @@ import edu.rits.ma.theory.Action;
 import edu.rits.ma.theory.IPreference;
 import edu.rits.ma.theory.IPreferenceSet;
 import edu.rits.ma.theory.IUtilitiesMap;
+import edu.rits.ma.theory.NashEquilibriumProblem;
 
 public class NashEquilibirumProblemParser {
 	private IPreferenceSet mPreferenceSet = null;
@@ -39,10 +40,11 @@ public class NashEquilibirumProblemParser {
 		return mUtilityMap;
 	}
 
-	public void parse(String jsonString) throws Exception {
+	public NashEquilibriumProblem parse(String jsonString) throws Exception {
 		JSONParser parser = new JSONParser();
 		JSONObject problemJSONObject = (JSONObject) parser.parse(jsonString);
 
+		mPreferenceSet.clear();
 		mPreferenceTmpMap.clear();
 
 		//Parse preference set
@@ -50,6 +52,8 @@ public class NashEquilibirumProblemParser {
 
 		//Parse utility map with information of preference set
 		parseUtilityMap(problemJSONObject, mPreferenceSet, mPreferenceTmpMap, mUtilityMap);
+	
+		return new NashEquilibriumProblem(mPreferenceSet, mUtilityMap);
 	}
 
 	@SuppressWarnings("rawtypes")
