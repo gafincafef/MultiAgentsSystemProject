@@ -1,0 +1,13 @@
+package agents;
+
+import behaviours.InteractiveBehaviour;
+import jade.core.Agent;
+
+public class MessageSenderAgent extends Agent {
+
+	@Override
+	protected void setup() {
+		System.out.println("Setup called on agent " + getAID().getName());
+		addBehaviour(new InteractiveBehaviour(this));
+	}
+}

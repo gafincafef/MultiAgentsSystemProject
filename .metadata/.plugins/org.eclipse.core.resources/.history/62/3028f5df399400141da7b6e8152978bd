@@ -1,0 +1,22 @@
+package agents;
+
+import jade.core.Agent;
+import jade.lang.acl.ACLMessage;
+
+public class MessageSenderAgent extends Agent {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 214632863175152517L;
+
+	@Override
+	protected void setup() {
+		System.out.println("Setup called on agent message sender " + getAID().getName());
+		
+	}
+	
+	private void sendMessage() {
+		ACLMessage message = new ACLMessage();
+	}
+}

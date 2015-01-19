@@ -1,0 +1,23 @@
+package edu.rits.ma.jade.concurrency;
+
+import edu.rits.ma.jade.dataobject.CondVar;
+
+public class CondVarManager implements ICondVarReleaser, ICondVarAcquirer {
+
+	@Override
+	public synchronized void waitOn(CondVar condVar) {
+		while(condVar.getReleaseThreshold() > 0) {
+			try {
+				condVar.wait();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@Override
+	public synchronized void release(CondVar condVar) {
+		
+	}
+
+}

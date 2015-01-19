@@ -1,0 +1,7 @@
+package behaviours;
+
+import jade.core.behaviours.CyclicBehaviour;
+
+public class MessageSenderBehaviour extends CyclicBehaviour {
+
+}

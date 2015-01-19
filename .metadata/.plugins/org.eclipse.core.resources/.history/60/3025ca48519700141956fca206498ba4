@@ -1,0 +1,18 @@
+package edu.rits.ma.test.impl;
+
+import edu.rits.ma.common.ITask;
+
+public abstract class AbstractTask implements ITask {
+
+	private int mStatus;
+	
+	public AbstractTask() {
+		mStatus = TASK_STATUS_CREATED;
+	}
+	
+	@Override
+	public int getStatus() {
+		return 0;
+	}
+
+}

@@ -1,0 +1,34 @@
+package edu.rits.ma.jade.communication;
+
+import java.io.Serializable;
+import java.util.ArrayDeque;
+import java.util.Deque;
+
+public class ContentElementOutcomingBuffer {
+	private Deque<ContentElementWrapper> mToSendElements = new ArrayDeque<ContentElementWrapper>();
+	private Deque<Serializable> mToSendObjects = new ArrayDeque<Serializable>();
+	
+	public boolean hasDataToSend() {
+		return !mToSendElements.isEmpty();
+	}
+
+	public void addContentElementToSend(ContentElementWrapper cew) {
+		mToSendElements.add(cew);
+	}
+
+	public ContentElementWrapper extractContentElementToSend() {
+		return mToSendElements.pop();
+	}
+	
+	public boolean hasObjectToSend() {
+		return !mToSendObjects.isEmpty();
+	}
+	
+	public void addReceivedObject(Serializable obj) {
+		mReceivedObjects.add(obj);
+	}
+	
+	public Serializable extractRetrievedObject() {
+		return mReceivedObjects.pop();
+	}
+}

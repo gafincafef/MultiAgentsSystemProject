@@ -1,0 +1,92 @@
+package main;
+
+import agents.SampleClientSideAgent;
+import jade.core.Profile;
+import jade.core.ProfileImpl;
+import jade.core.Runtime;
+import jade.wrapper.AgentController;
+import jade.wrapper.AgentState;
+import jade.wrapper.ContainerController;
+import jade.wrapper.StaleProxyException;
+import jade.wrapper.State;
+import model.IResponse;
+
+public class Main {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		String host = "localhost";
+		String port = "1099";
+		String name = "scs";
+		String className = SampleClientSideAgent.class.getName();
+		Object[] agentConstructorParams = null;
+		System.out.println("Main thread " + Thread.currentThread().getId());
+		AgentController ac = testCreateAgentInPeripheralContainer(host, port, name, className, agentConstructorParams);
+		try {
+			if(ac != null) {
+				ac.start();
+				while(showAndGetAgentControllerState(ac) == AgentState.cAGENT_STATE_IDLE) {
+					ac.start();
+				}
+				showAndGetAgentControllerState(ac);
+				testAgentCommunication(ac);
+			}
+		} 
+		catch (StaleProxyException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static AgentController testCreateAgentInPeripheralContainer(String host, String port, String name, String className, Object[] agentConstructorParams) {
+		// Retrieve the singleton instance of the JADE Runtime
+		Runtime rt = Runtime.instance();
+
+		// Create a container to host new agent
+		Profile p = new ProfileImpl();
+		p.setParameter(Profile.MAIN_HOST, host);
+		p.setParameter(Profile.MAIN_PORT, port);
+		ContainerController cc = rt.createAgentContainer(p);
+		if(cc != null) {
+			try {
+				AgentController ac = cc.createNewAgent(name, className, agentConstructorParams);
+				ac.start();
+				return ac;
+			} catch (StaleProxyException e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
+
+	private static int showAndGetAgentControllerState(AgentController ac) {
+		try {
+			State acState = ac.getState();
+			System.out.println("Agent controller state:" + acState.getCode() + " " + acState.getName());
+			return acState.getCode();
+		} 
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+
+	private static void testAgentCommunication(AgentController ac) {
+		try {
+			
+			//Send an integer as request message in blocking mode
+			ac.putO2AObject(12, AgentController.ASYNC);
+			
+			//Wait a response (integer value) from agent
+			IResponse response = ac.getO2AInterface(IResponse.class);
+			while (response == null) {
+				response = ac.getO2AInterface(IResponse.class);
+			}
+			
+			System.out.println("Response from agent " + response.getResponseValue());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+}

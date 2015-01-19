@@ -1,0 +1,29 @@
+package edu.rits.ma.jade.agent;
+
+import edu.rits.ma.jade.behaviour.SingleTaskProcessorBehaviour;
+import jade.core.Agent;
+
+public class SecondaryAgent extends Agent implements ICondVarReleaser {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1509623737210577104L;
+
+	@Override
+	protected void setup() {
+		super.setup();
+		System.out.println("Setup called on secondary agent" + getAID().getLocalName()
+				+ " in container " + getAMS().getName());
+		setEnabledO2ACommunication(true, 0);
+		
+		addBehaviour(new SingleTaskProcessorBehaviour(this));
+		
+	}
+
+	@Override
+	public void release(edu.rits.ma.jade.dataobject.CondVar condVar) {
+		// TODO Auto-generated method stub
+		
+	}
+}

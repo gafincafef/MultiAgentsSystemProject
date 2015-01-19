@@ -1,0 +1,22 @@
+package edu.rits.ma.jade.impl;
+
+import java.util.List;
+
+import edu.rits.ma.common.IAgentGateway;
+import edu.rits.ma.common.ITask;
+
+public class AgentGatewayImpl implements IAgentGateway {
+
+	@Override
+	public void prepareAgents(int numberOfAgents) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void startTasksOnAgents(List<ITask> tasks) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

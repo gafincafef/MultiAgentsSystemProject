@@ -1,0 +1,8 @@
+package edu.rits.ma.algorithm.impl;
+
+import edu.rits.ma.theory.IPreference;
+
+public class IDBasedPreferenceImpl implements IPreference 
+{
+
+}

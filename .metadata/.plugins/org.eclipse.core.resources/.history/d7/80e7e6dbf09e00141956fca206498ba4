@@ -1,0 +1,11 @@
+package communication;
+
+import jade.content.onto.Ontology;
+
+public class TestOntology extends Ontology {
+
+	public TestOntology(String arg0, Ontology arg1) {
+		super(arg0, arg1);
+	}
+
+}

@@ -1,0 +1,29 @@
+package edu.rits.ma.jade.behaviour;
+
+import edu.rits.ma.jade.communication.TaskProcessorIntermediator;
+import jade.core.Agent;
+import jade.core.behaviours.Behaviour;
+
+public class TaskProcessorMainBehaviour extends Behaviour {
+
+	private static final long serialVersionUID = 3398155524074335278L;
+
+	private TaskProcessorIntermediator mIntermediator = null;
+	
+	public TaskProcessorMainBehaviour(Agent agent, TaskProcessorIntermediator intermediator) {
+		mIntermediator = t
+	}
+	
+	@Override
+	public void action() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean done() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

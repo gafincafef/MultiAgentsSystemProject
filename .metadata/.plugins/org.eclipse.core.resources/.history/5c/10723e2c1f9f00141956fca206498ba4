@@ -1,0 +1,12 @@
+package edu.rits.ma.jade.communication;
+
+import jade.content.Predicate;
+
+public class SecondaryAgentState implements Predicate {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8175666842573311809L;
+
+}

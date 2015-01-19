@@ -1,0 +1,22 @@
+package tasks;
+
+import jade.content.Predicate;
+
+public class ReadyStatus implements Predicate {
+
+	private static final long serialVersionUID = -1952412868844983284L;
+
+	public static final int STATUS_NOT_READY = -1;
+	public static final int STATUS_READY = 0;
+	
+	private int mStatus;
+
+	public int getStatus() {
+		return mStatus;
+	}
+
+	public void setStatus(int mStatus) {
+		this.mStatus = mStatus;
+	}
+	
+}

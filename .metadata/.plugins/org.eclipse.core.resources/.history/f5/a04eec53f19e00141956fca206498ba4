@@ -1,0 +1,31 @@
+package tasks;
+
+import java.util.List;
+
+public class SimpleTaskImpl implements ITask {
+
+	@Override
+	public void execute() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getStatus() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Object[] getResults() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void createSubTasks(List<ITask> subTasks) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

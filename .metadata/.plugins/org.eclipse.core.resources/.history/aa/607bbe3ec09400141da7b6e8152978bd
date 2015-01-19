@@ -1,0 +1,9 @@
+package behaviours;
+
+import jade.core.behaviours.Behaviour;
+
+public class SampleBehaviour extends Behaviour {
+
+	
+
+}

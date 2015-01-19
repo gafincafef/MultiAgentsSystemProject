@@ -1,0 +1,23 @@
+package edu.rits.ma.jade.communication;
+
+import jade.content.ContentElement;
+
+public class ContentElementWrapper {
+	private ContentElement mContentElement = null;
+	private String mOntologyName = null;
+	private List<String> mReceiverAgentNames = new ;
+	
+	public ContentElementWrapper(ContentElement contentElement, String ontologyName) {
+		mContentElement = contentElement;
+		mOntologyName = ontologyName;
+	}
+
+	public ContentElement getContentElement() {
+		return mContentElement;
+	}
+
+	public String getOntologyName() {
+		return mOntologyName;
+	}
+	
+}

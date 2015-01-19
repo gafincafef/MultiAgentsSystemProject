@@ -1,0 +1,34 @@
+package edu.rits.ma.jade.impl;
+
+import jade.wrapper.gateway.JadeGateway;
+
+import java.util.List;
+
+import edu.rits.ma.common.IAgentGateway;
+import edu.rits.ma.common.ITask;;
+
+public class AgentGatewayImpl implements IAgentGateway {
+
+	private String mHost;
+	private String mPort;
+	private String mPrimaryAgentClassName;
+	
+	public AgentGatewayImpl(String host, String port, String primaryAgentClassName) {
+		mHost = host;
+		mPort = port;
+		mPrimaryAgentClassName = primaryAgentClassName;
+	}
+	
+	@Override
+	public void prepareAgents(int numberOfAgents) {
+		Properties pp = new Properties();
+		pp.setProperty(Profile.MAIN_HOST, "localhost");
+		pp.setProperty(Profile.MAIN_PORT, "1099");
+	}
+
+	@Override
+	public void runTasksOnAgents(List<ITask> tasks) {
+		
+	}
+
+}

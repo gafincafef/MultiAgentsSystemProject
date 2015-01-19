@@ -1,0 +1,11 @@
+package edu.rits.ma.jade.agent;
+
+import edu.rits.ma.jade.dataobject.CondVar;
+
+public interface IAgentCallback {
+	void onSetupStart();
+	void onSetupArgumentsParsed() throws Exception;
+	void onSetupArgumentsParseFailed();
+	void onSetupEnd();
+	CondVar getCondVarAfterSetup();
+}

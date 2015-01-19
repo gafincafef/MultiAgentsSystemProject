@@ -1,0 +1,14 @@
+package edu.rits.ma.algorithm.nashequil;
+
+import edu.rits.ma.theory.INashEquilibriumSolver;
+import edu.rits.ma.theory.NashEquilibriumProblem;
+
+public class NashEquilibriumSolverImpl implements INashEquilibriumSolver {
+
+	@Override
+	public void solve(NashEquilibriumProblem problem) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

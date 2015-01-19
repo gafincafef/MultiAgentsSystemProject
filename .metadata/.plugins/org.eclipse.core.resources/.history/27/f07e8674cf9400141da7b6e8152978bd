@@ -1,0 +1,18 @@
+package agents;
+
+import jade.core.Agent;
+
+public class DummyAgent extends Agent {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1991189725563141931L;
+
+	@Override
+	protected void setup() {
+		System.out.println("Setup called on agent dummy " + getAID().getLocalName()
+				+ " in container " + getAMS().getName());
+	}
+
+}

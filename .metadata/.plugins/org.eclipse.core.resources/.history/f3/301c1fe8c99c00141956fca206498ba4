@@ -1,0 +1,47 @@
+package edu.rits.ma.algorithm.nashequil;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import edu.rits.ma.common.abstr.ITask;
+import edu.rits.ma.common.theory.IPreference;
+import edu.rits.ma.common.theory.IPreferenceSet;
+
+public class FindBestPreferencesTaskImpl implements ITask {
+
+	private IPreference mSubPreference;
+	private IPreferenceSet mPreferenceSet;
+	private List<IPreference> mCandidatePreferences = new ArrayList<IPreference>();
+	
+	public FindBestPreferencesTaskImpl(IPreference subPreference, IPreferenceSet preferenceSet) {
+		mSubPreference = subPreference;
+		mPreferenceSet = preferenceSet;
+	}
+	
+	@Override
+	public long getTimeOutMs() {
+		return 1000;
+	}
+
+	@Override
+	public void execute() {
+		List<IPreference> subPreferenceContainers = new ArrayList<IPreference>();
+		
+	}
+
+	@Override
+	public int getStatus() {
+		return 0;
+	}
+
+	@Override
+	public Object[] getResults() {
+		return mCandidatePreferences.toArray();
+	}
+
+	@Override
+	public void createSubTasks(List<ITask> subTasks) {
+		
+	}
+
+}

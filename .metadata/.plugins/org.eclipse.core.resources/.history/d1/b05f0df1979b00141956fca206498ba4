@@ -1,0 +1,7 @@
+package edu.rits.ma.jade.behaviour;
+
+import edu.rits.ma.jade.communication.CommunicationDataStore;
+
+public interface ICommunicationDataStoreProcessor {
+	public void processCommunicationDataStore(CommunicationDataStore communicationDataStore);
+}

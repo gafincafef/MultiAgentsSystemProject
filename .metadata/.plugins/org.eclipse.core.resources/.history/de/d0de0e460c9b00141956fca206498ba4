@@ -1,0 +1,8 @@
+package edu.rits.ma.jade.dataobject;
+
+public class TaskProcessorState {
+	public static final int STATE_WAIT_FOR_SECONDARY_AGENT_START = 0;
+	
+	private int mState;
+	
+}

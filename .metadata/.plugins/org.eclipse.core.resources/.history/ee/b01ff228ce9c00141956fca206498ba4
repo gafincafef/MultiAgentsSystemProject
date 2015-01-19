@@ -1,0 +1,7 @@
+package edu.rits.ma.algorithm.nashequil;
+
+import edu.rits.ma.common.abstr.ITask;
+
+public class BestPreferenceCheckerTaskImpl implements ITask {
+
+}

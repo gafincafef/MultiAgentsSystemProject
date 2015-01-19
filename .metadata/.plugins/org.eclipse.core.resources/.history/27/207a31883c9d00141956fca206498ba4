@@ -1,0 +1,42 @@
+package edu.rits.ma.algorithm.impl;
+
+import java.util.List;
+import java.util.Set;
+
+import edu.rits.ma.theory.IPreference;
+import edu.rits.ma.theory.IPreferenceSet;
+
+public class PreferenceSetImpl implements IPreferenceSet<T> {
+
+	@Override
+	public void addPreference(IPreference preference) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removePreference(IPreference preference) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void getAllAgentIds(Set<Integer> agentIds) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void clear() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void getContainerPreferences(IPreference subPreference,
+			List<IPreference> containerPreferences) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

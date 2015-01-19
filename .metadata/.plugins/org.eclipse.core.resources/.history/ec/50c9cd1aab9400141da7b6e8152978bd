@@ -1,0 +1,6 @@
+package model;
+
+public class AgentMessage {
+	private String mMessage;
+	
+}

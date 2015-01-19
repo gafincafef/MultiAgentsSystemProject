@@ -1,0 +1,9 @@
+package edu.rits.ma.theory;
+
+public class Preference {
+	private int[] mActionIds;
+	
+	public Preference(int numberOfAgent) {
+		mActions = new Action[numberOfAgent];
+	}
+}

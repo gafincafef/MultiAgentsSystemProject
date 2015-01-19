@@ -1,0 +1,14 @@
+package agents;
+
+import jade.core.Agent;
+
+public class DummyAgent extends Agent {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1991189725563141931L;
+
+	
+
+}

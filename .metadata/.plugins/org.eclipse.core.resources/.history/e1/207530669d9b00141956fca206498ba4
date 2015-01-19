@@ -1,0 +1,50 @@
+package edu.rits.ma.jade.behaviour;
+
+import edu.rits.ma.jade.communication.CommunicationDataStore;
+
+public class SecondaryTaskProcessorImpl implements ICommunicationDataStoreProcessor {
+
+	private static final int ACTION_PHASE_TO_WAIT = 0;
+	private static final int ACTION_PHASE_TO_PROCESS_READY_CHECK_MESSAGE = 1;
+	private static final int ACTION_PHASE_TO_PROCESS_TASK_MESSAGE = 2;
+	private static final int ACTION_PHASE_TO_STOP = 3;
+	
+	private int mInternalState = ACTION_PHASE_TO_WAIT;
+	
+	@Override
+	public void processCommunicationDataStore(CommunicationDataStore communicationDataStore) {
+		updateInternalState(communicationDataStore);
+		int newInternalState = mInternalState;
+		switch (mInternalState) {
+		case ACTION_PHASE_TO_PROCESS_READY_CHECK_MESSAGE:
+			newInternalState = onReadyCheck(communicationDataStore);
+			break;
+		case ACTION_PHASE_TO_PROCESS_TASK_MESSAGE:
+			newInternalState = onTaskAssigned(communicationDataStore);
+			break;
+
+		default:
+			break;
+		}
+		mInternalState = newInternalState;
+		
+	}
+
+	private int onTaskAssigned(CommunicationDataStore communicationDataStore) {
+		return 0;
+	}
+
+	private int onReadyCheck(CommunicationDataStore communicationDataStore) {
+		return 0;
+	}
+
+	@Override
+	public boolean done() {
+		return mInternalState == ACTION_PHASE_TO_STOP;
+	}
+	
+	private void updateInternalState(CommunicationDataStore communicationDataStore) {
+
+	}
+
+}

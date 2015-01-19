@@ -1,0 +1,29 @@
+package edu.rits.ma.algorithm.nashequil;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import edu.rits.ma.common.theory.IPreferenceSet;
+import edu.rits.ma.common.theory.Preference;
+
+public class NashEquilibriumSolver {
+	public void solve(IPreferenceSet preferences) {
+		int primaryAgentId = 0;
+		
+		int[] secondaryAgentIds = new int[preferences.getNumberOfAgents() - 1];
+		for(int i = 1; i < secondaryAgentIds.length; i++) {
+			secondaryAgentIds[i] = i;
+		}
+		
+		List<int[]> actionsOfSecondaryAgents = new ArrayList<int[]>();
+		preferences.getAgentActionsIds(secondaryAgentIds, actionsOfSecondaryAgents);
+		
+		for(int[] secondaryActions : actionsOfSecondaryAgents) {
+			List<Preference> preferencesMatchedSecondaryActions = new ArrayList<Preference>();
+			preferences.getPreferencesOfAgents(secondaryAgentIds, secondaryActions, preferencesMatchedSecondaryActions);
+			
+			
+		}
+	}
+}

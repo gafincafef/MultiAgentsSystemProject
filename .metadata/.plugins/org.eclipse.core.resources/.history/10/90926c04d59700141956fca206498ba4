@@ -1,0 +1,19 @@
+package edu.rits.ma.jade.agent;
+
+public class AgentOrganizer {
+	public void setupAgent(IAgent agent, ICondVarReleaser condVarRelease) {
+		System.out.println("Setup called on secondary agent" + getAID().getLocalName()
+				+ " in container " + getAMS().getName());
+		setEnabledO2ACommunication(true, 0);
+		
+		try {
+			onSetupArgumentsParsed(getArguments());
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			doDelete();
+		}
+		
+		onSetupEnd();
+	}
+}

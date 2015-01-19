@@ -1,0 +1,6 @@
+package edu.rits.ma.jade.dataobject;
+
+public class TaskProcessorState {
+	private int mState;
+	
+}

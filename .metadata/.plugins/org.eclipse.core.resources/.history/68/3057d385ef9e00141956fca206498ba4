@@ -1,0 +1,20 @@
+package behaviour;
+
+import jade.core.AID;
+import jade.core.Agent;
+import jade.core.behaviours.OneShotBehaviour;
+
+public class OntologySenderBehaviour extends OneShotBehaviour {
+
+	private AID mReceiverAID;
+	
+	public OntologySenderBehaviour(Agent agent, AID receiverAID) {
+		
+	}
+	
+	@Override
+	public void action() {
+		
+	}
+
+}

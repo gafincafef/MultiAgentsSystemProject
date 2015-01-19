@@ -1,0 +1,19 @@
+package edu.rits.ma.jade.agent;
+
+import edu.rits.ma.jade.dataobject.CondVar;
+
+public class TaskProcessorPrimaryAgentImpl extends AbstractPrimaryAgent {
+
+	private static final long serialVersionUID = 8019767118623600485L;
+
+	@Override
+	protected String getSecondaryAgentClassName(int secondaryAgentId) {
+		return SecondaryAgent.class.getName();
+	}
+
+	@Override
+	protected Object[] createSecondarySetupParams(CondVar condVarToAcquire) {
+		return new Object[]{condVarToAcquire};
+	}
+
+}

@@ -1,0 +1,25 @@
+package behaviours;
+
+import jade.core.behaviours.Behaviour;
+
+public class SampleBehaviour extends Behaviour {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1506345155315090344L;
+
+	public SampleBehaviour() {
+		
+	}
+	
+	@Override
+	public void action() {
+		System.out.println("Sample action");
+	}
+
+	@Override
+	public boolean done() {
+		return true;
+	}
+}

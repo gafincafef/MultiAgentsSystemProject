@@ -1,0 +1,39 @@
+package main;
+
+import jade.core.Profile;
+import jade.core.ProfileImpl;
+import jade.core.Runtime;
+import jade.core.behaviours.Behaviour;
+import jade.wrapper.AgentController;
+import jade.wrapper.ContainerController;
+import jade.wrapper.StaleProxyException;
+
+public class Main {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		testCreateAgent(host, port, name, className, behaviours);
+	}
+
+	private static void testCreateAgent(String host, String port, String name, String className, Object[] behaviours) {
+		// Retrieve the singleton instance of the JADE Runtime
+		Runtime rt = Runtime.instance();
+		
+		// Create a container to host the Book Buyer agent
+		Profile p = new ProfileImpl();
+		p.setParameter(Profile.MAIN_HOST, host);
+		p.setParameter(Profile.MAIN_PORT, port);
+		ContainerController cc = rt.createAgentContainer(p);
+		
+		if(cc != null) {
+			try {
+				AgentController ac = cc.createNewAgent(name, className, behaviour);
+				ac.start();
+			} catch (StaleProxyException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+}

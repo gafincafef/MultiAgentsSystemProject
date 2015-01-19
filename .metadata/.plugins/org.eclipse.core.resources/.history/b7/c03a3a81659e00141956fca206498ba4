@@ -1,0 +1,64 @@
+package edu.rits.ma.test.main;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import edu.rits.ma.common.abstr.IAgentGateway;
+import edu.rits.ma.common.abstr.ITask;
+import edu.rits.ma.jade.agent.TaskProcessorPrimaryAgentImpl;
+import edu.rits.ma.jade.impl.JadeAgentGatewayImpl;
+import edu.rits.ma.jade.util.LogUtil;
+import edu.rits.ma.test.impl.TaskSampleImpl;
+import edu.rits.ma.theory.NashEquilibriumProblem;
+
+public class TestJade {
+	public static void main(String[] args) {
+		testCreateProblemFromJSONString();
+	}
+	
+	private static void testJade() {
+		String host = "localhost";
+		String port = "1099";
+		String primaryAgentClassName = TaskProcessorPrimaryAgentImpl.class.getName();
+		
+		IAgentGateway agentGateway = new JadeAgentGatewayImpl(host, port, primaryAgentClassName);
+		int nbAgents = 6;
+		agentGateway.prepareAgents(nbAgents);
+		
+		List<ITask> tasks = new ArrayList<ITask>();
+		tasks.add(new TaskSampleImpl(nbAgents - 1));
+		tasks.add(new TaskSampleImpl(nbAgents - 1));
+		
+		agentGateway.runTasksOnAgents(tasks);
+		
+		Object[] results = tasks.get(0).getResults();
+		if(results != null) {
+			for(int i = 0; i < results.length; i++) {
+				int rv = (int) results[i];
+				LogUtil.logInfo(TestJade.class, "Result " + i + " " + rv);
+			}
+		}
+	}
+	
+	private static NashEquilibriumProblem testCreateProblemFromJSONString() {
+		String jsonStringifiedProblem = "{\"utilityMap\":{\"1\":{\"1\":\"19\",\"2\":\"12\",\"3\":\"23\"},\"2\":{\"1\":\"5\",\"2\":\"3\",\"3\":\"5\"}},\"numberOfAgent\":\"3\",\"preferences\":[{\"id\":\"1\",\"actionMap\":{\"1\":\"3\",\"2\":\"5\",\"3\":\"5\"}},{\"id\":\"2\",\"actionMap\":{\"1\":\"4\",\"2\":\"4\",\"3\":\"5\"}}]}";
+		JSONParser jsonParser = new JSONParser();
+		try {
+			JSONObject jsonObject = (JSONObject) jsonParser.parse(jsonStringifiedProblem);
+			
+			//String utilityMapStr = (String) jsonObject.get("utilityMap");
+			//System.out.println(utilityMapStr);
+			
+			String numberOfAgentString = (String) jsonObject.get("numberOfAgent");
+			System.out.println("Parsed number of agent:" + numberOfAgent);
+			
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+}

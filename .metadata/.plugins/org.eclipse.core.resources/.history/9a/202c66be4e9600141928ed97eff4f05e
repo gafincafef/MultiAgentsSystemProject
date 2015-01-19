@@ -1,0 +1,11 @@
+package edu.rits.ma.theory;
+
+
+public class Preference {
+	private int[] mActionIds = null;
+	private int[] mUtilities = null;
+	
+	public Preference(int numberOfAgent) {
+		mActionIds = new int[numberOfAgent];
+	}
+}

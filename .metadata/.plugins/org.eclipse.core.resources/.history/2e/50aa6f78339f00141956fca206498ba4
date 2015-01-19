@@ -1,0 +1,12 @@
+package edu.rits.ma.jade.communication;
+
+import java.io.Serializable;
+
+public class SerializeObjectWrapper implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 733974895428689318L;
+
+}

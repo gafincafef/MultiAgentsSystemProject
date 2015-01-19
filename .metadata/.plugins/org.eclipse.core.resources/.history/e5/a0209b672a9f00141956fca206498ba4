@@ -1,0 +1,128 @@
+package edu.rits.ma.jade.behaviour;
+
+import jade.content.ContentElement;
+import jade.content.ContentManager;
+import jade.content.lang.Codec.CodecException;
+import jade.content.onto.OntologyException;
+import jade.core.AID;
+import jade.core.Agent;
+import jade.core.behaviours.Behaviour;
+import jade.domain.FIPANames;
+import jade.lang.acl.ACLMessage;
+import jade.wrapper.StaleProxyException;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import edu.rits.ma.jade.communication.ContentElementIncomingBuffer;
+import edu.rits.ma.jade.communication.ContentElementOutcomingBuffer;
+import edu.rits.ma.jade.communication.ContentElementWrapper;
+import edu.rits.ma.jade.taskprocessor.IContentElementBufferProcessor;
+
+public class AgentOntologyCommunicatingBehaviour extends Behaviour {
+
+	private static final long serialVersionUID = 3662010610519584453L;
+
+	private ContentElementIncomingBuffer mReceiveBuffer = new ContentElementIncomingBuffer();
+	private ContentElementOutcomingBuffer mSendBuffer = new ContentElementOutcomingBuffer();
+
+	private IContentElementBufferProcessor mProcessor = null;
+
+	public AgentOntologyCommunicatingBehaviour(Agent agent, IContentElementBufferProcessor processor) {
+		setAgent(agent);
+		mProcessor = processor;
+	}
+
+	@Override
+	public void action() {
+		updateCommunicationDataStore();
+		if(messageReceived()) {
+			processCommunicationDataStore();
+			if(hasMessageToSend()) {
+				try {
+					sendMessagesFromAgent();
+				} catch (StaleProxyException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		else {
+			block();
+		}
+	}
+
+	@Override
+	public boolean done() {
+		return mProcessor.done();
+	}
+
+	public void sendMessagesFromAgent() throws StaleProxyException {
+		//Send ACL message parsed from content element
+
+		if(mSendBuffer.hasDataToSend()) {
+			ContentElementWrapper contentElement = mSendBuffer.extractContentElementToSend();
+			ACLMessage message = parseMessageFromContentElement(contentElement);
+			getAgent().send(message);
+		}
+	}
+
+	public ContentElementWrapper parseContentElementFromMessage(ACLMessage message) {
+		ContentManager contentManager = getAgent().getContentManager();
+		try {
+			ContentElement contentElement = null;
+			contentElement = contentManager.extractContent(message);
+			return new ContentElementWrapper(contentElement, message.getOntology());
+		} 
+		catch (CodecException | OntologyException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public ACLMessage parseMessageFromContentElement(ContentElementWrapper contentElement) {
+		ACLMessage message = new ACLMessage(ACLMessage.INFORM);
+
+		//Set language and ontology
+		message.setLanguage(FIPANames.ContentLanguage.FIPA_SL);
+		message.setOntology(contentElement.getOntologyName());
+
+		//Add receivers
+		List<String> receiverAgentNames = new ArrayList<String>();
+		contentElement.getReceiverAgentNames(receiverAgentNames);
+		for(String receiverAgentName : receiverAgentNames) {
+			AID receiverAID = new AID(receiverAgentName, AID.ISGUID);
+			message.addReceiver(receiverAID);
+		}
+
+		//Set content
+		try {
+			getAgent().getContentManager().fillContent(message, contentElement.getContentElement());
+		} catch (CodecException e) {
+			e.printStackTrace();
+		} catch (OntologyException e) {
+			e.printStackTrace();
+		}
+
+		return message;
+	}
+	
+	private void updateCommunicationDataStore() {
+		//Receive ACL message
+		ACLMessage message = getAgent().receive();
+		if(message != null) {
+			mReceiveBuffer.addReceivedContentElement(parseContentElementFromMessage(message));
+		}
+	}
+
+	private boolean messageReceived() {
+		return mReceiveBuffer.hasReceivedData();
+	}
+
+	private void processCommunicationDataStore() {
+		mProcessor.processCommunicationDataStore(mReceiveBuffer, mSendBuffer);
+	}
+
+	private boolean hasMessageToSend() {
+		return mSendBuffer.hasDataToSend();
+	}
+}

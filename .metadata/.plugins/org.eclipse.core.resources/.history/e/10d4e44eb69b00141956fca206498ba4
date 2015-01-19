@@ -1,0 +1,40 @@
+package edu.rits.ma.jade.agent;
+
+import java.util.List;
+
+import edu.rits.ma.jade.behaviour.AgentCommunicatingBehaviour;
+import edu.rits.ma.jade.behaviour.ICommunicationDataStoreProcessor;
+import jade.core.behaviours.Behaviour;
+import jade.wrapper.AgentController;
+
+public class TaskProcessorPrimaryAgentImpl extends AbstractPrimaryAgent {
+
+	private static final long serialVersionUID = 8019767118623600485L;
+
+	@Override
+	protected String getSecondaryAgentClassName(int secondaryAgentId) {
+		return SecondaryAgent.class.getName();
+	}
+
+	@Override
+	protected Object[] createSecondarySetupParams(String primaryAgentName) {
+		return new Object[]{primaryAgentName};
+	}
+
+	@Override
+	protected Behaviour createBehaviourForCommand(final Object command) {
+		ICommunicationDataStoreProcessor processor = null;
+		List<AgentController> agentControllers = null;
+		
+		Behaviour behaviour = new AgentCommunicatingBehaviour(this, processor, agentControllers){
+			@Override
+			public int onEnd() {
+				//Command released
+				this.releaseCommand(command);
+				return super.onEnd();
+			}
+		};
+		return behaviour;
+	}
+
+}

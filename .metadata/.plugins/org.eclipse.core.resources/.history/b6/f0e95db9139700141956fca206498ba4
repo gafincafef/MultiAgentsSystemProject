@@ -1,0 +1,7 @@
+package edu.rits.ma.jade.behaviour;
+
+import jade.core.behaviours.CyclicBehaviour;
+
+public class PrimaryAgentBehaviour extends CyclicBehaviour {
+
+}

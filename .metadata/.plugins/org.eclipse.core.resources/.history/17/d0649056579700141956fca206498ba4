@@ -1,0 +1,21 @@
+package edu.rits.ma.jade.util;
+
+import java.util.Calendar;
+
+public class StopWatch {
+	private long mTimeOut;
+	private long mStartTime;
+	
+	public StopWatch(long timeOut) {
+		mTimeOut = timeOut;
+	}
+	
+	public void start() {
+		mStartTime = Calendar.getInstance().getTimeInMillis();
+	}
+	
+	public boolean isStoped() {
+		currentTime = Calendar.getInstance().getTimeInMillis();
+		
+	}
+}

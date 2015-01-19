@@ -1,0 +1,30 @@
+package edu.rits.ma.algorithm.nashequil;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import edu.rits.ma.common.abstr.IAgentGateway;
+import edu.rits.ma.common.abstr.ITask;
+import edu.rits.ma.theory.INashEquilibriumSolver;
+import edu.rits.ma.theory.NashEquilibriumProblem;
+
+public class NashEquilibriumAgentBasedSolverImpl implements INashEquilibriumSolver {
+
+	private  IAgentGateway mAgentGateway = null;
+	
+	public NashEquilibriumAgentBasedSolverImpl(IAgentGateway agentGateway) {
+		mAgentGateway = agentGateway;
+	}
+	
+	@Override
+	public void solve(NashEquilibriumProblem problem) {
+		List<ITask> tasks = new ArrayList<ITask>();
+		convertProblemToTasks(problem, tasks);
+		mAgentGateway.runTasksOnAgents(tasks);
+	}
+	
+	private void convertProblemToTasks(NashEquilibriumProblem problem, List<ITask> tasks) {
+		
+	}
+
+}

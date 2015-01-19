@@ -1,0 +1,7 @@
+package behaviour;
+
+import jade.core.behaviours.OneShotBehaviour;
+
+public class OntologySenderBehaviour extends OneShotBehaviour {
+
+}

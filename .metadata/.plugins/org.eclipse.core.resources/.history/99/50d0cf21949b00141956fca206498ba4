@@ -1,0 +1,50 @@
+package edu.rits.ma.jade.behaviour;
+
+import java.util.List;
+
+import edu.rits.ma.common.abstr.ITask;
+import edu.rits.ma.jade.communication.CommunicationDataStore;
+
+public class PrimaryTaskProcessorImpl implements ICommunicationDataStoreProcessor {
+
+	private static final int ACTION_PHASE_TO_RUN = 0;
+	private static final int ACTION_PHASE_TO_WAIT = 1;
+	private static final int ACTION_PHASE_TO_STOP = 2;
+	
+	private int mInternalState;
+	private List<ITask> mTasks = null;
+	
+	@Override
+	public void processCommunicationDataStore(CommunicationDataStore communicationDataStore) {
+		updateInternalState(communicationDataStore);
+		try {
+			int nextActionPhase = mInternalState;
+			switch (mInternalState) {
+			case ACTION_PHASE_TO_RUN:
+				runTasks();
+				nextActionPhase = ACTION_PHASE_TO_WAIT;
+				break;
+			case ACTION_PHASE_TO_WAIT:
+				waitForSubTasksOnSecondaryAgents();
+				break;
+			default:
+				break;
+			}
+			mInternalState = nextActionPhase;
+		} catch (Exception e) {
+			e.printStackTrace();
+			mInternalState = ACTION_PHASE_TO_STOP;
+		}
+	}
+
+	private void waitForSubTasksOnSecondaryAgents() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void runTasks() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

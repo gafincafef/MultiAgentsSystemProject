@@ -1,0 +1,18 @@
+package behaviours;
+
+import jade.core.Agent;
+import jade.core.behaviours.CyclicBehaviour;
+
+public class MessageSenderBehaviour extends CyclicBehaviour {
+
+	public InteractiveBehaviour(Agent agent) {
+		myAgent = agent;
+	}
+	
+	@Override
+	public void action() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

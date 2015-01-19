@@ -1,0 +1,9 @@
+package edu.rits.ma.algorithm.nashequil;
+
+import edu.rits.ma.common.theory.IPreferenceSet;
+
+public class NashEquilibriumSolver {
+	public void solve(IPreferenceSet) {
+		
+	}
+}

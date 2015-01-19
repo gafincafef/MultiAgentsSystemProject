@@ -1,0 +1,7 @@
+package edu.rits.ma.common.theory;
+
+import java.util.List;
+
+public interface IPreferenceSet {
+	
+}

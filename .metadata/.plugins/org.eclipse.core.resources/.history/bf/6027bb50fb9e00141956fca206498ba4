@@ -1,0 +1,21 @@
+package communication;
+
+import jade.content.onto.Ontology;
+
+public class ReadinessOntology extends Ontology {
+
+	private static final long serialVersionUID = -8068647241230541126L;
+
+	public static final String READINESS_ONTOLOGY_NAME = "secondary-agent-readiness-ontology";
+	
+	private static Ontology mInstance;
+	
+	public static Ontology getInstance() {
+		return mInstance;
+	}
+	
+	private ReadinessOntology(String arg0, Ontology arg1) {
+		super(arg0, arg1);
+	}
+
+}

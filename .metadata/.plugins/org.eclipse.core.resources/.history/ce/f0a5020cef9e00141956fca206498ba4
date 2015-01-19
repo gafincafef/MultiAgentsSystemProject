@@ -1,0 +1,14 @@
+package agent;
+
+import jade.core.Agent;
+
+public class OntologyMessageReceiverAgent extends Agent{
+
+	private static final long serialVersionUID = 7490980904997460253L;
+	private static final String SERVICE_TYPE = "messageListener";
+	
+	@Override
+	public void setup() {
+		super.setup();
+	}
+}

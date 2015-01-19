@@ -1,0 +1,16 @@
+package edu.rits.ma.algorithm.nashequil;
+
+import edu.rits.ma.common.theory.IPreferenceSet;
+
+public class NashEquilibriumSolver {
+	public void solve(IPreferenceSet preferences) {
+		int primaryAgentId = 0;
+		
+		int[] secondaryAgentIds = new int[preferences.getNumberOfAgents() - 1];
+		for(int i = 1; i < secondaryAgentIds.length; i++) {
+			secondaryAgentIds[i] = i;
+		}
+		
+		preferences.getPreferencesOfAgents(secondaryAgentIds, outputs);
+	}
+}

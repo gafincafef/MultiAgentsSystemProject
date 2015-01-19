@@ -1,0 +1,12 @@
+package agents;
+
+import jade.core.Agent;
+
+public class SecondaryAgent extends Agent {
+	@Override
+	protected void setup() {
+		System.out.println("Setup called on agent sample " + getAID().getLocalName()
+				+ " in container " + getAMS().getName());
+		setEnabledO2ACommunication(true, 0);
+	}
+}

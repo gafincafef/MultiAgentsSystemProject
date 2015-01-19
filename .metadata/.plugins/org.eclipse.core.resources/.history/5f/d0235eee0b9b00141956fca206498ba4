@@ -1,0 +1,34 @@
+package edu.rits.ma.jade.behaviour;
+
+import edu.rits.ma.jade.util.LogUtil;
+import jade.core.Agent;
+import jade.core.behaviours.Behaviour;
+import jade.lang.acl.ACLMessage;
+
+public class MessageReceiverBehaviour extends Behaviour {
+
+	private static final long serialVersionUID = 3107958984819531209L;
+	private boolean mMessageReceived = false;
+	
+	public MessageReceiverBehaviour(Agent agent) {
+		setAgent(agent);
+	}
+	
+	@Override
+	public void action() {
+		ACLMessage message = getAgent().receive();
+		if(message != null) {
+			LogUtil.logInfo(this, "Message received: " + message.getContent());
+			mMessageReceived = true;
+		}
+		else {
+			block();
+		}
+	}
+
+	@Override
+	public boolean done() {
+		return mMessageReceived;
+	}
+
+}

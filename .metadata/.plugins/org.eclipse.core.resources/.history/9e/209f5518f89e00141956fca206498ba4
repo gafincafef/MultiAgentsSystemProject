@@ -1,0 +1,12 @@
+package tasks;
+
+import jade.content.Predicate;
+
+public class ReadyStatus implements Predicate {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1952412868844983284L;
+
+}

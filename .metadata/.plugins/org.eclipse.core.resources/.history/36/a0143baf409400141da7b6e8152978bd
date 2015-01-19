@@ -1,0 +1,23 @@
+package behaviours;
+
+import jade.core.Agent;
+import jade.core.behaviours.CyclicBehaviour;
+
+public class MessageSenderBehaviour extends CyclicBehaviour {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3144764478272362958L;
+
+	public MessageSenderBehaviour(Agent agent) {
+		myAgent = agent;
+	}
+	
+	@Override
+	public void action() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

@@ -1,0 +1,21 @@
+package agents;
+
+import jade.core.Agent;
+import behaviours.SampleBehaviour;
+
+public class SampleClientSideAgent extends Agent {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Override
+	protected void setup() {
+		System.out.println("Setup called on agent sample " + getAID().getLocalName()
+				+ " in container " + getAMS().getName());
+		setEnabledO2ACommunication(true, 0);
+		registerO2AInterface(Integer.class, Integer);
+		addBehaviour(new SampleBehaviour(this));
+	}
+	
+}

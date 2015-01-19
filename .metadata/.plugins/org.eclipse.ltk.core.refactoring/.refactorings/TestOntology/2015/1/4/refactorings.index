@@ -1,0 +1,6 @@
+1421571170561	Rename type 'OntologySenderBehaviout'
+1421571818407	Rename type 'TestOntology'
+1421576073663	Encapsulate field 'mStatus'
+1421576923362	Delete element
+1421576964733	Rename type 'TaskStatus'
+1421577225641	Encapsulate field 'mReadyStatus'

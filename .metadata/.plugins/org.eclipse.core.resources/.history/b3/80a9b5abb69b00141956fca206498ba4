@@ -1,0 +1,29 @@
+package edu.rits.ma.jade.behaviour;
+
+import jade.core.Agent;
+import jade.wrapper.AgentController;
+import jade.wrapper.gateway.GatewayAgent;
+
+import java.util.List;
+
+public class GatewayAgentCommunicatingBehaviour extends AgentCommunicatingBehaviour {
+
+	private static final long serialVersionUID = -6373415624378748676L;
+
+	GatewayAgent mCbGatewayAgent = null;
+	
+	public GatewayAgentCommunicatingBehaviour(Agent agent,
+			ICommunicationDataStoreProcessor processor,
+			List<AgentController> agentControllers,
+			GatewayAgent cbGatewayAgent) {
+		super(agent, processor, agentControllers);
+		mCbGatewayAgent = cbGatewayAgent;
+	}
+
+	@Override
+	public int onEnd() {
+		//Command released
+		mCallbackGateWayAgent.releaseCommand(mTasks);
+		return super.onEnd();
+	}
+}

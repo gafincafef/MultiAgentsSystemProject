@@ -1,0 +1,12 @@
+package edu.rits.ma.jade.communication;
+
+import jade.content.ContentElement;
+
+public class ContentElementWrapper {
+	private ContentElement mContentElement = null;
+	private String mOntologyName = null;
+	
+	public ContentElementWrapper() {
+		
+	}
+}

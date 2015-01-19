@@ -1,0 +1,19 @@
+package agents;
+
+public class AgentStartNotifierImpl implements IAgentStartNotifier{
+
+	private boolean mStarted = false;
+	
+	@Override
+	public synchronized void waitForAgentStart() {
+		while (!mStarted) {
+			
+		}
+	}
+
+	@Override
+	public synchronized void nofityAllAgentControllers() {
+		
+	}
+
+}

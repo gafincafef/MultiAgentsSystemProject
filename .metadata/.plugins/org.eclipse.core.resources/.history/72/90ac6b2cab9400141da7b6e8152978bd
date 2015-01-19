@@ -1,0 +1,19 @@
+package model;
+
+public class AgentMessage {
+	//TODO Extends for ontology
+	private String mMessage;
+
+	public AgentMessage() {
+		
+	}
+	
+	public String getMessage() {
+		return mMessage;
+	}
+
+	public void setMessage(String mMessage) {
+		this.mMessage = mMessage;
+	}
+	
+}

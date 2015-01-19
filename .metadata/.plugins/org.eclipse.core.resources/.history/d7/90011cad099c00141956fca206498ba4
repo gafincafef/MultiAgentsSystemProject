@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="build" name="MA_WebApp">
+    <property environment="env"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.6"/>
+    <property name="source" value="1.6"/>
+	<property name="web.dir" value="war"/>
+	<property name="web.dir.inf" value=""/>
+	
+    <path id="MA_WebApp.classpath">
+        <pathelement location="bin/"/>
+        <pathelement location="lib/jsp-api-2.1.jar"/>
+        <pathelement location="lib/jstl-api-1.2.jar"/>
+        <pathelement location="lib/servlet-api-2.5.jar"/>
+        <pathelement location="lib/commons-fileupload-1.2.2.jar"/>
+        <pathelement location="lib/commons-io-1.4.jar"/>
+        <pathelement location="lib/log4j-1.2.14.jar"/>
+    </path>
+	
+    <target name="init">
+        <mkdir dir="bin/"/>
+        <copy includeemptydirs="false" todir="bin/">
+            <fileset dir="src">
+                <exclude name="**/*.launch"/>
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+	
+    <target name="clean">
+        <delete dir="bin/"/>
+    </target>
+	
+    <target depends="clean" name="cleanall"/>
+	
+    <target depends="build-subprojects,build-project" name="build"/>
+	
+    <target name="build-subprojects"/>
+	
+    <target depends="init" name="build-project">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin/" includeantruntime="false" source="${source}" target="${target}">
+            <src path="src"/>
+            <classpath refid="MA_WebApp.classpath"/>
+        </javac>
+    </target>
+	
+    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
+
+	<target name="clean-war">
+		<delete dir="${web.dir}"/>
+	</target>
+	
+	<target name="init-war">
+		<echo message="Creating folder ${web.dir}"/>
+		<mkdir dir="${web.dir}"/>
+	</target>
+	
+	<target depends="init-war" name="build-war">
+	</target>
+	
+	<target name="copy-war">
+	</target>
+	
+	<target name="package-war">
+	</target>
+		
+	<target depends="build-war,copy-war,package-war" name="create-war">
+	</target>
+	
+</project>

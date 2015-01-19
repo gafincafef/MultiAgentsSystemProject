@@ -1,0 +1,30 @@
+package edu.rits.ma.jade.communication;
+
+import jade.lang.acl.ACLMessage;
+
+public class TaskProcessorIntermediator {
+	public static final int STATE_WAIT_FOR_SECONDARY_AGENT_START = 0;
+	public static final int STATE_TO_RUN_TASKS = 1;
+	public static final int STATE_MESSAGE_RECEIVED_FROM_SECONDARY_AGENT = 2;
+	public static final int STATE_TO_STOP = 3;
+	
+	private int mState = STATE_WAIT_FOR_SECONDARY_AGENT_START;
+	private ACLMessage mCurrentMessage = null;
+	
+	public int getState() {
+		return mState;
+	}
+
+	public void setState(int state) {
+		this.mState = state;
+	}
+
+	public ACLMessage getCurrentMessage() {
+		return mCurrentMessage;
+	}
+
+	public void setCurrentMessage(ACLMessage currentMessage) {
+		this.mCurrentMessage = currentMessage;
+	}
+	
+}

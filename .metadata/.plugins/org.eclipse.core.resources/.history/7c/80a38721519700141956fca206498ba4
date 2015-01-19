@@ -1,0 +1,5 @@
+package edu.rits.ma.test.impl;
+
+public class AbstractTask {
+
+}

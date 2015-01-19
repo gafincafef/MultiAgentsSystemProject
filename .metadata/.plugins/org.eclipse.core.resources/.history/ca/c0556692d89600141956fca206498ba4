@@ -1,0 +1,17 @@
+package model;
+
+public class Response implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5149194563199746694L;
+	private int mResponseValue;
+
+	public int getResponseValue() {
+		return mResponseValue;
+	}
+
+	public void setResponseValue(int responseValue) {
+		this.mResponseValue = responseValue;
+	}
+}

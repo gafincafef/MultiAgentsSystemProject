@@ -1,0 +1,15 @@
+package agent;
+
+import jade.core.Agent;
+
+public class OntologySenderAgent extends Agent {
+
+	private static final long serialVersionUID = 3212214772605221070L;
+
+	@Override
+	public void setup() {
+		super.setup();
+	}
+	
+	
+}

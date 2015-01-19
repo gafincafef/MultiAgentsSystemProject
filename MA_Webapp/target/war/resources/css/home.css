@@ -1,0 +1,25 @@
+#tbl_util {
+	margin-top: 20px;
+	margin-bottom: 60px;
+	background-color: transparent;
+}
+
+#tbl_util td, th {
+	background-color: white;
+	border: 1px solid black;
+	font-size: 14px;
+	padding: 6px;
+	text-align: center;
+}
+
+#tbl_util .empty-cell {
+	background-color: transparent;
+}
+
+#tbl_util input[type="text"] {
+	width: 55px;
+}
+
+#tbl_util td.result-cell {
+	background-color: #F6CECE;
+}

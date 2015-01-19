@@ -1,0 +1,14 @@
+package model;
+
+public class AgentSpecifier {
+	private String mHost;
+	private String mPort;
+	private String mName;
+	private String mServiceType;
+	public String getHost() {
+		return mHost;
+	}
+	public void setHost(String mHost) {
+		this.mHost = mHost;
+	}
+}

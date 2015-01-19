@@ -1,0 +1,74 @@
+package edu.rits.ma.jade.communication;
+
+import jade.lang.acl.ACLMessage;
+
+import java.util.ArrayDeque;
+import java.util.Deque;
+
+public class CommunicationBuffer {
+	public static final int STATE_NONE = 1;
+	public static final int STATE_MESSAGE_RECEIVED = 2;
+	public static final int STATE_TO_SEND_MESSAGE = 3;
+	
+	private int mState = STATE_NONE;
+	private Deque<ACLMessage> mReceivedMessages = new ArrayDeque<ACLMessage>();
+	private Deque<ACLMessage> mMessagesToSend = new ArrayDeque<ACLMessage>();
+	private Deque<InProcessObjectMessage> mReceivedObjectMessages = new ArrayDeque<InProcessObjectMessage>();
+	private Deque<InProcessObjectMessage> mObjectsToSend = new ArrayDeque<InProcessObjectMessage>();
+	
+	public int getState() {
+		return mState;
+	}
+	
+	public int getMessageQueueSize() {
+		return mReceivedMessages.size();
+	}
+
+	public void setState(int state) {
+		this.mState = state;
+	}
+
+	public void addReceivedMessage(ACLMessage receivedMessage) {
+		mReceivedMessages.add(receivedMessage);
+	}
+	
+	public ACLMessage extractReceivedMessage() {
+		if(mReceivedMessages.isEmpty()) {
+			return null;
+		}
+		return mReceivedMessages.pop();
+	}
+	
+	public void addMessageToSend(ACLMessage receivedMessage) {
+		mMessagesToSend.add(receivedMessage);
+	}
+	
+	public ACLMessage extractMessageToSend() {
+		if(mMessagesToSend.isEmpty()) {
+			return null;
+		}
+		return mMessagesToSend.pop();
+	}
+	
+	public void addObjectToSend(InProcessObjectMessage objectMessage) {
+		mObjectsToSend.add(objectMessage);
+	}
+	
+	public InProcessObjectMessage extractObjectToSend() {
+		if(mObjectsToSend.isEmpty()) {
+			return null;
+		}
+		return mObjectsToSend.pop();
+	}
+	
+	public void addReceivedObjectMessage(InProcessObjectMessage objectMessage) {
+		mReceivedObjectMessages.add(objectMessage);
+	}
+	
+	public InProcessObjectMessage extractObjectReceived() {
+		if(mReceivedObjectMessages.isEmpty()) {
+			return null;
+		}
+		return mReceivedObjectMessages.pop();
+	}
+}

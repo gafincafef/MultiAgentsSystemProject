@@ -1,0 +1,34 @@
+package edu.rits.ma.algorithm.impl;
+
+import java.util.LinkedList;
+import java.util.List;
+
+import edu.rits.ma.algorithm.theory.IPreference;
+import edu.rits.ma.algorithm.theory.IPreferenceSet;
+
+public class PreferenceSetImpl implements IPreferenceSet {
+	
+	private List<IPreference> mPreferences = new LinkedList<IPreference>();
+	
+	@Override
+	public void addPreference(IPreference preference) {
+		mPreferences.add(preference);
+	}
+
+	@Override
+	public void removePreference(IPreference preference) {
+		mPreferences.remove(preference);
+	}
+
+	@Override
+	public void clear() {
+		mPreferences.clear();
+	}
+
+	@Override
+	public void getContainerPreferences(IPreference subPreference, List<IPreference> containerPreferences) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

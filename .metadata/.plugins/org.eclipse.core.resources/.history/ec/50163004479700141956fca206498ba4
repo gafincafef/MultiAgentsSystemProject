@@ -1,0 +1,16 @@
+package edu.rits.ma.jade.agent;
+
+import jade.core.Agent;
+
+public class SecondaryAgent extends Agent {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1509623737210577104L;
+
+	@Override
+	protected void setup() {
+		
+	}
+}

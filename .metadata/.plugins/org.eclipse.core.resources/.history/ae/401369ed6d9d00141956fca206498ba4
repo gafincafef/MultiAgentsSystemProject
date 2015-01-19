@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="build" name="MA_WebApp">
+    <property environment="env"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.6"/>
+    <property name="source" value="1.6"/>
+	<property name="lib" value="lib"/>
+	<property name="src.dir.resources" value="resources"/>
+	<property name="src.dir.inf" value="WEB-INF"/>
+	<property name="src.dir.inf.jsp" value="${src.dir.inf}/jsp"/>
+	<property name="src.dir.inf.webxml" value="${src.dir.inf}/web.xml"/>
+	<property name="web.dir" value="target/war"/>
+	<property name="web.dir.resources" value="${web.dir}/resources"/>
+	<property name="web.dir.inf" value="${web.dir}/WEB-INF"/>
+	<property name="web.dir.inf.jsp" value="${web.dir.inf}/jsp"/>
+	<property name="web.dir.inf.classes" value="${web.dir.inf}/classes"/>
+	<property name="web.dir.inf.lib" value="${web.dir.inf}/lib"/>
+	<property name="web.app.name" value="target/agents-app.war"/>
+	
+    <path id="MA_WebApp.classpath">
+        <pathelement location="bin/"/>
+        <pathelement location="lib/jsp-api-2.1.jar"/>
+        <pathelement location="lib/jstl-api-1.2.jar"/>
+        <pathelement location="lib/servlet-api-2.5.jar"/>
+        <pathelement location="lib/commons-fileupload-1.2.2.jar"/>
+        <pathelement location="lib/commons-io-1.4.jar"/>
+        <pathelement location="lib/log4j-1.2.14.jar"/>
+    </path>
+	
+    <target name="init">
+        <mkdir dir="bin/"/>
+        <copy includeemptydirs="false" todir="bin/">
+            <fileset dir="src">
+                <exclude name="**/*.launch"/>
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+	
+    <target name="clean">
+        <delete dir="bin/"/>
+    </target>
+	
+    <target depends="clean" name="cleanall"/>
+	
+    <target depends="build-subprojects,build-project" name="build"/>
+	
+    <target name="build-subprojects"/>
+	
+    <target depends="init" name="build-project">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin/" includeantruntime="false" source="${source}" target="${target}">
+            <src path="src"/>
+            <classpath refid="MA_WebApp.classpath"/>
+        </javac>
+    </target>
+	
+    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
+
+	<target name="clean-war">
+		<delete dir="${web.dir}"/>
+	</target>
+	
+	<target name="init-war">
+		<echo message="Creating folder ${web.dir}"/>
+		<mkdir dir="${web.dir}"/>
+		<mkdir dir="${web.dir.inf}"/>
+		<mkdir dir="${web.dir.inf.classes}"/>
+		<copy todir="${web.dir.inf.lib}" overwrite="true">
+			<fileset dir="${lib}">
+			</fileset>
+		</copy>
+		<copy file="${src.dir.inf.webxml}" todir="${web.dir.inf}">
+		</copy>
+	</target>
+	
+	<target depends="init-war" name="build-war">
+		<echo message="${ant.project.name}: ${ant.file}"/>
+	    <javac debug="true" debuglevel="${debuglevel}" destdir="${web.dir.inf.classes}" includeantruntime="false" source="${source}" target="${target}">
+	    	<src path="src"/>
+	    	<classpath refid="MA_WebApp.classpath"/>
+	    </javac>
+	</target>
+	
+	<target name="copy-war">
+		<copy todir="${web.dir.resources}" overwrite="true">
+			<fileset dir="${src.dir.resources}">
+			</fileset>
+		</copy>
+		<copy todir="${web.dir.inf.jsp}" overwrite="true">
+			<fileset dir="${src.dir.inf.jsp}">
+			</fileset>
+		</copy>
+	</target>
+	
+	<target name="package-war">
+		<war destfile="${web.app.name}" webxml="${web.dir.inf}/web.xml">
+			<fileset dir="${web.dir.inf.jsp}"/>
+			<fileset dir="${web.dir.resources}"/>
+			<lib dir="${web.dir.inf.lib}">
+			</lib>
+			<classes dir="${web.dir.inf.classes}"/>
+		</war>
+	</target>
+		
+	<target depends="build-war,copy-war,package-war" name="create-war">
+	</target>
+	
+</project>

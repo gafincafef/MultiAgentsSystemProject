@@ -1,0 +1,9 @@
+package edu.rits.ma.theory;
+
+public interface IPreferenceSet {
+	public static final int PRERENCE_SET_OP_RESULT_OK = 0;
+	public static final int PRERENCE_SET_OP_RESULT_NG = -1;
+	
+	public int addPreference(Preference preference);
+	public int getPreferencesOfAgents(int[] agentIds, );
+}

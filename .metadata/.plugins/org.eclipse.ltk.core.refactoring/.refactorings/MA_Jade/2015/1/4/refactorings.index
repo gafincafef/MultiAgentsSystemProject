@@ -1,0 +1,43 @@
+1421582531780	Rename method 'addContentElementWrapper'
+1421582543929	Rename method 'extractContentElementWrapper'
+1421591529729	Move compilation units
+1421591799120	Rename method 'getReadyStatus'
+1421591807630	Rename method 'setReadyStatus'
+1421591839065	Rename package 'edu.rits.ma.jade.impl'
+1421592085692	Rename field 'READINESS_READY_STATUS'
+1421592143415	Rename type 'TaskProcessOntology'
+1421592223823	Rename field 'READINESS'
+1421592232093	Rename field 'READINESS_AGENT_NAME'
+1421592240255	Rename field 'READINESS_STATE'
+1421593636392	Rename type 'SecondaryOntologyBufferProcessorImpl'
+1421593651667	Rename type 'IOntologyBufferProcessor'
+1421593674479	Rename type 'PrimaryOntologyBufferProcessorImpl'
+1421594535912	Delete element
+1421595274857	Delete element
+1421595280481	Delete element
+1421595284832	Delete element
+1421595297023	Delete element
+1421595301664	Delete element
+1421595311782	Delete element
+1421596702071	Rename field 'TRACKING'
+1421596709657	Rename field 'TRACKING_AGENT_NAME'
+1421596718390	Rename field 'TRACKING_STATE'
+1421596730139	Rename field 'STOPPING'
+1421599120377	Rename method 'hasReceivedData'
+1421599410735	Rename method 'hasReceivedElement'
+1421599488578	Rename method 'messageReceived'
+1421600660747	Rename type 'SerializeObjectWrapper'
+1421600682638	Rename method 'hasReceivedObject'
+1421600692529	Rename method 'addReceivedObject'
+1421600699609	Rename method 'extractRetrievedObject'
+1421600789675	Rename method 'hasObjectToSend'
+1421600794948	Rename method 'addObjectToSend'
+1421600800388	Rename method 'extractObjectToSend'
+1421601439814	Rename type 'ContentElementIncomingBuffer'
+1421601448120	Rename type 'ContentElementOutcomingBuffer'
+1421601458572	Rename type 'IContentElementBufferProcessor'
+1421601469688	Rename type 'PrimaryContentElementBufferProcessorImpl'
+1421603221614	Rename type 'SecondaryContentElementBufferProcessorImpl'
+1421605324887	Rename local variable 'contentElementWrapper'
+1421608086936	Rename method 'parseMessageFromContentElement'
+1421608110974	Rename method 'parseMessageFromContentObject'

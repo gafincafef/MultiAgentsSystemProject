@@ -1,0 +1,14 @@
+package edu.rits.ma.algorithm.nashequil;
+
+import java.util.List;
+
+import edu.rits.ma.common.theory.IPreferenceSet;
+
+public class NashEquilibriumSolver {
+	private void detectOtherAgentIds(int agentId, List<int[]> otherAgentsIds) {
+	}
+	
+	public void solve(IPreferenceSet preferences) {
+		
+	}
+}

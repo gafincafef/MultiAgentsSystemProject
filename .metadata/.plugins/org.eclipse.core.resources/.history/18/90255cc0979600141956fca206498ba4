@@ -1,0 +1,43 @@
+package behaviours;
+
+import jade.core.Agent;
+import jade.core.behaviours.CyclicBehaviour;
+import jade.wrapper.AgentController;
+
+public class SampleBehaviour extends CyclicBehaviour {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1506345155315090344L;
+
+	public SampleBehaviour(Agent agent) {
+		myAgent = agent;
+	}
+
+	@Override
+	public void action() {
+		//System.out.println("Sample action on agent thread " + Thread.currentThread().getId());
+
+		/*try {
+			//ACK message
+			myAgent.putO2AObject(1, AgentController.SYNC);
+			System.out.println("Putted object !?");
+		} 
+		catch (InterruptedException e) {
+			e.printStackTrace();
+		}*/
+		
+		Integer requestValue = (Integer) myAgent.getO2AObject();
+		if(requestValue != null) {
+			try {
+				System.out.println("Read from external " + requestValue);
+				//Put back to controller the value doubled
+				myAgent.registerO2AInterface(Integer.class, requestValue * 2);
+			} 
+			catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+}

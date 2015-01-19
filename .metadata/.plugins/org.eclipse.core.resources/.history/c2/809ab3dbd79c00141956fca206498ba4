@@ -1,0 +1,7 @@
+package edu.rits.ma.algorithm.impl;
+
+import edu.rits.ma.algorithm.theory.IPreferenceSet;
+
+public class PreferenceSetImpl implements IPreferenceSet {
+
+}

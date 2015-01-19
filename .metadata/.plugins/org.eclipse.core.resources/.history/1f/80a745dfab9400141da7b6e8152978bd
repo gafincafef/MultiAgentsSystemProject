@@ -1,0 +1,9 @@
+package controllers;
+
+import jade.core.AID;
+import model.AgentSpecifier;
+
+public interface IAgentController {
+	AID createNewAgent(AgentSpecifier agentSpecifier);
+	void sendMessageToAgent();
+}

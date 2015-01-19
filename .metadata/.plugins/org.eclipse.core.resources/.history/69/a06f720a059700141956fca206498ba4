@@ -1,0 +1,5 @@
+package edu.rits.ma.jade.impl;
+
+public class AgentGatewayImpl {
+
+}

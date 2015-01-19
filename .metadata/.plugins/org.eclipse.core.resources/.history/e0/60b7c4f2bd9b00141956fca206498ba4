@@ -1,0 +1,6 @@
+package edu.rits.ma.jade.concurrency;
+
+
+public interface ICondVarReleaser {
+	void release(CondVar condVar);
+}

@@ -1,0 +1,6 @@
+package edu.rits.ma.jade.dataobjecy;
+
+public interface IResponse {
+	public int getResponseValue();
+	public void setResponseValue(int responseValue);
+}

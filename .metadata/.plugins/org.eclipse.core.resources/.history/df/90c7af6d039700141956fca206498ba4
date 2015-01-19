@@ -1,0 +1,8 @@
+package edu.rits.ma.common;
+
+import java.util.List;
+
+public interface IGateway {
+	void passTasks(List<ITask> tasks);
+	
+}

@@ -1,0 +1,17 @@
+package agents;
+
+public class AgentStartNotifierImpl implements IAgentStartNotifier{
+
+	@Override
+	public void waitForAgentStart() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void nofityAllAgentControllers() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

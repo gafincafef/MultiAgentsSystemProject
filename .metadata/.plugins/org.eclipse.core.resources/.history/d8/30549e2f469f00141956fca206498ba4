@@ -1,0 +1,44 @@
+package edu.rits.ma.test.impl;
+
+import java.io.Serializable;
+import java.util.List;
+
+import edu.rits.ma.common.abstr.ITask;
+
+public class ChildTaskSampleImpl extends AbstractTask implements Serializable {
+
+	private static final long serialVersionUID = -9074618601502495931L;
+	
+	private int mChildTaskId;
+	private int[] mResultStorage = null;
+	
+	public ChildTaskSampleImpl(int[] resultStorage, int childTaskId) {
+		super();
+		mChildTaskId = childTaskId;
+		mResultStorage = resultStorage;
+	}
+	
+	@Override
+	public void execute() {
+		onInitiated();
+		try {
+			mResultStorage[mChildTaskId] = 4;
+			onSucceeded();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			onFailed();
+		}
+	}
+
+	@Override
+	public void createSubTasks(List<ITask> subTasks) {
+		return;
+	}
+
+	@Override
+	public Object[] getResults() {
+		return null;
+	}
+
+}

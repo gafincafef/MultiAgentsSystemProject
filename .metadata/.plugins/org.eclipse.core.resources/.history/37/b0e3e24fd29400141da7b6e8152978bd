@@ -1,0 +1,22 @@
+package agents;
+
+import jade.core.Agent;
+import jade.domain.DFService;
+import jade.domain.FIPAException;
+import jade.domain.FIPAAgentManagement.DFAgentDescription;
+import jade.domain.FIPAAgentManagement.ServiceDescription;
+
+public class SampleClientSideAgent extends Agent {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Override
+	protected void setup() {
+		System.out.println("Setup called on agent sample " + getAID().getLocalName()
+				+ " in container " + getAMS().getName());
+		
+	}
+	
+}

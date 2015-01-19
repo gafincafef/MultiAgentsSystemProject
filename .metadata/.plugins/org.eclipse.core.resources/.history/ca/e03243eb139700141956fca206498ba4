@@ -1,0 +1,21 @@
+package edu.rits.ma.jade.behaviour;
+
+import jade.core.behaviours.CyclicBehaviour;
+
+public class PrimaryAgentBehaviour extends CyclicBehaviour {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8974716117508990142L;
+
+	public PrimaryAgentBehaviour(List<ITask> task, ) {
+		
+	}
+	
+	@Override
+	public void action() {
+		
+	}
+
+}

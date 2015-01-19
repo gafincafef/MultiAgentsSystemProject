@@ -1,0 +1,40 @@
+package edu.rits.ma.test.impl;
+
+import java.util.List;
+
+import edu.rits.ma.common.ITask;
+
+public class ChildTaskSampleImpl implements ITask {
+
+	private int mStatus;
+	private int mChildTaskId;
+	
+	public ChildTaskSampleImpl(int[] resultStorage, int childTaskId) {
+		
+	}
+	
+	@Override
+	public void execute() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getStatus() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void createSubTasks(List<ITask> subTasks) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Object[] getResults() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

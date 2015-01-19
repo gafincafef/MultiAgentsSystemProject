@@ -1,0 +1,12 @@
+package edu.rits.ma.jade.communication;
+
+import jade.lang.acl.ACLMessage;
+
+import java.util.ArrayDeque;
+import java.util.Deque;
+
+public class OutCommingBuffer {
+	private Deque<ACLMessage> mMessagesToSend = new ArrayDeque<ACLMessage>();
+	private Deque<InProcessObjectMessage> mObjectsToSend = new ArrayDeque<InProcessObjectMessage>();
+	
+}

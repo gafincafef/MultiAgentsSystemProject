@@ -1,0 +1,14 @@
+package model;
+
+public class AgentMessage {
+	private String mMessage;
+
+	public String getMessage() {
+		return mMessage;
+	}
+
+	public void setMessage(String mMessage) {
+		this.mMessage = mMessage;
+	}
+	
+}

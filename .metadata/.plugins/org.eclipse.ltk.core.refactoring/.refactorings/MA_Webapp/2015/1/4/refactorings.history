@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;resultStr&apos; in &apos;edu.rits.ma.webapp.servlet.NashEquilibriumSolverServlet.responseResults(...)&apos; to &apos;strResults&apos;&#x0A;- Original project: &apos;MA_Webapp&apos;&#x0A;- Original element: &apos;edu.rits.ma.webapp.servlet.NashEquilibriumSolverServlet.responseResults(HttpServletResponse, int[]).resultStr&apos;&#x0A;- Renamed element: &apos;resultStr&apos;&#x0A;- Update references to refactored element" description="Rename local variable &apos;resultStr&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;edu.rits.ma.webapp.servlet{NashEquilibriumSolverServlet.java[NashEquilibriumSolverServlet~responseResults~QHttpServletResponse;~\[I@resultStr!1467!1509!1474!1482!QString;!0!false" name="strResults" references="true" stamp="1421654058471" version="1.0"/>
+</session>

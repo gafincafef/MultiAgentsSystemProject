@@ -1,0 +1,6 @@
+package controllers;
+
+public interface IAgentStartNotifier {
+	void waitForAgentStart();
+	void nofityAllAgentController();
+}

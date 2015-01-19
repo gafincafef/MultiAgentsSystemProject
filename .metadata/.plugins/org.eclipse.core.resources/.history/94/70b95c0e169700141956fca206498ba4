@@ -1,0 +1,59 @@
+package edu.rits.ma.jade.behaviour;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import edu.rits.ma.common.ITask;
+
+import jade.core.behaviours.CyclicBehaviour;
+import jade.wrapper.AgentController;
+import jade.wrapper.gateway.GatewayAgent;
+
+public class PrimaryAgentBehaviour extends CyclicBehaviour {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8974716117508990142L;
+
+	private Object mCommand;
+	private List<ITask> mTasks = null;
+	private List<AgentController> mSecondaryAgentControllers = null;
+	private GatewayAgent mCallbackGateWayAgent;
+	
+	@SuppressWarnings("unchecked")
+	public PrimaryAgentBehaviour(Object command, List<AgentController> secondaryAgentControllers, GatewayAgent callbackGatewayAgent) {
+		mTasks = (List<ITask>) mCommand;
+		mSecondaryAgentControllers = secondaryAgentControllers;
+		mCallbackGateWayAgent = callbackGatewayAgent;
+	}
+	
+	@Override
+	public void action() {
+		runTasks();
+		waitForSubTasksOnSecondaryAgents();
+		finish();
+	}
+	
+	private void runTasks() {
+		for(ITask task : mTasks) {
+			task.execute();
+			if(task.getStatus() == ITask.TASK_STATUS_SUCCEEDED) {
+				List<ITask> subTasks = new ArrayList<ITask>();
+				task.createSubTasks(subTasks);
+				for(int i = 0; i < subTasks.size(); i++) {
+					int subTaskIndex = i;//TODO Tweak this logic.
+					mSecondaryAgentControllers[i]
+				}
+			}
+		}
+	}
+	
+	private void waitForSubTasksOnSecondaryAgents() {
+		
+	}
+
+	private void finish() {
+		mCallbackGateWayAgent.releaseCommand(mCommand);
+	}
+}

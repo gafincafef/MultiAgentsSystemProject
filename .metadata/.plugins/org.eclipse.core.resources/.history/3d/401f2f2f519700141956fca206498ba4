@@ -1,0 +1,28 @@
+package edu.rits.ma.test.impl;
+
+import java.util.List;
+
+import edu.rits.ma.common.ITask;
+
+public abstract class AbstractTask implements ITask {
+
+
+	@Override
+	public int getStatus() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void createSubTasks(List<ITask> subTasks) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Object[] getResults() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

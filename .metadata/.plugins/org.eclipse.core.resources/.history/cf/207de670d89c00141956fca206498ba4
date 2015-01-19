@@ -1,0 +1,37 @@
+package edu.rits.ma.algorithm.impl;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import edu.rits.ma.algorithm.theory.IPreference;
+import edu.rits.ma.algorithm.theory.IPreferenceSet;
+
+public class PreferenceSetImpl implements IPreferenceSet {
+	
+	private List<IPreference> mPreferences = new ArrayList<IPreference>();
+	
+	@Override
+	public void addPreference(IPreference preference) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removePreference(IPreference preference) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void clear() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void getContainerPreferences(IPreference subPreference, List<IPreference> containerPreferences) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

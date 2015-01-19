@@ -1,0 +1,9 @@
+package edu.rits.ma.common;
+
+import java.util.List;
+
+public interface IGateway {
+	void prepareAgents(int numberOfAgents);
+	void startTasksOnAgents(List<ITask> tasks);
+	
+}

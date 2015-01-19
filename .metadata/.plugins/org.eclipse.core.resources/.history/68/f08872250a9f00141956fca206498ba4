@@ -1,0 +1,20 @@
+package edu.rits.ma.jade.communication;
+
+import java.util.ArrayDeque;
+import java.util.Deque;
+
+public class ContentElementOutcomingBuffer {
+	private Deque<ContentElementWrapper> mToSendElements = new ArrayDeque<ContentElementWrapper>();
+
+	public boolean hasDataToSend() {
+		return !mToSendElements.isEmpty();
+	}
+
+	public void addContentElementToSend(ContentElementWrapper cew) {
+		mToSendElements.add(cew);
+	}
+
+	public ContentElementWrapper extractRetrievedContentElement() {
+		return mToSendElements.pop();
+	}
+}

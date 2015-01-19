@@ -1,0 +1,19 @@
+package edu.rits.ma.jade.agent;
+
+import jade.core.Agent;
+
+public class SecondaryAgent extends Agent {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1509623737210577104L;
+
+	@Override
+	protected void setup() {
+		super.setup();
+		System.out.println("Setup called on secondary agent" + getAID().getLocalName()
+				+ " in container " + getAMS().getName());
+		setEnabledO2ACommunication(true, 0);
+	}
+}

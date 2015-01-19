@@ -1,0 +1,76 @@
+package edu.rits.ma.jade.agent;
+
+import jade.wrapper.AgentController;
+import jade.wrapper.StaleProxyException;
+import jade.wrapper.gateway.GatewayAgent;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import edu.rits.ma.common.ITask;
+import edu.rits.ma.jade.behaviour.PrimaryAgentBehaviour;
+
+public class PrimaryAgent extends GatewayAgent {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4166260446398994126L;
+	private List<AgentController> mSecondaryAgentControllers = new ArrayList<AgentController>();
+
+	@Override
+	protected void setup() {
+		super.setup();
+		System.out.println("Setup called on agent sample " + getAID().getLocalName()
+				+ " in container " + getAMS().getName());
+		setEnabledO2ACommunication(true, 0);
+		
+		try {
+			onSetupArgumentsParsed();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			doDelete();
+		}
+	}
+
+	@Override
+	protected void processCommand(java.lang.Object command) {
+		List<ITask> tasks = (List<ITask>) command;
+		addBehaviour(new PrimaryAgentBehaviour(tasks , mSecondaryAgentControllers));
+	}
+
+	@Override
+	protected void takeDown() {
+		stopSecondaryAgents();
+		super.takeDown();
+	}
+
+	private void onSetupArgumentsParsed() throws Exception {
+		Object[] args = getArguments();
+		if(args != null && args.length > 0) {
+			int numberOfSecondaryAgents = (Integer) args[0];
+			String secondaryAgentClassName = (String) args[1];
+			createAndStartSecondaryAgents(numberOfSecondaryAgents, secondaryAgentClassName);
+		}
+	}
+
+	private void createAndStartSecondaryAgents(int numberOfSecondaryAgents, String secondaryAgentClassName) throws StaleProxyException {
+		stopSecondaryAgents();
+		for(int i = 0; i < numberOfSecondaryAgents; i++) {
+			String secondaryAgentInstanceName = "SecondaryAgent" + i;
+			AgentController ac = getContainerController().createNewAgent(secondaryAgentInstanceName, secondaryAgentClassName, null);
+			ac.start();
+			mSecondaryAgentControllers.add(ac);
+		}
+		waitAllSecondaryAgentsStart();
+	}
+
+	private void stopSecondaryAgents() {
+		//TODO Implement
+	}
+
+	private void waitAllSecondaryAgentsStart() {
+		//TODO Implement
+	}
+}

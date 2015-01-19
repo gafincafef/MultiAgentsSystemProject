@@ -1,0 +1,8 @@
+package edu.rits.ma.jade.util;
+
+public class StopWatch {
+	private long mTimeOut;
+	public StopWatch(long timeOut) {
+		mTimeOut = timeOut;
+	}
+}

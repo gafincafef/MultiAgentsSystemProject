@@ -1,0 +1,7 @@
+package edu.rits.ma.jade.util;
+
+public class LogUtil {
+	public static logInfo(Object object, String message) {
+		
+	}
+}

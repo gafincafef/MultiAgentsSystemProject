@@ -1,0 +1,75 @@
+package main;
+
+import jade.core.Profile;
+import jade.core.ProfileImpl;
+import jade.core.Runtime;
+import jade.domain.DFService;
+import jade.domain.FIPAException;
+import jade.domain.FIPAAgentManagement.DFAgentDescription;
+import jade.domain.FIPAAgentManagement.ServiceDescription;
+import jade.wrapper.AgentController;
+import jade.wrapper.ContainerController;
+import jade.wrapper.StaleProxyException;
+
+public class Main {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		String host = "localhost";
+		String port = "1099";
+		String name = "scs";
+		String className = "agents.SampleClientSideAgent";
+		Object[] behaviours = null;
+		AgentController ac = testCreateAgent(host, port, name, className, behaviours);
+		if(ac != null) {
+			try {
+				ac.start();
+			} catch (StaleProxyException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			//Wait a response (integer value) from agent
+			int responseValue = ac.getO2AInterface(Integer.class);
+			System.out.println("Response from agent " + responseValue);
+		}
+		probeAgents();
+	}
+
+	private static AgentController testCreateAgent(String host, String port, String name, String className, Object[] behaviours) {
+		// Retrieve the singleton instance of the JADE Runtime
+		Runtime rt = Runtime.instance();
+		
+		// Create a container to host new agent
+		Profile p = new ProfileImpl();
+		p.setParameter(Profile.MAIN_HOST, host);
+		p.setParameter(Profile.MAIN_PORT, port);
+		ContainerController cc = rt.createAgentContainer(p);
+		if(cc != null) {
+			try {
+				AgentController ac = cc.createNewAgent(name, className, behaviours);
+				return ac;
+			} catch (StaleProxyException e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
+	
+	private static void probeAgents() {
+		DFAgentDescription template = new DFAgentDescription();
+		ServiceDescription sd = new ServiceDescription();
+		sd.setType("messageListener");
+		template.addServices(sd);
+		try {
+			DFAgentDescription[] result = DFService.search(null, template);
+			if(result != null && result.length > 0) {
+				System.out.println(result[0].getName());
+			}
+		}
+		catch (FIPAException fe) {
+			//fe.printStackTrace();
+		}
+	}
+}

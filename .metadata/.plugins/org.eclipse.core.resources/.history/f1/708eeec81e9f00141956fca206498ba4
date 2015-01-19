@@ -1,0 +1,9 @@
+package edu.rits.ma.jade.behaviour;
+
+import edu.rits.ma.jade.communication.ContentElementIncomingBuffer;
+import edu.rits.ma.jade.communication.ContentElementOutcomingBuffer;
+
+public interface IOntologyBufferProcessor {
+	public void processCommunicationDataStore(ContentElementIncomingBuffer receiveBuffer, ContentElementOutcomingBuffer sendBuffer);
+	public boolean done();
+}

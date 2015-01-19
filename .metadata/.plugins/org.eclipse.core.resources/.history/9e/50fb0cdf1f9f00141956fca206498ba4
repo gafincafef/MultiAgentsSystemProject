@@ -1,0 +1,7 @@
+package edu.rits.ma.jade.communication;
+
+import jade.content.onto.Ontology;
+
+public class TaskProcessOntology extends Ontology {
+
+}

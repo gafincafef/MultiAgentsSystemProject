@@ -1,0 +1,31 @@
+package edu.rits.ma.jade.behaviour;
+
+import jade.core.behaviours.CyclicBehaviour;
+import edu.rits.ma.common.ITask;
+
+public class SecondaryAgentBehaviour extends CyclicBehaviour {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -949869179196957814L;
+
+	@Override
+	public void action() {
+		ITask task = getAssignedTask();
+		if(task != null) {
+			task.execute();
+		}
+		else {
+			block();
+		}
+	}
+
+	private ITask getAssignedTask() {
+		return (ITask) getAgent().getO2AObject();
+	}
+	
+	private void responseToPrimaryAgent() {
+		
+	}
+}

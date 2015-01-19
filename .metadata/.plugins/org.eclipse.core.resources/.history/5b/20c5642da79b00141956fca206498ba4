@@ -1,0 +1,58 @@
+package edu.rits.ma.jade.behaviour;
+
+import jade.lang.acl.ACLMessage;
+import edu.rits.ma.common.abstr.ITask;
+import edu.rits.ma.jade.communication.CommunicationDataStore;
+import edu.rits.ma.jade.communication.InProcessObjectMessage;
+
+public class SecondaryTaskProcessorImpl implements ICommunicationDataStoreProcessor {
+
+	private static final int ACTION_PHASE_TO_WAIT = 0;
+	private static final int ACTION_PHASE_TO_PROCESS_TASK_MESSAGE = 2;
+	private static final int ACTION_PHASE_TO_STOP = 3;
+
+	private int mInternalState = ACTION_PHASE_TO_WAIT;
+
+	@Override
+	public void processCommunicationDataStore(CommunicationDataStore communicationDataStore) {
+		updateInternalState(communicationDataStore);
+		int newInternalState = mInternalState;
+		switch (mInternalState) {
+		case ACTION_PHASE_TO_PROCESS_TASK_MESSAGE:
+			newInternalState = onTaskAssigned(communicationDataStore);
+			break;
+
+		default:
+			break;
+		}
+		mInternalState = newInternalState;
+	}
+
+	private int onTaskAssigned(CommunicationDataStore communicationDataStore) {
+		InProcessObjectMessage objectMessage = communicationDataStore.extractObjectReceived();
+		ITask task = (ITask) objectMessage.getObject();
+		task.execute();
+		ACLMessage taskDoneMessage = createTaskDoneMessage();
+		communicationDataStore.addMessageToSend(taskDoneMessage);
+		return ACTION_PHASE_TO_STOP;
+	}
+
+	@Override
+	public boolean done() {
+		return mInternalState == ACTION_PHASE_TO_STOP;
+	}
+
+	private void updateInternalState(CommunicationDataStore communicationDataStore) {
+		if(communicationDataStore.getState() == CommunicationDataStore.STATE_MESSAGE_RECEIVED) {
+			if() {
+				
+			}
+		}
+	}
+	
+	private ACLMessage createTaskDoneMessage() {
+		//TODO Implement
+		return null;
+	}
+	
+}

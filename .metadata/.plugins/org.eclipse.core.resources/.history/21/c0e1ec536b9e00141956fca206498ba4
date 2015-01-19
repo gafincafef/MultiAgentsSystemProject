@@ -1,0 +1,49 @@
+package edu.rits.ma.test.impl;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import edu.rits.ma.theory.IPreferenceSet;
+import edu.rits.ma.theory.IUtilitiesMap;
+
+public class NashEquilibirumProblemParser {
+	private IPreferenceSet mPreferenceSet = null;
+	private IUtilitiesMap mUtilityMap = null;
+
+	public NashEquilibirumProblemParser(IPreferenceSet preferenceSet, IUtilitiesMap utilityMap) {
+		mPreferenceSet = preferenceSet;
+		mUtilityMap = utilityMap;
+	}
+
+	public IPreferenceSet getPreferenceSet() {
+		return mPreferenceSet;
+	}
+
+	public IUtilitiesMap getUtilityMap() {
+		return mUtilityMap;
+	}
+
+	public void parse(String jsonString) throws Exception {
+		JSONParser parser = new JSONParser();
+		JSONObject problemJSONObject = (JSONObject) parser.parse(jsonString);
+		
+		//Parse preference set
+		parsePreferenceSet(problemJSONObject, mPreferenceSet);
+		
+		//Parse utility map with information of preference set
+		parseUtilityMap(problemJSONObject, mPreferenceSet, mUtilityMap);
+	}
+
+	private void parsePreferenceSet(JSONObject jsonObject, IPreferenceSet mPreferenceSet2) throw Exception {
+		JSONArray jPreferences = (JSONArray)jsonObject.get("preferences");
+		for(JSONObject preference : jPreferences) {
+			
+		}
+	}
+	
+	private void parseUtilityMap(JSONObject jsonObject, IPreferenceSet mPreferenceSet2, IUtilitiesMap mUtilityMap2) {
+		
+	}
+}

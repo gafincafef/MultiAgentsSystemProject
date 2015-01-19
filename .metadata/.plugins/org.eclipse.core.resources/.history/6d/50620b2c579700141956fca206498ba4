@@ -1,0 +1,14 @@
+package edu.rits.ma.jade.util;
+
+public class StopWatch {
+	private long mTimeOut;
+	private long mStartEpoch;
+	
+	public StopWatch(long timeOut) {
+		mTimeOut = timeOut;
+	}
+	
+	public void start() {
+		
+	}
+}

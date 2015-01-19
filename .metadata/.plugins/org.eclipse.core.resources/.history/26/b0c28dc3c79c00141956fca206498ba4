@@ -1,0 +1,5 @@
+package edu.rits.ma.common.theory;
+
+public interface IPreference {
+	public 
+}

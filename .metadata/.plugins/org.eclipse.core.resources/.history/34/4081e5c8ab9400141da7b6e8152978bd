@@ -1,0 +1,7 @@
+package controllers;
+
+import model.AgentSpecifier;
+
+public interface IAgentController {
+	AID createNewAgent(AgentSpecifier agentSpecifier);
+}

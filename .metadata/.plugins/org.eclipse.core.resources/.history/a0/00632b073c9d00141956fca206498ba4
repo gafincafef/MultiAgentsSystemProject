@@ -1,0 +1,12 @@
+package edu.rits.ma.theory;
+
+import java.util.List;
+import java.util.Set;
+
+public interface IPreferenceSet<T extends IPreference> {
+	public void addPreference(T preference);
+	public void removePreference(T preference);
+	public void getAllAgentIds(Set<Integer> agentIds);
+	public void clear();
+	public void getContainerPreferences(T subPreference, List<IPreference> containerPreferences);
+}

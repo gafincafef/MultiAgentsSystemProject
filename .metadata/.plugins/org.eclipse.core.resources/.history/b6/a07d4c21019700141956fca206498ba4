@@ -1,0 +1,41 @@
+package agents;
+
+import jade.core.Agent;
+import behaviours.MainContainerAgentsSenderBehaviour;
+import behaviours.SampleBehaviour;
+
+public class SampleClientSideAgent extends Agent {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Override
+	protected void setup() {
+		System.out.println("Setup called on agent sample " + getAID().getLocalName()
+				+ " in container " + getAMS().getName());
+		setEnabledO2ACommunication(true, 0);
+		
+		addBehaviour(new SampleBehaviour(this));
+		addBehaviour(new MainContainerAgentsSenderBehaviour(this));
+		
+		// Notify blocked threads that the agent is ready and that
+		// object-to-agent communication is enabled
+		IAgentStartNotifier agentStartNotifier = null;
+		Object[] args = getArguments();
+		if(args.length > 0) {
+			agentStartNotifier = (IAgentStartNotifier) args[0];
+		}
+
+		if(agentStartNotifier != null) {
+			agentStartNotifier.nofityAllAgentControllers();
+		}
+	}
+
+	public void takeDown() {
+		// Disables the object-to-agent communication channel, thus
+		// waking up all waiting threads
+		setEnabledO2ACommunication(false, 0);
+	}
+
+}

@@ -1,0 +1,76 @@
+package edu.rits.ma.jade.behaviour;
+
+import edu.rits.ma.jade.communication.CommunicationDataStore;
+import edu.rits.ma.jade.communication.ObjectMessage;
+import jade.core.AID;
+import jade.core.Agent;
+import jade.core.behaviours.Behaviour;
+import jade.lang.acl.ACLMessage;
+
+public class AgentCommunicatingBehaviour extends Behaviour {
+
+	private static final long serialVersionUID = 2906637694654715113L;
+	private CommunicationDataStore mCommunicationDataStore;
+	private ICommunicationDataStoreProcessor mProcessor;
+	
+	public AgentCommunicatingBehaviour(Agent agent, ICommunicationDataStoreProcessor processor) {
+		setAgent(agent);
+		mProcessor = processor;
+	}
+
+	@Override
+	public void action() {
+		ACLMessage message = getMessageSentToAgent();
+		updateCommunicationDataStore(message);
+		if(messageReceived()) {
+			processCommunicationDataStore();
+		}
+		if(hasMessageToSend()) {
+			sendMessagesFromAgent();
+		}
+		if(message == null) {
+			block();
+		}
+	}
+
+	@Override
+	public boolean done() {
+		return false;
+	}
+	
+	private ACLMessage getMessageSentToAgent() {
+		return getAgent().receive();
+	}
+
+	private void updateCommunicationDataStore(ACLMessage message) {
+		if(message != null) {
+			mCommunicationDataStore.addReceivedMessage(message);
+		}
+		mCommunicationDataStore.setState(CommunicationDataStore.STATE_MESSAGE_RECEIVED);
+	}
+	
+	private boolean messageReceived() {
+		return mCommunicationDataStore.getState() == CommunicationDataStore.STATE_MESSAGE_RECEIVED;
+	}
+
+	private void processCommunicationDataStore() {
+		mProcessor.processCommunicationDataStore(mCommunicationDataStore);
+	}
+	
+	private boolean hasMessageToSend() {
+		return mCommunicationDataStore.getState() == CommunicationDataStore.STATE_MESSAGE_SEND;
+	}
+	
+	private void sendMessagesFromAgent() {
+		//Send ACL message
+		ACLMessage messageToSend = mCommunicationDataStore.extractMessageToSend();
+		while(messageToSend != null) {
+			getAgent().send(messageToSend);
+		}
+		
+		//Send object in-process to agent controller
+		ObjectMessage objectMessage = mCommunicationDataStore.extractObjectToSend();
+		AID receiverAID = new AID(objectMessage.getTargetAgentName(), AID.ISGUID);
+		
+	}
+}

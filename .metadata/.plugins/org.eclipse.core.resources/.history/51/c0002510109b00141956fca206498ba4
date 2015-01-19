@@ -1,0 +1,48 @@
+package edu.rits.ma.jade.behaviour;
+
+import edu.rits.ma.jade.communication.TaskProcessorIntermediator;
+import jade.core.Agent;
+import jade.core.behaviours.Behaviour;
+
+public class TaskProcessorMainBehaviour extends Behaviour {
+
+	private static final long serialVersionUID = 3398155524074335278L;
+
+	private TaskProcessorIntermediator mIntermediator = null;
+	
+	public TaskProcessorMainBehaviour(Agent agent, TaskProcessorIntermediator intermediator) {
+		super();
+		mIntermediator = intermediator;
+		setAgent(agent);
+	}
+
+	@Override
+	public void action() {
+		int newState = process(mIntermediator);
+		mIntermediator.setState(newState);
+	}
+
+	@Override
+	public boolean done() {
+		return mIntermediator.getState() == TaskProcessorIntermediator.STATE_TO_STOP;
+	}
+
+	private int process(TaskProcessorIntermediator intermediator) {
+		int newState = 0;
+		switch (intermediator.getState()) {
+		case TaskProcessorIntermediator.STATE_MESSAGE_RECEIVED_FROM_SECONDARY_AGENT:
+
+			break;
+		case TaskProcessorIntermediator.STATE_TO_RUN_TASK:
+
+			break;
+		case TaskProcessorIntermediator.STATE_WAIT_FOR_SECONDARY_AGENT_START:
+
+			break;
+		default:
+			break;
+		}
+		return newState;
+	}
+
+}

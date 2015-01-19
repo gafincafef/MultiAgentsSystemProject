@@ -1,0 +1,7 @@
+package edu.rits.ma.jade.impl;
+
+import edu.rits.ma.common.IAgentGateway;
+
+public class AgentGatewayImpl implements IAgentGateway {
+
+}

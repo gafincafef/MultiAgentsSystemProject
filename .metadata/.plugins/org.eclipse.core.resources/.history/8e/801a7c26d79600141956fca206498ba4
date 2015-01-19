@@ -1,0 +1,13 @@
+package model;
+
+public class Response {
+	private int mResponseValue;
+
+	public int getResponseValue() {
+		return mResponseValue;
+	}
+
+	public void setResponseValue(int mResponseValue) {
+		this.mResponseValue = mResponseValue;
+	}
+}

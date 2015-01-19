@@ -1,0 +1,12 @@
+package edu.rits.ma.jade.behaviour;
+
+import edu.rits.ma.jade.communication.CommunicationDataStore;
+
+public class PrimaryTaskProcessorImpl implements ICommunicationDataStoreProcessor {
+
+	@Override
+	public void processCommunicationDataStore(CommunicationDataStore communicationDataStore) {
+		
+	}
+
+}

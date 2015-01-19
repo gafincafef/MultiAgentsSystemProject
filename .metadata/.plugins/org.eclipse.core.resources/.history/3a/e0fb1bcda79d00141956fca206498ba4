@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+   version="2.5">
+  
+  <servlet>
+    <servlet-name>defaultServlet</servlet-name>
+    <servlet-class>edu.rits.ma.webapp.servlet.MyGenericServlet</servlet-class>
+  	<init-param>
+			<param-name>corpName</param-name>
+			<param-value>Techburg</param-value>
+	</init-param>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>defaultServlet</servlet-name>
+    <url-pattern>/app.do</url-pattern>
+  </servlet-mapping>
+
+</web-app>   

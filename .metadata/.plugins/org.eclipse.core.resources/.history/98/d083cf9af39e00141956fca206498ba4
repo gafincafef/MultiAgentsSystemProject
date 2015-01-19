@@ -1,0 +1,26 @@
+package behaviour;
+
+import tasks.ITask;
+import jade.core.AID;
+import jade.core.Agent;
+import jade.core.behaviours.OneShotBehaviour;
+
+public class OntologySenderBehaviour extends OneShotBehaviour {
+
+	private static final long serialVersionUID = -4671854788864070637L;
+	
+	private AID mReceiverAID;
+	private ITask mTask;
+	
+	public OntologySenderBehaviour(Agent agent, AID receiverAID, ITask task) {
+		setAgent(agent);
+		mReceiverAID = receiverAID;
+		mTask = task;
+	}
+	
+	@Override
+	public void action() {
+		//Try to send object first
+	}
+
+}

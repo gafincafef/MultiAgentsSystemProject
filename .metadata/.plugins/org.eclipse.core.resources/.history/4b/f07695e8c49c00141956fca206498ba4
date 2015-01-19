@@ -1,0 +1,34 @@
+package edu.rits.ma.algorithm.nashequil;
+
+import java.util.List;
+
+import edu.rits.ma.common.abstr.ITask;
+
+public class FindBestPreferencesTaskImpl implements ITask {
+
+	@Override
+	public long getTimeOutMs() {
+		return 1000;
+	}
+
+	@Override
+	public void execute() {
+		
+	}
+
+	@Override
+	public int getStatus() {
+		return 0;
+	}
+
+	@Override
+	public Object[] getResults() {
+		return null;
+	}
+
+	@Override
+	public void createSubTasks(List<ITask> subTasks) {
+		
+	}
+
+}

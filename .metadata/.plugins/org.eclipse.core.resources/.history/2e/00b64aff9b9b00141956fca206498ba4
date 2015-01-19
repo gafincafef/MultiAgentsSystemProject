@@ -1,0 +1,25 @@
+package edu.rits.ma.jade.behaviour;
+
+import edu.rits.ma.jade.communication.CommunicationDataStore;
+
+public class SecondaryTaskProcessorImpl implements ICommunicationDataStoreProcessor {
+
+	private final int STATE_INITIATED = 0;
+	private final int STATE_TO_PROCESS_READY_CHECK_MESSAGE = 1;
+	private final int STATE_TO_PROCESS_TASK_MESSAGE = 2;
+	private final int STATE_TO_STOP = 4;
+	
+	private int mInternalState;
+	
+	@Override
+	public void processCommunicationDataStore(CommunicationDataStore communicationDataStore) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean done() {
+		return false;
+	}
+
+}

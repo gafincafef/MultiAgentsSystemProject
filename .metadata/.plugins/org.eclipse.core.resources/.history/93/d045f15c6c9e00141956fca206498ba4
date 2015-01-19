@@ -1,0 +1,62 @@
+package edu.rits.ma.test.impl;
+
+import java.util.Set;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
+import edu.rits.ma.algorithm.impl.IDBasedPreferenceImpl;
+import edu.rits.ma.theory.IPreference;
+import edu.rits.ma.theory.IPreferenceSet;
+import edu.rits.ma.theory.IUtilitiesMap;
+
+public class NashEquilibirumProblemParser {
+	private IPreferenceSet mPreferenceSet = null;
+	private IUtilitiesMap mUtilityMap = null;
+
+	public NashEquilibirumProblemParser(IPreferenceSet preferenceSet, IUtilitiesMap utilityMap) {
+		mPreferenceSet = preferenceSet;
+		mUtilityMap = utilityMap;
+	}
+
+	public IPreferenceSet getPreferenceSet() {
+		return mPreferenceSet;
+	}
+
+	public IUtilitiesMap getUtilityMap() {
+		return mUtilityMap;
+	}
+
+	public void parse(String jsonString) throws Exception {
+		JSONParser parser = new JSONParser();
+		JSONObject problemJSONObject = (JSONObject) parser.parse(jsonString);
+		
+		//Parse preference set
+		parsePreferenceSet(problemJSONObject, mPreferenceSet);
+		
+		//Parse utility map with information of preference set
+		parseUtilityMap(problemJSONObject, mPreferenceSet, mUtilityMap);
+	}
+
+	private void parsePreferenceSet(JSONObject jsonObject, IPreferenceSet mPreferenceSet2) throws Exception {
+		JSONArray jPreferences = (JSONArray)jsonObject.get("preferences");
+		for(Object oPreference : jPreferences) {
+			JSONObject jPreference = (JSONObject) oPreference;
+			String sId = (String) jPreference.get("id");
+			IPreference preference = new IDBasedPreferenceImpl(Integer.valueOf(sID));
+			
+			JSONObject jActionMap = (JSONObject) jPreference.get("actionMap");
+			Set<Object> oAgentIds = jActionMap.keySet();
+			for(Object oAgentId : oAgentIds) {
+				String sActionId = (String) jActionMap.get(oAgentId);
+				String sAgentId = (String) oAgentId;
+				
+			}
+		}
+	}
+	
+	private void parseUtilityMap(JSONObject jsonObject, IPreferenceSet mPreferenceSet2, IUtilitiesMap mUtilityMap2) {
+		
+	}
+}

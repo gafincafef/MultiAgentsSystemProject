@@ -1,0 +1,46 @@
+package agents;
+
+import jade.core.Agent;
+import jade.domain.DFService;
+import jade.domain.FIPAException;
+import jade.domain.FIPAAgentManagement.DFAgentDescription;
+import jade.domain.FIPAAgentManagement.ServiceDescription;
+import behaviours.InteractiveBehaviour;
+
+public class SampleAgent extends Agent {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private static final String SERVICE_TYPE = "messageListener";
+	@Override
+	protected void setup() {
+		System.out.println("Setup called on agent sample " + getAID().getLocalName());
+		addBehaviour(new InteractiveBehaviour(this));
+		registerService();
+	}
+	
+	private void registerService() {
+		DFAgentDescription dfd = new DFAgentDescription();
+		dfd.setName(getAID());
+		ServiceDescription sd = new ServiceDescription();
+		sd.setType(SERVICE_TYPE);
+		dfd.addServices(sd);
+		try {
+			DFService.register(this, dfd);
+		} catch (FIPAException e) {
+			// TODO Auto-generated catch block
+		}
+	}
+	
+	@Override
+	protected void takeDown() {
+		super.takeDown();
+		try {
+			DFService.deregister(this);
+		} catch (FIPAException e) {
+			e.printStackTrace();
+		}
+	}
+}

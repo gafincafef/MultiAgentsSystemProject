@@ -1,0 +1,16 @@
+package edu.rits.ma.jade.agent;
+
+import jade.core.Agent;
+
+public class PrimaryAgent extends Agent {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4166260446398994126L;
+	
+	@Override
+	public void setup() {
+		
+	}
+}

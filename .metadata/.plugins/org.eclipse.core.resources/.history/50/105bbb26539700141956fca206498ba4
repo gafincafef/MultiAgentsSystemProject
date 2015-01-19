@@ -1,0 +1,12 @@
+package edu.rits.ma.test;
+
+import edu.rits.ma.common.IAgentGateway;
+import edu.rits.ma.jade.impl.JadeAgentGatewayImpl;
+
+public class Main {
+	public static void main(String[] args) {
+		IAgentGateway agentGateway = new JadeAgentGatewayImpl(host, port, primaryAgentClassName, secondaryAgentClassName);
+		int nbAgents = 4;
+		agentGateway.prepareAgents(nbAgents);
+	}
+}

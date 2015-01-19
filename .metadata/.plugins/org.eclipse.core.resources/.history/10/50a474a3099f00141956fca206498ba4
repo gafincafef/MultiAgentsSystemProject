@@ -1,0 +1,12 @@
+package edu.rits.ma.jade.communication;
+
+import java.util.ArrayDeque;
+import java.util.Deque;
+
+public class ContentElementIncomingBuffer {
+	private Deque<ContentElementWrapper> mReceivedElements = new ArrayDeque<ContentElementWrapper>();
+	
+	public boolean hasReceivedData() {
+		return !mReceivedElements.isEmpty();
+	}
+}

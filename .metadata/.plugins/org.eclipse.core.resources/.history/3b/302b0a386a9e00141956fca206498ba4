@@ -1,0 +1,11 @@
+package edu.rits.ma.test.impl;
+
+import edu.rits.ma.theory.IPreferenceSet;
+import edu.rits.ma.theory.IUtilitiesMap;
+
+public class NashEquilibirumProblemParser {
+	private IPreferenceSet mPreferenceSet;
+	private IUtilitiesMap mUtilMap;
+	
+	public 
+}

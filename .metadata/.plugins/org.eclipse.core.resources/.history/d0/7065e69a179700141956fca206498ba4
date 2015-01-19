@@ -1,0 +1,68 @@
+package edu.rits.ma.jade.behaviour;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import edu.rits.ma.common.ITask;
+
+import jade.core.behaviours.CyclicBehaviour;
+import jade.wrapper.AgentController;
+import jade.wrapper.StaleProxyException;
+import jade.wrapper.gateway.GatewayAgent;
+
+public class PrimaryAgentBehaviour extends CyclicBehaviour {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8974716117508990142L;
+
+	private Object mCommand;
+	private List<ITask> mTasks = null;
+	private List<AgentController> mSecondaryAgentControllers = null;
+	private GatewayAgent mCallbackGateWayAgent;
+	private int mNumberOfSubTasks = 0;
+	
+	@SuppressWarnings("unchecked")
+	public PrimaryAgentBehaviour(Object command, List<AgentController> secondaryAgentControllers, GatewayAgent callbackGatewayAgent) {
+		mTasks = (List<ITask>) mCommand;
+		mSecondaryAgentControllers = secondaryAgentControllers;
+		mCallbackGateWayAgent = callbackGatewayAgent;
+	}
+	
+	@Override
+	public void action() {
+		try {
+			runTasks();
+			waitForSubTasksOnSecondaryAgents();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public int onEnd() {
+		mCallbackGateWayAgent.releaseCommand(mCommand);
+		return super.onEnd();
+	}
+	
+	private void runTasks() throws StaleProxyException {
+		for(ITask task : mTasks) {
+			task.execute();
+			if(task.getStatus() == ITask.TASK_STATUS_SUCCEEDED) {
+				List<ITask> subTasks = new ArrayList<ITask>();
+				task.createSubTasks(subTasks);
+				mNumberOfSubTasks ++;
+				for(int i = 0; i < subTasks.size(); i++) {
+					int secondaryAgentIndex = i;//TODO Tweak this logic. There may be different between sub task id and secondary agent id 
+					mSecondaryAgentControllers.get(secondaryAgentIndex).putO2AObject(subTasks.get(i), AgentController.ASYNC);
+				}
+			}
+		}
+	}
+	
+	private void waitForSubTasksOnSecondaryAgents() {
+		
+	}
+
+	
+}

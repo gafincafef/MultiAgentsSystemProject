@@ -1,0 +1,8 @@
+package tasks;
+
+public class ReadyStatus {
+	private String mAgentName;
+	private int mIsReady;
+	
+	
+}

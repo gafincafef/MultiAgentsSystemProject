@@ -1,0 +1,22 @@
+package edu.rits.ma.jade.behaviour;
+
+import java.util.List;
+
+import edu.rits.ma.common.abstr.ITask;
+import edu.rits.ma.jade.communication.CommunicationDataStore;
+
+public class PrimaryTaskProcessorImpl implements ICommunicationDataStoreProcessor {
+
+	private static final int ACTION_PHASE_TO_RUN = 0;
+	private static final int ACTION_PHASE_TO_WAIT = 1;
+	private static final int ACTION_PHASE_TO_STOP = 2;
+	
+	private int mInternalState;
+	private List<ITask> mTasks = null;
+	
+	@Override
+	public void processCommunicationDataStore(CommunicationDataStore communicationDataStore) {
+		
+	}
+
+}

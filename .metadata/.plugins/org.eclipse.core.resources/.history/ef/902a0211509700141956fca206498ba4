@@ -1,0 +1,7 @@
+package edu.rits.ma.test.impl;
+
+import edu.rits.ma.common.ITask;
+
+public class ChildTaskSampleImpl implements ITask {
+
+}

@@ -1,0 +1,14 @@
+package tasks;
+
+public class ReadyStatus {
+	public static final int STATUS_NOT_READY = -1;
+	public static final int STATUS_READY = 0;
+	
+	private String mAgentName;
+	private int mIsReady;
+	
+	public void setAgentName(String agentName) {
+		mAgentName = agentName;
+	}
+	
+}

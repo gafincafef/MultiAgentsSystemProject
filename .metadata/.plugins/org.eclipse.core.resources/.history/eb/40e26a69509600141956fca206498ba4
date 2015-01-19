@@ -1,0 +1,9 @@
+package edu.rits.ma.theory;
+
+public interface IPreferenceSet {
+	/*
+	 * 
+	 */
+	int addPreference(Preference preference);
+	int 
+}

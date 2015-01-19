@@ -1,0 +1,9 @@
+1421335315594	Rename package 'edu.rits.ma.common.theory'
+1421336728320	Rename method 'findBestPrefenrenceForPrimaryAgent'
+1421341206516	Rename method 'getPreferencesContains'
+1421380372693	Rename package 'edu.rits.ma.algorithm.theory'
+1421380413547	Move package
+1421380964001	Rename type 'NashEquilibriumImpl'
+1421381252679	Rename type 'NashEquilibriumSolverImpl'
+1421382807698	Delete element
+1421384346627	Delete element

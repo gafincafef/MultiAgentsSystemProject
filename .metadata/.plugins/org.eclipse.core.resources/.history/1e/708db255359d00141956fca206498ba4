@@ -1,0 +1,21 @@
+package edu.rits.ma.algorithm.nashequil;
+
+import edu.rits.ma.common.abstr.IAgentGateway;
+import edu.rits.ma.theory.INashEquilibriumSolver;
+import edu.rits.ma.theory.NashEquilibriumProblem;
+
+public class NashEquilibriumAgentBasedSolverImpl implements INashEquilibriumSolver {
+
+	private  IAgentGateway mAgentGateway = null;
+	
+	public NashEquilibriumAgentBasedSolverImpl() {
+		
+	}
+	
+	@Override
+	public void solve(NashEquilibriumProblem problem) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

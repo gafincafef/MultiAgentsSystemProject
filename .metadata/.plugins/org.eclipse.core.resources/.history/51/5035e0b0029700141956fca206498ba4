@@ -1,0 +1,11 @@
+package edu.rits.ma.common;
+
+public interface ITask {
+	public static final int TASK_STATUS_CREATE = -1;
+	public static final int TASK_STATUS_INITIAED = -1;
+	public static final int TASK_STATUS_FINISHED = -1;
+	public static final int TASK_STATUS_SUCCESSED = -1;
+	
+	void execute();
+	int getStatus();
+}

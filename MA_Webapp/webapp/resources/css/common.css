@@ -1,0 +1,48 @@
+body {
+	margin: 0px;
+	background-color: azure;
+}
+
+.sidebar {
+	position:fixed;
+    top:0; bottom:0; left:0;
+    width: 8%;
+    background-color: aliceblue;
+}
+
+.container {
+	position: relative;
+	padding-left: 8%;
+	padding-right: 0;
+	height: 100%;
+	background-color: azure;
+}
+
+.container_header {
+	background-color: #04B431;
+	width: 100%;
+	color: white;
+	font-size: 44px;
+	text-align: center;
+	padding-top: 1.2%;
+	padding-bottom: 1.2%;
+	margin-bottom: 1.2%;
+}
+
+.main_content {
+	padding-left: 0.5%;
+	padding-right: 0.75%;
+}
+
+.container-footer { 
+   position: fixed;
+   bottom: 0;
+   left: 8%;
+   right: 0;
+   height: 10%;
+   background-color: transparent;
+}
+
+input.long-text {
+	width: 50%;
+}

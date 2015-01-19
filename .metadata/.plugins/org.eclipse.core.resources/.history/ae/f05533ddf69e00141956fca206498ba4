@@ -1,0 +1,38 @@
+package behaviour;
+
+import java.io.IOException;
+import java.io.Serializable;
+
+import tasks.ITask;
+import jade.core.AID;
+import jade.core.Agent;
+import jade.core.behaviours.OneShotBehaviour;
+import jade.lang.acl.ACLMessage;
+
+public class OntologySenderBehaviour extends OneShotBehaviour {
+
+	private static final long serialVersionUID = -4671854788864070637L;
+	
+	private AID mReceiverAID;
+	private ITask mTask;
+	
+	public OntologySenderBehaviour(Agent agent, ITask task) {
+		setAgent(agent);
+		mReceiverAID = receiverAID;
+		mTask = task;
+	}
+	
+	@Override
+	public void action() {
+		ACLMessage message = new ACLMessage(ACLMessage.INFORM);
+		message.addReceiver(mReceiverAID);
+		try {
+			message.setContentObject((Serializable) mTask);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		System.out.println("Message is going to be sent to " + mReceiverAID.getName());
+		getAgent().send(message);
+	}
+
+}

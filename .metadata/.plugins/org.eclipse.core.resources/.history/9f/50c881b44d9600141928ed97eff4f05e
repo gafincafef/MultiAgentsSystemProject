@@ -1,0 +1,28 @@
+package edu.rits.ma.theory;
+
+public class Action {
+	private int mId;
+	private String mName;
+	
+	public Action(int id, String name) {
+		mId = id;
+		mName = name;
+	}
+	
+	public void setId(int mId) {
+		this.mId = mId;
+	}
+	
+	public int getId() {
+		return mId;
+	}
+
+	public String getName() {
+		return mName;
+	}
+
+	public void setName(String mName) {
+		this.mName = mName;
+	}
+	
+}

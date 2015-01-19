@@ -1,0 +1,5 @@
+package edu.rits.ma.jade.communication;
+
+public class IncomingBuffer {
+
+}
