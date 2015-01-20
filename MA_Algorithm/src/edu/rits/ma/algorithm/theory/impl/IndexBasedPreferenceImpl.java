@@ -3,6 +3,9 @@ package edu.rits.ma.algorithm.theory.impl;
 import edu.rits.ma.theory.IPreference;
 
 public class IndexBasedPreferenceImpl extends PreferenceImpl {
+	
+	private static final long serialVersionUID = 1616990797832465544L;
+	
 	private int mIndex;
 
 	public IndexBasedPreferenceImpl() {

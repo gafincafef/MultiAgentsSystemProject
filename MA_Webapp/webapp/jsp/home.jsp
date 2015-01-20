@@ -17,7 +17,9 @@
 			Input number of agents:<input type="text" id="txt_agent_number"> <input type="button" id="btn_agent_number" value="OK">
 			</div>
 			<div id="div_util">
-				<p> Input actions of each agent and its utility value in each preference</p>
+				<p id="p_message" style="visibility: hidden;"> Input actions of each agent and its utility value in each preference. Then click on submit button to get
+				the result from server. <br>Lines of preferences those form Nash equilibrium will be highlighted.
+				</p>
 				<table id="tbl_util">
 				</table>
 			</div>

@@ -60,7 +60,6 @@ public class FindBestPreferencesTaskImpl implements ITask, Serializable {
 			IPreference candidatePreference = pIter.next();
 			for(ITaskResult candidatesAcceptedBySubTask : subTasksResults) {
 				Set<Object> setOfcandidatesAcceptedBySubTask = candidatesAcceptedBySubTask.toSet();
-				System.out.println("---------------------------Candidates number accepted by sub tasks " + setOfcandidatesAcceptedBySubTask.size());
 				if(!setOfcandidatesAcceptedBySubTask.contains(candidatePreference)) {
 					pIter.remove();
 					break;

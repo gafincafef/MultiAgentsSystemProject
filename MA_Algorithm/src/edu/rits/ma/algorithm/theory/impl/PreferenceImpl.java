@@ -9,7 +9,7 @@ import java.util.Set;
 import edu.rits.ma.theory.Action;
 import edu.rits.ma.theory.IPreference;
 
-public class PreferenceImpl implements IPreference, Serializable	{
+public class PreferenceImpl implements IPreference, Serializable {
 
 	private static final long serialVersionUID = -896399257737383558L;
 	

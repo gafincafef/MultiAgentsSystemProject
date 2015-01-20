@@ -52,18 +52,7 @@ public class BestPreferenceCheckerTaskImpl implements ITask, Serializable {
 			mPreferenceSet.getContainerPreferences(subPreference, preferences);
 
 			for(IPreference oPreference : preferences) {
-				if(oPreference == null) {
-					System.out.println("----------------------------Null preference !!!");
-				}
 				if(mUtilitiesMap.getUtilityOfAgent(oPreference, mAgentId) > candidateUtilValueForAgent) {
-					System.out.println("-----------------------------For agent " + 
-							mAgentId +
-							" candidate util = " +
-							candidateUtilValueForAgent + 
-							" < utility value "  +
-							mUtilitiesMap.getUtilityOfAgent(oPreference, mAgentId) +
-							" by action " +
-							oPreference.getActionOfAgent(mAgentId).getId());
 					return false;
 				}
 			}

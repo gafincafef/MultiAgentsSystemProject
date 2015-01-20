@@ -131,6 +131,9 @@ function applyResultsToRows(resultRows) {
 
 $(document).ready(function() {
 		$("#btn_agent_number").click(function () {
+			var $message = $("#p_message");
+			$message.css("visibility", "visible");
+			
 			var $table = $("#tbl_util");
 			$table.html("");
 			var numberOfAgent = $("#txt_agent_number").val();

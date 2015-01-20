@@ -28,11 +28,6 @@ public class UtilitiesMapImpl implements IUtilitiesMap, Serializable {
 		if(agentUtilityMap != null) {
 			return agentUtilityMap.get(agentId);
 		}
-		System.out.println("-----------------------------Going to return null");
-		System.out.println("-----------------------------Cause preference info");
-		for(int aid : preference.getAllAgentIds()) {
-			System.out.println("Agent " + aid + " action " + preference.getActionOfAgent(aid).getId());
-		}
 		return null;
 	}
 
