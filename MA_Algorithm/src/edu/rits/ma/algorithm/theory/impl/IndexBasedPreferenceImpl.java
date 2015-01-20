@@ -1,23 +1,18 @@
 package edu.rits.ma.algorithm.theory.impl;
 
-import java.io.Serializable;
-
 import edu.rits.ma.theory.IPreference;
 
-public class IndexBasedPreferenceImpl extends PreferenceImpl implements Serializable {
-
-	private static final long serialVersionUID = -5058945633704891446L;
-	
+public class IndexBasedPreferenceImpl extends PreferenceImpl {
 	private int mIndex;
-	
+
 	public IndexBasedPreferenceImpl() {
 		mIndex  = -1;
 	}
-	
+
 	public IndexBasedPreferenceImpl(int id) {
 		mIndex = id;
 	}
-	
+
 	@Override
 	public int getIndex() {
 		return mIndex;
@@ -35,12 +30,12 @@ public class IndexBasedPreferenceImpl extends PreferenceImpl implements Serializ
 		}
 		return super.equals(other);
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return mIndex > 0 ? mIndex : super.hashCode();
 	}
-	
+
 	@Override
 	protected IPreference newInstance() {
 		return new IndexBasedPreferenceImpl();

@@ -14,6 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONArray;
 
+import edu.rits.ma.algorithm.nashequil.NashEquilibriumAgentBasedSolverImpl;
+import edu.rits.ma.common.abstr.IAgentGateway;
+import edu.rits.ma.jade.agent.TaskProcessorPrimaryAgentImpl;
+import edu.rits.ma.jade.gateway.JadeAgentGatewayImpl;
 import edu.rits.ma.theory.INashEquilibriumSolver;
 import edu.rits.ma.theory.IPreference;
 import edu.rits.ma.theory.NashEquilibriumProblem;
@@ -26,11 +30,13 @@ public class NashEquilibriumSolverServlet extends HttpServlet {
 	
 	private NashEquilibirumProblemParser mProblemParser = null;
 	private INashEquilibriumSolver mProblemSolver = null;
+	private IAgentGateway mAgentGateway = null;
 	
 	@Override
 	public void init() throws ServletException {
 		mProblemParser = new NashEquilibirumProblemParser();
-		//TODO Init mProblemSolver
+		mAgentGateway = new JadeAgentGatewayImpl("localhost", "1099", TaskProcessorPrimaryAgentImpl.class.getName());
+		mProblemSolver = new NashEquilibriumAgentBasedSolverImpl(mAgentGateway);
 	}
 	
 	@Override
@@ -52,6 +58,7 @@ public class NashEquilibriumSolverServlet extends HttpServlet {
 			if(problem != null && mProblemSolver != null) {
 				mProblemSolver.solve(problem);
 				List<IPreference> resultPreferences = new ArrayList<IPreference>();
+				mProblemSolver.getResults(resultPreferences);
 				for(IPreference preference : resultPreferences) {
 					if(preference.isIndexed()) {
 						resultPreferenceIndexes.add(preference.getIndex());

@@ -147,6 +147,8 @@ $(document).ready(function() {
 			if (gNEProblem != null) {
 				preSubmitPost();
 				var requestString = JSON.stringify(gNEProblem);
+				console.log(requestString);
+				
 				var url = "/agents-app/solve.do";
 				$.ajax({
 				  type: "POST",

@@ -104,6 +104,7 @@ public class PrimaryContentBufferProcessorImpl extends AbstractContentBufferProc
 	}
 
 	private int onOneTaskDone(ContentOutcomingBuffer sendBuffer) {
+		
 		//Process results from sub task of the current task
 		ITask currentTask = mTasks.get(mExecutingStatus.getPreviousTaskIndex());
 		processSubTasksResults(currentTask);
@@ -114,9 +115,15 @@ public class PrimaryContentBufferProcessorImpl extends AbstractContentBufferProc
 		}
 		else {
 			runNextTask(sendBuffer);
-		}
+			
+			//Handle for the case there is no sub tasks and there fore there won't be any task-done message
+			if(mExecutingStatus.allSubTasksDone()) {
+				LogUtil.logInfo(this, "All secondary done task");
+				return onOneTaskDone(sendBuffer);
+			}
 
-		return ACTION_PHASE_TO_WAIT_SECONDARY_AGENTS_DONE_TASK;
+			return ACTION_PHASE_TO_WAIT_SECONDARY_AGENTS_DONE_TASK;
+		}
 	}
 
 	private int onAllTasksDone(ContentOutcomingBuffer sendBuffer) {
@@ -126,7 +133,9 @@ public class PrimaryContentBufferProcessorImpl extends AbstractContentBufferProc
 
 	private void processSubTasksResults(ITask currentTask) {
 		LogUtil.logInfo(this, "Going to process " + mSubTasksResultBuffer.size() + " sub tasks results");
+		LogUtil.logInfo(this, "------------Before process,  results size = " + currentTask.getResult().toSet().size());
 		currentTask.processSubTaskResults(mSubTasksResultBuffer);
+		LogUtil.logInfo(this, "------------After process,  results size = " + currentTask.getResult().toSet().size());
 		mSubTasksResultBuffer.clear();
 	}
 

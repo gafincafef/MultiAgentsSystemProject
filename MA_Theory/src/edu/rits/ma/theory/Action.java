@@ -1,6 +1,10 @@
 package edu.rits.ma.theory;
 
-public class Action {
+import java.io.Serializable;
+
+public class Action implements Serializable {
+	private static final long serialVersionUID = 2694159632739375339L;
+	
 	private int mId;
 	private String mName;
 	

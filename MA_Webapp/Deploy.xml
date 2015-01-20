@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project basedir="." default="build" name="MA_WebApp">
+<project basedir="." default="create-war" name="MA_WebApp">
     
 	<property environment="env"/>
     <property name="debuglevel" value="source,lines,vars"/>
@@ -54,38 +54,15 @@
         <pathelement location="${dependencies}/jade.jar"/>
     </path>
 	
-    <target name="init">
-        <mkdir dir="bin/"/>
-        <copy includeemptydirs="false" todir="bin/">
-            <fileset dir="src">
-                <exclude name="**/*.launch"/>
-                <exclude name="**/*.java"/>
-            </fileset>
-        </copy>
-    </target>
-	
-    <target name="clean">
-        <delete dir="bin/"/>
-    </target>
-	
-    <target depends="clean" name="cleanall"/>
-	
-    <target depends="build-subprojects,build-project" name="build"/>
-	
-    <target name="build-subprojects"/>
-	
-    <target depends="init" name="build-project">
-        <echo message="${ant.project.name}: ${ant.file}"/>
-        <javac debug="true" debuglevel="${debuglevel}" destdir="bin/" includeantruntime="false" source="${source}" target="${target}">
-            <src path="src"/>
-            <classpath refid="MA_WebApp.classpath"/>
-        </javac>
-    </target>
-	
-    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
-
 	<target name="clean-war">
 		<delete dir="${target.dir}"/>
+	</target>
+	
+	<target name="clean-dependencies">
+		<ant antfile="${dependencies.ma.common.buildfile}" dir="${dependencies.ma.common.dir}" target="clean" inheritall="false" inheritrefs="false"/>
+		<ant antfile="${dependencies.ma.theory.buildfile}" dir="${dependencies.ma.theory.dir}" target="clean" inheritall="false" inheritrefs="false"/>
+		<ant antfile="${dependencies.ma.algorithm.buildfile}" dir="${dependencies.ma.algorithm.dir}" target="clean" inheritall="false" inheritrefs="false"/>
+		<ant antfile="${dependencies.ma.jade.buildfile}" dir="${dependencies.ma.jade.dir}" target="clean" inheritall="false" inheritrefs="false"/>
 	</target>
 	
 	<target name="build-dependencies">
@@ -144,6 +121,9 @@
 	</target>
 		
 	<target depends="build-war,copy-war,package-war" name="create-war">
+	</target>
+	
+	<target depends="clean-dependencies,clean-war,build-war,copy-war,package-war" name="clean-create-war">
 	</target>
 	
 </project>

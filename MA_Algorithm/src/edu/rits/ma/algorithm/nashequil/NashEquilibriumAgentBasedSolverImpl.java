@@ -33,7 +33,7 @@ public class NashEquilibriumAgentBasedSolverImpl implements INashEquilibriumSolv
 		mAgentGateway.runTasksOnAgents(mTasks);
 	}
 	
-	private void convertProblemToTasks(NashEquilibriumProblem problem, Set<Integer> agentIdSet, List<ITask> tasks) {
+	public void convertProblemToTasks(NashEquilibriumProblem problem, Set<Integer> agentIdSet, List<ITask> tasks) {
 		Integer[] agentIds = agentIdSet.toArray(new Integer[agentIdSet.size()]);
 		
 		if(agentIds == null || agentIds.length == 0) {

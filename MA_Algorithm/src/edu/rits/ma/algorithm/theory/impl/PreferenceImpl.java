@@ -1,5 +1,6 @@
 package edu.rits.ma.algorithm.theory.impl;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -8,8 +9,10 @@ import java.util.Set;
 import edu.rits.ma.theory.Action;
 import edu.rits.ma.theory.IPreference;
 
-public class PreferenceImpl implements IPreference 	{
+public class PreferenceImpl implements IPreference, Serializable	{
 
+	private static final long serialVersionUID = -896399257737383558L;
+	
 	private Map<Integer, Action> mAgentActionMap = new HashMap<Integer, Action>();
 	private int mHashCode = 0;
 	

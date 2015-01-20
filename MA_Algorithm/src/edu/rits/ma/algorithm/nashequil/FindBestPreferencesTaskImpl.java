@@ -40,7 +40,7 @@ public class FindBestPreferencesTaskImpl implements ITask, Serializable {
 
 	@Override
 	public int getStatus() {
-		return 0;
+		return TASK_STATUS_SUCCEEDED;
 	}
 
 	@Override
@@ -60,6 +60,7 @@ public class FindBestPreferencesTaskImpl implements ITask, Serializable {
 			IPreference candidatePreference = pIter.next();
 			for(ITaskResult candidatesAcceptedBySubTask : subTasksResults) {
 				Set<Object> setOfcandidatesAcceptedBySubTask = candidatesAcceptedBySubTask.toSet();
+				System.out.println("---------------------------Candidates number accepted by sub tasks " + setOfcandidatesAcceptedBySubTask.size());
 				if(!setOfcandidatesAcceptedBySubTask.contains(candidatePreference)) {
 					pIter.remove();
 					break;
