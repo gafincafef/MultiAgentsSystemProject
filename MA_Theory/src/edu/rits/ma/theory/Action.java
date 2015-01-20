@@ -19,10 +19,12 @@ public class Action {
 	
 	@Override
 	public boolean equals(Object other) {
-		if(!(other instanceof Action) || other == null) {
+		if(!(other instanceof Action)) {
 			return false;
 		}
-		return getId() == ((Action)other).getId();
+		System.out.println("Compare " + getId() + " " + ((Action)other).getId() + " " + (getId()==((Action)other).getId()));
+		boolean eq = (getId()==((Action)other).getId());
+		return eq;
 	}
 	
 }

@@ -1,6 +1,9 @@
 package edu.rits.ma.test.main;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.After;
 import org.junit.Before;
@@ -104,8 +107,21 @@ public class TestAlgorithmTask {
 	@Test
 	public void test() {
 		testUtilityMap();
+		//testHashMap();
 	}
-
+						
+	private void testHashMap() {
+		Map<IntWrapper, Integer> map = new HashMap<IntWrapper, Integer>();
+		map.put(new IntWrapper(10), 1);
+		map.put(new IntWrapper(1), 12);
+		map.put(new IntWrapper(20), 3);
+		map.put(new IntWrapper(30), 39);
+		
+		System.out.println("Checking search");
+		IntWrapper key = new IntWrapper(20);
+		assertEquals(3, (int)map.get(key));
+	}
+	
 	private void testUtilityMap() {
 		int agent1Action = 2;
 		int agent2Action = 4;
@@ -118,9 +134,31 @@ public class TestAlgorithmTask {
 		preference.addAgentAction(3, new Action(agent3Action, ""));
 		
 		for(int agentId = 1; agentId <= 3; agentId++) {
-			int utilityVal = mUtilityMap.getUtilityOfAgent(preference, agentId);
-			System.out.println(agent1Action + " " + agent2Action + " " + agent3Action + " " + agentId + " " + utilityVal);
-			assertEquals(mUtilities[agent1Action][agent2Action][agent3Action][agentId], utilityVal);
+			Integer utilityVal = mUtilityMap.getUtilityOfAgent(preference, agentId);
+			assertNotNull(utilityVal);
+			assertEquals(mUtilities[agent1Action][agent2Action][agent3Action][agentId], (int)utilityVal);
+		}
+	}
+	
+	private static class IntWrapper {
+		int val = 0;
+		
+		public IntWrapper(int val) {
+			this.val = val;
+		}
+		
+		@Override
+		public boolean equals(Object object) {
+			System.out.println("Check equal");
+			if(object instanceof IntWrapper) {
+				return ((IntWrapper)object).val == val;
+			}
+			return false;
+		}
+		
+		@Override
+		public int hashCode() {
+			return val % 10;
 		}
 	}
 }

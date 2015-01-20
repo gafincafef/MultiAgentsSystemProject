@@ -8,36 +8,39 @@ public class IndexBasedPreferenceImpl extends PreferenceImpl implements Serializ
 
 	private static final long serialVersionUID = -5058945633704891446L;
 	
-	private int mId;
+	private int mIndex;
 	
 	public IndexBasedPreferenceImpl() {
-		mId  = -1;
+		mIndex  = -1;
 	}
 	
 	public IndexBasedPreferenceImpl(int id) {
-		mId = id;
+		mIndex = id;
 	}
 	
 	@Override
 	public int getIndex() {
-		return mId;
+		return mIndex;
 	}
 
 	@Override
 	public boolean isIndexed() {
-		return mId > 0;
+		return mIndex > 0;
 	}
 
 	@Override
 	public boolean equals(Object other) {
-		if(!(other instanceof IPreference)) {
-			return false;
-		}
-		if(other instanceof IndexBasedPreferenceImpl && mId > 0 && ((IndexBasedPreferenceImpl)other).mId >0) {
-			return mId == ((IndexBasedPreferenceImpl)other).mId;
+		if(other instanceof IndexBasedPreferenceImpl && mIndex > 0 && ((IndexBasedPreferenceImpl)other).mIndex >0) {
+			System.out.println("Compare by indexed !");
+			return mIndex == ((IndexBasedPreferenceImpl)other).mIndex;
 		}
 		
 		return super.equals(other);
+	}
+	
+	@Override
+	public int hashCode() {
+		return mIndex > 0 ? mIndex : super.hashCode();
 	}
 	
 	@Override

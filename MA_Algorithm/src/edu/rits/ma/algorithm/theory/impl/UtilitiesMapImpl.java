@@ -18,12 +18,23 @@ public class UtilitiesMapImpl implements IUtilitiesMap, Serializable {
 		if(!mUtilitiesMap.containsKey(preference)) {
 			mUtilitiesMap.put(preference, new HashMap<Integer,Integer>());
 		}
+		else {
+			System.out.println("Key already existed");
+		}
 		Map<Integer, Integer> agentUtilityMap = mUtilitiesMap.get(preference);
 		agentUtilityMap.put(agentId, utilityValue);
 	}
 
 	@Override
 	public Integer getUtilityOfAgent(IPreference preference, int agentId) {
+		System.out.println("Search for hash code " + preference.hashCode());
+		System.out.println("Map key set size " + mUtilitiesMap.keySet().size());
+		
+		for(IPreference prefKey : mUtilitiesMap.keySet()) {
+			System.out.println("Key hashcode " + prefKey.hashCode());
+			System.out.println("Matched key = " + (prefKey.equals(preference)));
+		}
+		
 		Map<Integer, Integer> agentUtilityMap = mUtilitiesMap.get(preference);
 		if(agentUtilityMap != null) {
 			return agentUtilityMap.get(agentId);
