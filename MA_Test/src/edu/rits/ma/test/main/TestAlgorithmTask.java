@@ -1,18 +1,25 @@
 package edu.rits.ma.test.main;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import edu.rits.ma.algorithm.nashequil.FindBestPreferencesTaskImpl;
 import edu.rits.ma.algorithm.theory.impl.IndexBasedPreferenceImpl;
 import edu.rits.ma.algorithm.theory.impl.PreferenceSetImpl;
 import edu.rits.ma.algorithm.theory.impl.UtilitiesMapImpl;
 import edu.rits.ma.common.abstr.ITask;
+import edu.rits.ma.common.abstr.ITaskResult;
 import edu.rits.ma.theory.Action;
 import edu.rits.ma.theory.IPreference;
 import edu.rits.ma.theory.IPreferenceSet;
@@ -22,8 +29,7 @@ public class TestAlgorithmTask {
 
 	private IPreferenceSet mPreferenceSet = new PreferenceSetImpl();
 	private IUtilitiesMap mUtilityMap = new UtilitiesMapImpl();
-	private ITask mTask = null;
-
+	
 	//Test case
 
 	//Preference set
@@ -52,7 +58,7 @@ public class TestAlgorithmTask {
 	//Utility[2][4][7][1] = 10;
 	//Utility[2][4][7][2] = 12;
 	//Utility[2][4][7][3] = 8;
-	//Utility[2][5][7][1] = 10;
+	//Utility[2][5][7][1] = 9;
 	//Utility[2][5][7][2] = 0;
 	//Utility[2][5][7][3] = 2;
 
@@ -67,7 +73,7 @@ public class TestAlgorithmTask {
 		mUtilities[1][4][7][2] = 12;
 		mUtilities[1][4][7][3] = 8;
 		mUtilities[1][5][7][1] = 10;
-		mUtilities[1][5][7][2] = 0;
+		mUtilities[1][5][7][2] = 90;
 		mUtilities[1][5][7][3] = 2;
 
 		mUtilities[2][3][7][1] = 4;
@@ -76,7 +82,7 @@ public class TestAlgorithmTask {
 		mUtilities[2][4][7][1] = 10;
 		mUtilities[2][4][7][2] = 12;
 		mUtilities[2][4][7][3] = 8;
-		mUtilities[2][5][7][1] = 10;
+		mUtilities[2][5][7][1] = 9;
 		mUtilities[2][5][7][2] = 0;
 		mUtilities[2][5][7][3] = 2;
 
@@ -106,8 +112,9 @@ public class TestAlgorithmTask {
 
 	@Test
 	public void test() {
-		testUtilityMap();
+		//testUtilityMap();
 		//testHashMap();
+		testFindBestPreference();
 	}
 						
 	private void testHashMap() {
@@ -123,8 +130,8 @@ public class TestAlgorithmTask {
 	}
 	
 	private void testUtilityMap() {
-		int agent1Action = 2;
-		int agent2Action = 4;
+		int agent1Action = 1;
+		int agent2Action = 5;
 		int agent3Action = 7;
 		
 		//Test utilities value of preference 
@@ -138,6 +145,56 @@ public class TestAlgorithmTask {
 			assertNotNull(utilityVal);
 			assertEquals(mUtilities[agent1Action][agent2Action][agent3Action][agentId], (int)utilityVal);
 		}
+	}
+	
+	private void testFindBestPreference() {
+		int primaryAgentId = 1;
+		
+		//Agent2Action = 5
+		//Agent3Action = 7
+		//Expect result for Agent1Action = {1} because utility[1][5][7][1] = 10 > utility[2][5][7][1] = 9
+		int agent2Action = 5;
+		int agent3Action = 7;
+		IPreference subPreference = new IndexBasedPreferenceImpl();
+		subPreference.addAgentAction(2, new Action(agent2Action, ""));
+		subPreference.addAgentAction(3, new Action(agent3Action, ""));
+		
+		
+		ITask task = new FindBestPreferencesTaskImpl(primaryAgentId, subPreference, mPreferenceSet, mUtilityMap); 
+		task.execute();
+		
+		ITaskResult result = task.getResult();
+		Set<Object> resultPreferences = result.toSet();
+		
+		assertEquals(1, resultPreferences.size());
+		
+		for(Object oPreference : resultPreferences) {
+			IPreference preference = (IPreference) oPreference;
+			assertEquals(1, preference.getActionOfAgent(1).getId());
+			assertEquals(5, preference.getActionOfAgent(2).getId());
+			assertEquals(7, preference.getActionOfAgent(3).getId());
+		}
+		
+		//Now suppose we have to process sub task now
+		List<ITask> subTasks = new ArrayList<ITask>();
+		task.createSubTasks(subTasks);
+		List<ITaskResult> subTasksResults = new LinkedList<ITaskResult>();
+		for(ITask subTask : subTasks) {
+			subTask.execute();
+			subTasksResults.add(subTask.getResult());
+		}
+		
+		//There must be 2 sub tasks for agent 2 and agent 3
+		assertEquals(2, subTasks.size());
+		
+		task.processSubTaskResults(subTasksResults);
+		
+		result = task.getResult();
+		resultPreferences = result.toSet();
+		
+		//Now the results size still 1 because utility[1][5][7][2] = 90  > utility[1][3][7][2] = 5
+		//and 7 is the only choice for agent 3
+		assertEquals(1, resultPreferences.size());
 	}
 	
 	private static class IntWrapper {

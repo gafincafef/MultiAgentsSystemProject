@@ -34,9 +34,7 @@ public class FindBestPreferencesTaskImpl implements ITask, Serializable {
 	@Override
 	public void execute() {
 		List<IPreference> subPreferenceContainers = new ArrayList<IPreference>();
-		IPreferenceSet preferenceSet = mPreferenceSet;
-		preferenceSet.getContainerPreferences(mSubPreference, subPreferenceContainers);
-
+		mPreferenceSet.getContainerPreferences(mSubPreference, subPreferenceContainers);
 		findBestPrefenrencesForPrimaryAgent(subPreferenceContainers, mCandidatePreferences);
 	}
 
@@ -56,12 +54,13 @@ public class FindBestPreferencesTaskImpl implements ITask, Serializable {
 		 *  Expected sub tasks results : 
 		 *  - Each sub task return list of preferences in the candidate preferences list which it accepts 
 		 * 
-		 *  Any candidate is not accepted by at least one of the sub tasks would be eliminated
+		 *  Any candidate is not accepted by anyone of the sub tasks must be eliminated
 		 */
 		for(Iterator<IPreference> pIter = mCandidatePreferences.iterator(); pIter.hasNext();) {
 			IPreference candidatePreference = pIter.next();
 			for(ITaskResult candidatesAcceptedBySubTask : subTasksResults) {
-				if(!candidatesAcceptedBySubTask.toSet().contains(candidatePreference)) {
+				Set<Object> setOfcandidatesAcceptedBySubTask = candidatesAcceptedBySubTask.toSet();
+				if(!setOfcandidatesAcceptedBySubTask.contains(candidatePreference)) {
 					pIter.remove();
 					break;
 				}
@@ -80,19 +79,19 @@ public class FindBestPreferencesTaskImpl implements ITask, Serializable {
 	}
 
 	private void findBestPrefenrencesForPrimaryAgent(List<IPreference> preferences, List<IPreference> outputs) {
-		int bestUtilities = Integer.MIN_VALUE;
+		int bestUtility = Integer.MIN_VALUE;
 		IUtilitiesMap utilityMap = mUtilitiesMap;
 
 		for(IPreference preference : preferences) {
 			int utility = utilityMap.getUtilityOfAgent(preference, mPrimaryAgentId);
-			if(utility > bestUtilities) {
-				bestUtilities = utility;
+			if(utility > bestUtility) {
+				bestUtility = utility;
 			}
 		}
 
 		for(IPreference preference : preferences) {
 			int utility = utilityMap.getUtilityOfAgent(preference, mPrimaryAgentId);
-			if(utility == bestUtilities) {
+			if(utility == bestUtility) {
 				outputs.add(preference);
 			}
 		}

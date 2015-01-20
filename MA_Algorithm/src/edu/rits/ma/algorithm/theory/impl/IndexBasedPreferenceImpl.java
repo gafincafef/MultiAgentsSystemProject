@@ -31,10 +31,8 @@ public class IndexBasedPreferenceImpl extends PreferenceImpl implements Serializ
 	@Override
 	public boolean equals(Object other) {
 		if(other instanceof IndexBasedPreferenceImpl && mIndex > 0 && ((IndexBasedPreferenceImpl)other).mIndex >0) {
-			System.out.println("Compare by indexed !");
 			return mIndex == ((IndexBasedPreferenceImpl)other).mIndex;
 		}
-		
 		return super.equals(other);
 	}
 	
