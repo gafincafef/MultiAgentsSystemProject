@@ -3,7 +3,6 @@ package edu.rits.ma.jade.communication;
 import jade.content.onto.BasicOntology;
 import jade.content.onto.Ontology;
 import jade.content.onto.OntologyException;
-import jade.content.schema.AgentActionSchema;
 import jade.content.schema.PredicateSchema;
 import jade.content.schema.PrimitiveSchema;
 
@@ -17,8 +16,6 @@ public class AgentTrackingOntology extends Ontology {
 	public static final String PREDICATE_TRACKING_AGENT_NAME = "agentName";
 	public static final String PREDICATE_TRACKING_STATE = "state";
 	
-	public static final String AGENT_ACTION_STOPPING = "Stop";
-	
 	private static Ontology mInstance = new AgentTrackingOntology();
 
 	public static Ontology getInstance() {
@@ -29,16 +26,13 @@ public class AgentTrackingOntology extends Ontology {
 		super(ONTOLOGY_NAME, BasicOntology.getInstance());
 		try {
 			//Use predicate schema
-			add(new PredicateSchema(PREDICATE_TRACKING), SecondaryAgentState.class);
+			add(new PredicateSchema(PREDICATE_TRACKING), AgentState.class);
 			
 			//The predicate schema contents (secondary) agent name and its state (ready, not ready, done task...)
 			PredicateSchema predicateSchema = (PredicateSchema) getSchema(PREDICATE_TRACKING);
 			predicateSchema.add(PREDICATE_TRACKING_AGENT_NAME, (PrimitiveSchema)getSchema(BasicOntology.STRING));
 			predicateSchema.add(PREDICATE_TRACKING_STATE, (PrimitiveSchema)getSchema(BasicOntology.INTEGER));
 
-			//Use agent action
-			add(new AgentActionSchema(AGENT_ACTION_STOPPING), SecondaryAgentStopAction.class);
-			
 		} catch (OntologyException e) {
 			e.printStackTrace();
 		}

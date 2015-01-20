@@ -1,10 +1,12 @@
 package edu.rits.ma.test.impl;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import edu.rits.ma.common.abstr.ITask;
+import edu.rits.ma.common.abstr.ITaskResult;
 
 public class TaskSampleImpl extends AbstractTask implements Serializable{
 
@@ -37,12 +39,29 @@ public class TaskSampleImpl extends AbstractTask implements Serializable{
 	}
 
 	@Override
-	public List<Object> getResults() {
-		List<Object> resultList = new ArrayList<Object>();
-		for(int i = 0; i < mSubTaskResults.length; i++) {
-			resultList.add(mSubTaskResults[i]);
+	public ITaskResult getResult() {
+		return new TaskResult();
+	}
+	
+	private class TaskResult implements ITaskResult {
+
+		@Override
+		public Object[] toArray() {
+			Object[] obs = new Object[mSubTaskResults.length];
+			for(int i = 0; i < obs.length; i++) {
+				obs[i] = mSubTaskResults[i];
+			}
+			return obs;
 		}
-		return resultList;
+
+		@Override
+		public Set<Object> toSet() {
+			Set<Object> set = new HashSet<Object>();
+			for(int i = 0; i < mSubTaskResults.length; i++) {
+				set.add(mSubTaskResults[i]);
+			}
+			return set;
+		}
 		
 	}
 

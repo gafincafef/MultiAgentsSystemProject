@@ -1,4 +1,4 @@
-package edu.rits.ma.algorithm.impl;
+package edu.rits.ma.algorithm.theory.impl;
 
 import java.util.HashMap;
 import java.util.HashSet;

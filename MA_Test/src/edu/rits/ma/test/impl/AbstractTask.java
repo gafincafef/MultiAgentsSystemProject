@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import edu.rits.ma.common.abstr.ITask;
+import edu.rits.ma.common.abstr.ITaskResult;
 
 public abstract class AbstractTask implements ITask, Serializable {
 
@@ -20,7 +21,7 @@ public abstract class AbstractTask implements ITask, Serializable {
 	}
 	
 	@Override
-	public void processSubTaskResults(List<Object>[] subTasksResults) {
+	public void processSubTaskResults(List<ITaskResult> subTasksResults) {
 		//Do no thing
 	}
 	

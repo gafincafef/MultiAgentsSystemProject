@@ -10,11 +10,15 @@ public class TaskExecutingStatus {
 		mNumberOfTasks = numberOfTasks;
 	}
 	
-	public int getNextTaskId() {
+	public int getPreviousTaskIndex() {
+		return mNextTaskId - 1;
+	}
+	
+	public int getNextTaskIndex() {
 		return mNextTaskId;
 	}
 	
-	public void incrementNextTaskId() {
+	public void incrementNextTaskIndex() {
 		mNextTaskId++;
 	}
 	

@@ -1,13 +1,16 @@
-package edu.rits.ma.algorithm.impl;
+package edu.rits.ma.algorithm.theory.impl;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 import edu.rits.ma.theory.IPreference;
 import edu.rits.ma.theory.IUtilitiesMap;
 
-public class UtilitiesMapImpl implements IUtilitiesMap {
+public class UtilitiesMapImpl implements IUtilitiesMap, Serializable {
 
+	private static final long serialVersionUID = 2171760270300206118L;
+	
 	private Map<IPreference, Map<Integer, Integer> > mUtilitiesMap = new HashMap<IPreference, Map<Integer,Integer>>();
 	
 	@Override

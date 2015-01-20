@@ -1,7 +1,6 @@
 package edu.rits.ma.test.main;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -24,23 +23,12 @@ import edu.rits.ma.theory.NashEquilibriumProblem;
 
 public class Test {
 	public static void main(String[] args) {
-		/*try {
+		try {
 			//testCreateProblemFromJSONString2();
 			testJade();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
-		List<Integer> list = new LinkedList<Integer>();
-		list.add(1);
-		list.add(3);
-		list.add(4);
-		list.add(2);
-		list.add(5);
-		list.add(3);
-		list.add(3);
-		int valueToRemove = 3;
-		testListRemoveWhileTraverse(list, valueToRemove);
+		}
 	}
 	
 	private static void testListRemoveWhileTraverse(List<Integer> list, int valueToRemove) {
@@ -63,14 +51,14 @@ public class Test {
 		
 		List<ITask> tasks = new ArrayList<ITask>();
 		tasks.add(new TaskSampleImpl(nbAgents - 1));
-		//tasks.add(new TaskSampleImpl(nbAgents - 1));
+		tasks.add(new TaskSampleImpl(nbAgents - 1));
 		
 		agentGateway.runTasksOnAgents(tasks);
 		
-		List<Object> results = tasks.get(0).getResults();
+		Object[] results = tasks.get(0).getResult().toArray();
 		if(results != null) {
-			for(int i = 0; i < results.size(); i++) {
-				int rv = (int) results.get(i);
+			for(int i = 0; i < results.length; i++) {
+				int rv = (int) results[i];
 				LogUtil.logInfo(Test.class, "Result " + i + " " + rv);
 			}
 		}

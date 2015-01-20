@@ -61,13 +61,17 @@ public class AgentOntologyCommunicatingBehaviour extends Behaviour {
 	}
 
 	public void sendMessagesFromAgent() throws StaleProxyException {
-		//Send ACL message parsed from content element / object
 		if(mSendBuffer.hasDataToSend()) {
+			//Send ACL message parsed from content object
+			
 			while(mSendBuffer.hasContentElementToSend()) {
 				ContentElementWrapper contentElement = mSendBuffer.extractContentElementToSend();
 				ACLMessage message = createMessageFromContentElement(contentElement);
 				getAgent().send(message);
 			}
+			
+			//Send ACL message parsed from content object
+			
 			while(mSendBuffer.hasContentObjectToSend()) {
 				LogUtil.logInfo(this, "Going to send content object");
 				ContentObjectWrapper contentObject = mSendBuffer.extractContentObjectToSend();
@@ -107,6 +111,7 @@ public class AgentOntologyCommunicatingBehaviour extends Behaviour {
 		}
 
 		//Set content to message
+		
 		try {
 			getAgent().getContentManager().fillContent(message, contentElement.getContentElement());
 		} catch (CodecException e) {

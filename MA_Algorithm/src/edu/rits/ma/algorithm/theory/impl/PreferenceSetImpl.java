@@ -1,5 +1,6 @@
-package edu.rits.ma.algorithm.impl;
+package edu.rits.ma.algorithm.theory.impl;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -8,7 +9,9 @@ import java.util.Set;
 import edu.rits.ma.theory.IPreference;
 import edu.rits.ma.theory.IPreferenceSet;
 
-public class PreferenceSetImpl implements IPreferenceSet {
+public class PreferenceSetImpl implements IPreferenceSet, Serializable {
+	
+	private static final long serialVersionUID = 7368098042100968103L;
 	
 	private List<IPreference> mPreferences = new LinkedList<IPreference>();
 	

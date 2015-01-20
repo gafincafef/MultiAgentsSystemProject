@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import edu.rits.ma.common.abstr.ITask;
+import edu.rits.ma.common.abstr.ITaskResult;
 import edu.rits.ma.jade.util.LogUtil;
 
 public class ChildTaskSampleImpl extends AbstractTask implements Serializable {
@@ -45,7 +46,7 @@ public class ChildTaskSampleImpl extends AbstractTask implements Serializable {
 	}
 
 	@Override
-	public List<Object> getResults() {
+	public ITaskResult getResult() {
 		return null;
 	}
 

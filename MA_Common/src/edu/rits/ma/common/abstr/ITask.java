@@ -13,9 +13,9 @@ public interface ITask {
 	
 	int getStatus();
 	
-	List<Object> getResults();
+	ITaskResult getResult();
 	
-	void processSubTaskResults(List<Object>[] subTasksResults);
+	void processSubTaskResults(List<ITaskResult> subTasksResults);
 	
 	void createSubTasks(List<ITask> subTasks);
 }

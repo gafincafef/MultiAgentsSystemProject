@@ -3,10 +3,12 @@ package edu.rits.ma.algorithm.nashequil;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
 import edu.rits.ma.common.abstr.ITask;
+import edu.rits.ma.common.abstr.ITaskResult;
 import edu.rits.ma.theory.IPreference;
 import edu.rits.ma.theory.IPreferenceSet;
 import edu.rits.ma.theory.IUtilitiesMap;
@@ -20,7 +22,7 @@ public class FindBestPreferencesTaskImpl implements ITask, Serializable {
 	private IPreferenceSet mPreferenceSet = null;
 	private IUtilitiesMap mUtilitiesMap = null;
 
-	private List<IPreference> mCandidatePreferences = new ArrayList<IPreference>();
+	private List<IPreference> mCandidatePreferences = new LinkedList<IPreference>();
 
 	public FindBestPreferencesTaskImpl(int primaryAgentId, IPreference subPreference, IPreferenceSet preferenceSet, IUtilitiesMap utilitiesMap) {
 		mPrimaryAgentId = primaryAgentId;
@@ -44,14 +46,12 @@ public class FindBestPreferencesTaskImpl implements ITask, Serializable {
 	}
 
 	@Override
-	public List<Object> getResults() {
-		List<Object> results = new ArrayList<Object>();
-		results.addAll(mCandidatePreferences);
-		return results;
+	public ITaskResult getResult() {
+		return new PreferencesTaskResultImpl(mCandidatePreferences);
 	}
 
 	@Override
-	public void processSubTaskResults(List<Object>[] subTasksResults) {
+	public void processSubTaskResults(List<ITaskResult> subTasksResults) {
 		/*
 		 *  Expected sub tasks results : 
 		 *  - Each sub task return list of preferences in the candidate preferences list which it accepts 
@@ -60,9 +60,9 @@ public class FindBestPreferencesTaskImpl implements ITask, Serializable {
 		 */
 		for(Iterator<IPreference> pIter = mCandidatePreferences.iterator(); pIter.hasNext();) {
 			IPreference candidatePreference = pIter.next();
-			for(List<Object> candidateAcceptedBySubTask : subTasksResults) {
-				pIter.remove();
-				if(!candidateAcceptedBySubTask.contains(candidatePreference)) {
+			for(ITaskResult candidatesAcceptedBySubTask : subTasksResults) {
+				if(!candidatesAcceptedBySubTask.toSet().contains(candidatePreference)) {
+					pIter.remove();
 					break;
 				}
 			}

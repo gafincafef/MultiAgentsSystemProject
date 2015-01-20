@@ -8,9 +8,9 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import edu.rits.ma.algorithm.impl.IndexBasedPreferenceImpl;
-import edu.rits.ma.algorithm.impl.PreferenceSetImpl;
-import edu.rits.ma.algorithm.impl.UtilitiesMapImpl;
+import edu.rits.ma.algorithm.theory.impl.IndexBasedPreferenceImpl;
+import edu.rits.ma.algorithm.theory.impl.PreferenceSetImpl;
+import edu.rits.ma.algorithm.theory.impl.UtilitiesMapImpl;
 import edu.rits.ma.theory.Action;
 import edu.rits.ma.theory.IPreference;
 import edu.rits.ma.theory.IPreferenceSet;

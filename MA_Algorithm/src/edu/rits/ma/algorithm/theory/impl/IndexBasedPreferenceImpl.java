@@ -1,12 +1,15 @@
-package edu.rits.ma.algorithm.impl;
+package edu.rits.ma.algorithm.theory.impl;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import edu.rits.ma.theory.Action;
 import edu.rits.ma.theory.IPreference;
 
-public class IndexBasedPreferenceImpl extends PreferenceImpl {
+public class IndexBasedPreferenceImpl extends PreferenceImpl implements Serializable {
 
+	private static final long serialVersionUID = -5058945633704891446L;
+	
 	private int mId;
 	
 	public IndexBasedPreferenceImpl() {

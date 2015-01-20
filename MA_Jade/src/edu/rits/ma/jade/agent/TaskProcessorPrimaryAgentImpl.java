@@ -48,7 +48,7 @@ public class TaskProcessorPrimaryAgentImpl extends AbstractPrimaryAgent {
 			secondaryAgentNames.add(ac.getName());
 		}
 		
-		IContentBufferProcessor processor = new PrimaryContentBufferProcessorImpl(tasks, secondaryAgentNames);
+		IContentBufferProcessor processor = new PrimaryContentBufferProcessorImpl(tasks, getName(), secondaryAgentNames);
 		
 		Behaviour behaviour = new GatewayAgentCommunicatingBehaviour(this, processor, this, command);
 		

@@ -8,7 +8,7 @@ import jade.lang.acl.ACLMessage;
 import edu.rits.ma.jade.behaviour.AgentOntologyCommunicatingBehaviour;
 import edu.rits.ma.jade.communication.AgentTrackingOntology;
 import edu.rits.ma.jade.communication.ContentElementWrapper;
-import edu.rits.ma.jade.communication.SecondaryAgentState;
+import edu.rits.ma.jade.communication.AgentState;
 import edu.rits.ma.jade.taskprocessor.IContentBufferProcessor;
 import edu.rits.ma.jade.taskprocessor.SecondaryContentBufferProcessorImpl;
 import edu.rits.ma.jade.util.LogUtil;
@@ -56,7 +56,7 @@ public class SecondaryAgent extends Agent implements IAgentProtocol {
 		AgentOntologyCommunicatingBehaviour behaviour = new AgentOntologyCommunicatingBehaviour(this, processor);
 		addBehaviour(behaviour);
 		
-		SecondaryAgentState readyState = createReadyMessage();
+		AgentState readyState = createReadyMessage();
 		ContentElementWrapper cew = new ContentElementWrapper(readyState, AgentTrackingOntology.ONTOLOGY_NAME);
 		cew.addReceiverAgentName(mPrimaryAgentName);
 		
@@ -66,10 +66,10 @@ public class SecondaryAgent extends Agent implements IAgentProtocol {
 		send(readyMessage);
 	}
 	
-	private SecondaryAgentState createReadyMessage() {
-		SecondaryAgentState agentState = new SecondaryAgentState();
+	private AgentState createReadyMessage() {
+		AgentState agentState = new AgentState();
 		agentState.setAgentName(getName());
-		agentState.setState(SecondaryAgentState.STATE_READY);
+		agentState.setState(AgentState.STATE_READY);
 		return agentState;
 	}
 

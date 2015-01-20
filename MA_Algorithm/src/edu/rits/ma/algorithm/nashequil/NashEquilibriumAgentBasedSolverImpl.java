@@ -59,7 +59,7 @@ public class NashEquilibriumAgentBasedSolverImpl implements INashEquilibriumSolv
 	@Override
 	public void getResults(List<IPreference> resultPreferences) {
 		for(ITask task : mTasks) {
-			List<Object> taskResults = task.getResults();
+			Object[] taskResults = task.getResult().toArray();
 			for(Object oResult : taskResults) {
 				resultPreferences.add((IPreference) oResult);
 			}

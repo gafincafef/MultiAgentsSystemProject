@@ -1,85 +1,74 @@
 package edu.rits.ma.jade.taskprocessor;
 
-import jade.content.ContentElement;
+import java.io.Serializable;
+
 import edu.rits.ma.common.abstr.ITask;
-import edu.rits.ma.jade.communication.AgentTrackingOntology;
-import edu.rits.ma.jade.communication.ContentIncomingBuffer;
-import edu.rits.ma.jade.communication.ContentOutcomingBuffer;
+import edu.rits.ma.jade.communication.AgentState;
 import edu.rits.ma.jade.communication.ContentElementWrapper;
+import edu.rits.ma.jade.communication.ContentIncomingBuffer;
 import edu.rits.ma.jade.communication.ContentObjectWrapper;
-import edu.rits.ma.jade.communication.SecondaryAgentState;
-import edu.rits.ma.jade.communication.SecondaryAgentStopAction;
+import edu.rits.ma.jade.communication.ContentOutcomingBuffer;
 import edu.rits.ma.jade.util.LogUtil;
 
-public class SecondaryContentBufferProcessorImpl implements IContentBufferProcessor {
+public class SecondaryContentBufferProcessorImpl extends AbstractContentBufferProcessor {
 	
 	private static final int ACTION_PHASE_TO_WAIT = 0;
 	private static final int ACTION_PHASE_TO_PROCESS_TASK_MESSAGE = 1;
 	private static final int ACTION_PHASE_TO_STOP = 2;
 
-	private int mInternalState = ACTION_PHASE_TO_WAIT;
-	
 	private String mPrimaryAgentName;
-	private String mAgentName;
+	private ITask mTask = null;
 	
 	public SecondaryContentBufferProcessorImpl(String primaryAgentName, String agentName) {
 		mPrimaryAgentName = primaryAgentName;
-		mAgentName = agentName;
 	}
 	
 	@Override
-	public void processCommunicationDataStore(ContentIncomingBuffer receiveBuffer, ContentOutcomingBuffer sendBuffer) {
-		updateInternalState(receiveBuffer);
-		int newInternalState = mInternalState;
-		switch (mInternalState) {
+	public int processNewState(int newState, ContentIncomingBuffer receiveBuffer, ContentOutcomingBuffer sendBuffer) {
+		int nextState = newState;
+		switch (newState) {
 		case ACTION_PHASE_TO_PROCESS_TASK_MESSAGE:
-			newInternalState = onTaskAssigned(receiveBuffer, sendBuffer);
+			nextState = onTaskAssigned(receiveBuffer, sendBuffer);
 			break;
 		default:
 			break;
 		}
-		mInternalState = newInternalState;
-	}
-	
-	@Override
-	public boolean done() {
-		return mInternalState == ACTION_PHASE_TO_STOP;
+		return nextState;
 	}
 	
 	private int onTaskAssigned(ContentIncomingBuffer receiveBuffer, ContentOutcomingBuffer sendBuffer) {
-		ContentObjectWrapper cow = receiveBuffer.extractRetrievedContentObject();
-		ITask task = (ITask) cow.getSerializable();
-		task.execute();
+		mTask.execute();
 												
-		notifyTaskDone(sendBuffer);
+		notifyTaskDone(mTask, sendBuffer);
 		
 		return ACTION_PHASE_TO_WAIT;
 	}
-
-	private void updateInternalState(ContentIncomingBuffer receivedBuffer) {
-		if(receivedBuffer.hasReceivedContentElement()) {
-			ContentElementWrapper cew = receivedBuffer.extractRetrievedContentElement();
-			if(cew.getContentElement() instanceof SecondaryAgentStopAction) {
-				mInternalState = ACTION_PHASE_TO_STOP;
+	
+	@Override
+	protected int onContentElementReceived(ContentElementWrapper cew) {
+		int newState = getCurrentState();
+		if(cew.getContentElement() instanceof AgentState) {
+			//Stop if primary agent stops
+			AgentState agentState = (AgentState) cew.getContentElement();
+			if(mPrimaryAgentName.equals(agentState.getAgentName()) && agentState.getState() == AgentState.STATE_TO_STOP) {
+				LogUtil.logInfo(this, "Stop due to primary agent stopping");
+				newState = ACTION_PHASE_TO_STOP;
 			}
 		}
-		if(receivedBuffer.hasReceivedContentObject()) {
-			mInternalState = ACTION_PHASE_TO_PROCESS_TASK_MESSAGE;
-		}
+		return newState;
 	}
 	
-	private void notifyTaskDone(ContentOutcomingBuffer sendBuffer) {
+	@Override
+	protected int onContentObjectReceived(ContentObjectWrapper cow) {
+		//Immediately get task from the content element wrapper
+		mTask = (ITask) cow.getSerializable();
+		return ACTION_PHASE_TO_PROCESS_TASK_MESSAGE;
+	}
+	
+	private void notifyTaskDone(ITask task, ContentOutcomingBuffer sendBuffer) {
 		LogUtil.logInfo(this, "Task done. Going to notify primary agent");
-		ContentElement taskDoneContentElement = createTaskDoneContentElement();
-		ContentElementWrapper contentElementWrapper = new ContentElementWrapper(taskDoneContentElement, AgentTrackingOntology.ONTOLOGY_NAME);
-		contentElementWrapper.addReceiverAgentName(mPrimaryAgentName);
-		sendBuffer.addContentElementToSend(contentElementWrapper);
-	}
-	
-	private SecondaryAgentState createTaskDoneContentElement() {
-		SecondaryAgentState agentState = new SecondaryAgentState();
-		agentState.setAgentName(mAgentName);
-		agentState.setState(SecondaryAgentState.STATE_SUB_TASK_DONE);
-		return agentState;
+		ContentObjectWrapper cow = new ContentObjectWrapper((Serializable) task.getResult());
+		cow.addReceiverAgentName(mPrimaryAgentName);
+		sendBuffer.addContentObjectToSend(cow);
 	}
 }
