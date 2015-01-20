@@ -17,4 +17,12 @@ public class Action {
 		return mName;
 	}
 	
+	@Override
+	public boolean equals(Object other) {
+		if(!(other instanceof Action) || other == null) {
+			return false;
+		}
+		return getId() == ((Action)other).getId();
+	}
+	
 }

@@ -1,9 +1,7 @@
 package edu.rits.ma.algorithm.theory.impl;
 
 import java.io.Serializable;
-import java.util.Set;
 
-import edu.rits.ma.theory.Action;
 import edu.rits.ma.theory.IPreference;
 
 public class IndexBasedPreferenceImpl extends PreferenceImpl implements Serializable {
@@ -39,18 +37,11 @@ public class IndexBasedPreferenceImpl extends PreferenceImpl implements Serializ
 			return mId == ((IndexBasedPreferenceImpl)other).mId;
 		}
 		
-		IPreference otherPreference = (IPreference) other;
-		Set<Integer> otherPreferenceAgentIdSet = otherPreference.getAllAgentIds();
-		if(!otherPreferenceAgentIdSet.equals(getAllAgentIds())) {
-			return false;
-		}
-		for(int agentId : otherPreferenceAgentIdSet) {
-			Action action = getActionOfAgent(agentId);
-			Action otherPreferenceAction = otherPreference.getActionOfAgent(agentId);
-			if(action.getId() != otherPreferenceAction.getId()) {
-				return false;
-			}
-		}
-		return true;
+		return super.equals(other);
+	}
+	
+	@Override
+	protected IPreference newInstance() {
+		return new IndexBasedPreferenceImpl();
 	}
 }

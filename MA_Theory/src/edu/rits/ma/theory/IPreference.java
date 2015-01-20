@@ -12,6 +12,6 @@ public interface IPreference {
 	public IPreference getSubPreference(Set<Integer> agentIds);
 	public Set<Integer> getAllAgentIds();
 	
-	public boolean contains(Set<Integer> agentsIds);
+	public boolean contains(IPreference subPreference);
 	public boolean equals(Object other);
 }

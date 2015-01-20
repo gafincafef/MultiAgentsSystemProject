@@ -48,9 +48,7 @@ public class PreferenceSetImpl implements IPreferenceSet, Serializable {
 	public void getSubPreferencesForAgents(Set<Integer> agentIds, List<IPreference> subPreferences) {
 		HashSet<IPreference> subPreferenceSet = new HashSet<IPreference>();
 		for(IPreference preference : mPreferences) {
-			if(preference.contains(agentIds)) {
-				subPreferenceSet.add(preference);
-			}
+				subPreferenceSet.add(preference.getSubPreference(agentIds));
 		}
 		subPreferences.clear();
 		subPreferences.addAll(subPreferenceSet);
@@ -59,9 +57,8 @@ public class PreferenceSetImpl implements IPreferenceSet, Serializable {
 	@Override
 	public void getContainerPreferences(IPreference subPreference, List<IPreference> containerPreferences) {
 		containerPreferences.clear();
-		Set<Integer> subSetOfAgentsIds = subPreference.getAllAgentIds();
 		for(IPreference preference : mPreferences) {
-			if(preference.contains(subSetOfAgentsIds)) {
+			if(preference.contains(subPreference)) {
 				containerPreferences.add(preference);
 			}
 		}

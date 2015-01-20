@@ -16,7 +16,7 @@ public class UtilitiesMapImpl implements IUtilitiesMap, Serializable {
 	@Override
 	public void addPreferenceUtilityForAgent(IPreference preference, int agentId, int utilityValue) {
 		if(!mUtilitiesMap.containsKey(preference)) {
-			mUtilitiesMap.put(preference, new HashMap<Integer, Integer>());
+			mUtilitiesMap.put(preference, new HashMap<Integer,Integer>());
 		}
 		Map<Integer, Integer> agentUtilityMap = mUtilitiesMap.get(preference);
 		agentUtilityMap.put(agentId, utilityValue);

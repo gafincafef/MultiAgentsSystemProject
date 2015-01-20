@@ -34,7 +34,7 @@ public class PreferenceImpl implements IPreference 	{
 	
 	@Override
 	public IPreference getSubPreference(Set<Integer> agentIds) {
-		IPreference preference = new PreferenceImpl();
+		IPreference preference = newInstance();
 		for(int agentId : agentIds) {
 			preference.addAgentAction(agentId, mAgentActionMap.get(agentId));
 		}
@@ -52,11 +52,23 @@ public class PreferenceImpl implements IPreference 	{
 	}
 
 	@Override
-	public boolean contains(Set<Integer> agentsIds) {
-		Set<Integer> backedAgentIdSet = mAgentActionMap.keySet();
-		return backedAgentIdSet.containsAll(agentsIds);
+	public boolean contains(IPreference subPreference) {
+		Set<Integer> agentIdSubSet = subPreference.getAllAgentIds();
+		for(int agentId : agentIdSubSet) {
+			if(mAgentActionMap.containsKey(agentId)) {
+				Action action = mAgentActionMap.get(agentId);
+				Action otherAction = subPreference.getActionOfAgent(agentId);
+				if(action != otherAction) {
+					return false;
+				}
+			}
+			else {
+				return false;
+			}
+		}
+		return true;
 	}
-
+	
 	@Override
 	public boolean equals(Object other) {
 		if(!(other instanceof IPreference)) {
@@ -70,10 +82,14 @@ public class PreferenceImpl implements IPreference 	{
 		for(int agentId : otherPreferenceAgentIdSet) {
 			Action action = getActionOfAgent(agentId);
 			Action otherPreferenceAction = otherPreference.getActionOfAgent(agentId);
-			if(action.getId() != otherPreferenceAction.getId()) {
+			if(action != otherPreferenceAction) {
 				return false;
 			}
 		}
 		return true;
+	}
+	
+	protected IPreference newInstance() {
+		return new PreferenceImpl();
 	}
 }
