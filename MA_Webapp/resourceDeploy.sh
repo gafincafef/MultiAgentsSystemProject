@@ -1,4 +1,4 @@
-export DEPLOY_PATH=/home/pham/servers/apache-tomcat-6.0.41/webapps
+export DEPLOY_PATH=../apache-tomcat-6.0.41/webapps
 export SRC_PATH=target/war
 
 ant -buildfile Deploy.xml copy-war
