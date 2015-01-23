@@ -23,7 +23,7 @@ import edu.rits.ma.jade.communication.ContentOutcomingBuffer;
 import edu.rits.ma.jade.taskprocessor.IContentBufferProcessor;
 import edu.rits.ma.jade.util.LogUtil;
 
-public class AgentOntologyCommunicatingBehaviour extends Behaviour {
+public class AgentCommunicatingBehaviour extends Behaviour {
 
 	private static final long serialVersionUID = 3662010610519584453L;
 
@@ -32,16 +32,16 @@ public class AgentOntologyCommunicatingBehaviour extends Behaviour {
 
 	private IContentBufferProcessor mProcessor = null;
 
-	public AgentOntologyCommunicatingBehaviour(Agent agent, IContentBufferProcessor processor) {
+	public AgentCommunicatingBehaviour(Agent agent, IContentBufferProcessor processor) {
 		setAgent(agent);
 		mProcessor = processor;
 	}
 
 	@Override
 	public void action() {
-		updateCommunicationDataStore();
+		updateCommunicationDataBuffer();
 		if(dataReceived()) {
-			processCommunicationDataStore();
+			processCommunicationDataBuffer();
 			if(hasMessageToSend()) {
 				try {
 					sendMessagesFromAgent();
@@ -147,7 +147,7 @@ public class AgentOntologyCommunicatingBehaviour extends Behaviour {
 		return message;
 	}
 
-	private void updateCommunicationDataStore() {
+	private void updateCommunicationDataBuffer() {
 		//Receive ACL message
 		ACLMessage message = getAgent().receive();
 		if(message != null) {
@@ -171,8 +171,8 @@ public class AgentOntologyCommunicatingBehaviour extends Behaviour {
 		return mReceiveBuffer.hasReceivedData();
 	}
 
-	private void processCommunicationDataStore() {
-		mProcessor.processCommunicationDataStore(mReceiveBuffer, mSendBuffer);
+	private void processCommunicationDataBuffer() {
+		mProcessor.processCommunicationDataBuffer(mReceiveBuffer, mSendBuffer);
 	}
 
 	private boolean hasMessageToSend() {

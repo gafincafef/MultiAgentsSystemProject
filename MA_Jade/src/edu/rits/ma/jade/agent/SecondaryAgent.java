@@ -5,7 +5,7 @@ import jade.content.lang.sl.SLCodec;
 import jade.content.onto.Ontology;
 import jade.core.Agent;
 import jade.lang.acl.ACLMessage;
-import edu.rits.ma.jade.behaviour.AgentOntologyCommunicatingBehaviour;
+import edu.rits.ma.jade.behaviour.AgentCommunicatingBehaviour;
 import edu.rits.ma.jade.communication.AgentTrackingOntology;
 import edu.rits.ma.jade.communication.ContentElementWrapper;
 import edu.rits.ma.jade.communication.AgentState;
@@ -53,7 +53,7 @@ public class SecondaryAgent extends Agent implements IAgentProtocol {
 	@Override
 	public void onSetupEnd() {
 		IContentBufferProcessor processor = new SecondaryContentBufferProcessorImpl(mPrimaryAgentName, getName());
-		AgentOntologyCommunicatingBehaviour behaviour = new AgentOntologyCommunicatingBehaviour(this, processor);
+		AgentCommunicatingBehaviour behaviour = new AgentCommunicatingBehaviour(this, processor);
 		addBehaviour(behaviour);
 		
 		AgentState readyState = createReadyMessage();

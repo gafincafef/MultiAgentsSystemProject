@@ -78,7 +78,7 @@ function getNumberOfPreferences() {
 
 function preSubmitPost () {
 	if (gNEProblem != null) {
-		fillEmptyCells();
+		fillInvalidCells();
 		
 		gNEProblem.clear();
 		reconstructNEProblem();
@@ -93,9 +93,10 @@ function showResult(data) {
 	applyResultsToRows(data);
 }
 
-function fillEmptyCells() {
+function fillInvalidCells() {
 	$("#tbl_util td>input").each(function (index, input) {
-			if ($(input).val() == "") {
+			var inputVal = $(input).val();
+			if (inputVal != parseInt(inputVal, 10) ) {
 				$(input).val(0);
 			}				
 	});

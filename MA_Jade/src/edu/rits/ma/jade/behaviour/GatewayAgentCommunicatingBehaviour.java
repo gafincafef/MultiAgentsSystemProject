@@ -4,7 +4,7 @@ import jade.core.Agent;
 import jade.wrapper.gateway.GatewayAgent;
 import edu.rits.ma.jade.taskprocessor.IContentBufferProcessor;
 
-public class GatewayAgentCommunicatingBehaviour extends AgentOntologyCommunicatingBehaviour {
+public class GatewayAgentCommunicatingBehaviour extends AgentCommunicatingBehaviour {
 
 	private static final long serialVersionUID = -6373415624378748676L;
 

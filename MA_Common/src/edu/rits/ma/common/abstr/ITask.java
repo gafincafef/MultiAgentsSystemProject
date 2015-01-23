@@ -1,3 +1,7 @@
+/*
+ * Provide interface for tasks. Be used in others module.
+ * Implementations should be found only in algorithm module
+ */
 package edu.rits.ma.common.abstr;
 
 import java.util.List;

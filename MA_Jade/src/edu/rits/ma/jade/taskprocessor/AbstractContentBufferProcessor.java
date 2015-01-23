@@ -12,7 +12,7 @@ public abstract class AbstractContentBufferProcessor implements IContentBufferPr
 	private int mInternalState = -1;
 	
 	@Override
-	public void processCommunicationDataStore(ContentIncomingBuffer receiveBuffer, ContentOutcomingBuffer sendBuffer) {
+	public void processCommunicationDataBuffer(ContentIncomingBuffer receiveBuffer, ContentOutcomingBuffer sendBuffer) {
 		mInternalState = updateInternalState(receiveBuffer);
 		try {
 			int nextActionPhase = processNewState(mInternalState, receiveBuffer, sendBuffer);
