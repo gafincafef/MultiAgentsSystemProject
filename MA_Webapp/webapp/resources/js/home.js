@@ -94,7 +94,7 @@ function showResult(data) {
 }
 
 function fillInvalidCells() {
-	$("#tbl_util td>input").each(function (index, input) {
+	$("#tbl_util td>input[type='text']").each(function (index, input) {
 			var inputVal = $(input).val();
 			if (inputVal != parseInt(inputVal, 10) ) {
 				$(input).val(0);
